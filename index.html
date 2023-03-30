@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+<script src="scripts.js" defer></script>
 
 <body>
     <div class="logo">Untitled Travel Agency</div>
-    <marquee>hello</marquee>
+    <marquee>-Hello there!</marquee>
+    <marquee scrollamount="32">-General Kenobi!</marquee>
     <div class="grid-container">
         <nav>
             <ul>
@@ -19,12 +21,17 @@
             </ul>
         </nav>
         <main>
-            Hello there
-            <br>
-            General Kenobi
-            <br>
-            <br>
-            Θα βάλω σε λίγο φόρμα εδώ
+            <div class="search-area">
+                <select name="from">
+                    <option></option>
+                </select>
+                <select name="destination">
+                    <option></option>
+                </select>
+                <input type="date">
+                <button id="searchtrips">Αναζήτηση</button>
+            </div>
+            <div class="information" id="departures"></div>
         </main>
         <div class="sidebar">
             Σύντομες Ανακοινώσεις
