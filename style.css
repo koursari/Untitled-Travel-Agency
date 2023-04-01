@@ -94,6 +94,10 @@ main {
     grid-row: 2;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 5px 5px 10px black;
-    
+    box-shadow: 5px 5px 10px black;   
+}
+
+form button {
+    background-color: violet;
+    color: red;
 }
