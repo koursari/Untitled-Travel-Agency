@@ -19,7 +19,7 @@ function showUs(){
         x.innerHTML = departureForm;
         x.style.display = "block";
         let btn = x.querySelector("button");
-        x.querySelectorAll("input").forEach(i => i.addEventListener("change", () => {btn.disabled = ''}))
+        x.querySelectorAll("input").forEach(i => i.addEventListener("change", () => {btn.disabled = ''}));
     }
 }
 
