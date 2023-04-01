@@ -2,8 +2,8 @@ let departureForm = `
 <form><fieldset>
 <legend>Δρομολόγια</legend>
 <ul>
-<li style="list-style-type: none"><input type="radio" id="time1" name="time" value="time1"><label for="time1">Peekaboo</label></li>
-<li style="list-style-type: none"><input type="radio" id="time2" name="time" value="time2"><label for="time2">Peekaboo</label></li>
+<li><input type="radio" id="time1" name="time" value="time1"><label for="time1">Peekaboo</label></li>
+<li><input type="radio" id="time2" name="time" value="time2"><label for="time2">Peekaboo</label></li>
 </ul>
 </fieldset>
 <button type="submit" disabled>Αγορά</button>
