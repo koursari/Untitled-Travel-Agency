@@ -17,7 +17,7 @@ body {
     column-gap: 10px;
 }
 
-.footer {
+footer {
     grid-column: 1 / 4;
     grid-row: 3;
     
