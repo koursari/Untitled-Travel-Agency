@@ -85,10 +85,6 @@ function populateDepartures(){
     let locationB = document.getElementById("destination-location").value;
 
     let departureForm = document.getElementById("departures");
-    let tripSpan = document.createElement("span");
-    tripSpan.textContent = "Από: " + locationA + ". Προς: " + locationB + ".";
-    departureForm.appendChild(tripSpan);
-
     let formUL = departureForm.querySelector("ul");
     let btn = departureForm.querySelector("button");
     btn.disabled = true;
