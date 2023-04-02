@@ -122,6 +122,9 @@ main {
     padding: 20px;
     border-radius: 20px;
     box-shadow: 5px 5px 10px black;
+
+    display: flex;
+    justify-content: space-around;
 }
 
 .departures {
@@ -136,11 +139,11 @@ main {
     box-shadow: 5px 5px 10px black;   
 }
 
-form li {
+.departures form li {
     list-style-type: none
 }
 
-form button {
+.departures form button {
     background-color: violet;
     color: red;
 }

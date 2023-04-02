@@ -22,14 +22,16 @@
         </nav>
         <main>
             <div class="search-area">
-                <select name="from">
-                    <option></option>
+                <label for="from-location">Από</label>
+                <select id="from-location">
+                    <option value="" disabled selected hidden>Προέλευση</option>
                 </select>
-                <select name="destination">
-                    <option></option>
+                <label for="destination-location">Πρός</label>
+                <select id="destination-location">
+                    <option value="" disabled selected hidden>Προορισμός</option>
                 </select>
                 <input type="date">
-                <button id="searchtrips">Αναζήτηση</button>
+                <button id="searchtrips" disabled>Αναζήτηση</button>
             </div>
             <div class="departures" id="departures"><form><fieldset><legend>Δρομολόγια</legend><ul></ul></fieldset><button disabled>Αγορά</button></form></div>
         </main>
