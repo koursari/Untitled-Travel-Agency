@@ -1,30 +1,45 @@
-let departureForm = `
-<form><fieldset>
-<legend>Δρομολόγια</legend>
-<ul>
-<li><input type="radio" id="time1" name="time" value="time1"><label for="time1">Δρομολόγιο 1</label></li>
-<li><input type="radio" id="time2" name="time" value="time2"><label for="time2">Δρομολόγιο 2</label></li>
-</ul>
-</fieldset>
-<button type="submit" disabled>Αγορά</button>
-</form>
-`;
-
-function showUs(){
-    let x = document.getElementById("departures");
-    if(x.hasChildNodes()) {
-        x.innerHTML = "";
-        x.style.display = "none";
-    } else {
-        x.innerHTML = departureForm;
-        x.style.display = "block";
-        let btn = x.querySelector("button");
-        x.querySelectorAll("input").forEach(i => i.addEventListener("change", () => {btn.disabled = ''}));
+//Populate Departures List
+let customDepartures = [
+    {
+        timeID: "time1",
+        text: "Δρομολόγιο 1",
+    },
+    {
+        timeID: "time2",
+        text: "Δρομολόγιο 2",
     }
+];
+
+function populateDepartures(){
+    let departureForm = document.getElementById("departures");
+    let formUL = departureForm.querySelector("ul");
+    let btn = departureForm.querySelector("button");
+    btn.disabled = true;
+    if (formUL.innerHTML != "") {
+        formUL.innerHTML = "";
+        departureForm.style.display = "none";
+        return;
+    }
+    customDepartures.forEach(i => {
+        let deLI = document.createElement("li");
+        let deRadio = document.createElement("input");
+        let deLabel = document.createElement("label");
+        deLI.appendChild(deRadio);
+        deLI.appendChild(deLabel);
+        formUL.appendChild(deLI);
+        deRadio.setAttribute("type", "radio");
+        deRadio.setAttribute("name", "time");
+        deRadio.setAttribute("value", i.timeID);
+        deRadio.setAttribute("id", i.timeID);
+        deRadio.addEventListener("change", ()=>{btn.disabled = false});
+        deLabel.textContent = i.text;
+        deLabel.setAttribute("for", i.timeID);
+    });
+    departureForm.style.display = "block";
 }
 
 let searchButton = document.getElementById("searchtrips");
-searchButton.addEventListener("click", showUs);
+searchButton.addEventListener("click", populateDepartures);
 
 //Populate Announcement List
 customAnnouncements = [
