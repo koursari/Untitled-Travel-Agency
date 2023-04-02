@@ -23,6 +23,19 @@ function showUs(){
     }
 }
 
-
 let searchButton = document.getElementById("searchtrips");
 searchButton.addEventListener("click", showUs);
+
+announcementMessage = `
+<span>Pop Up</span>
+<button>Κλείσιμο</button>
+`;
+
+function announce(){
+    let x = document.getElementById("short-announce");
+    x.style.display = "block";
+    x.innerHTML = announcementMessage;
+    let btn = x.querySelector("button").addEventListener("click", ()=>{x.innerHTML = ""; x.style.display = "none"})
+}
+
+let announcementList = document.querySelectorAll(".sidebar ul li").forEach(i => i.addEventListener("click", announce));
