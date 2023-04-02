@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Untitled Travel Agency</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/main-style.css">
+    <link rel="stylesheet" href="styles/trips-look.css">
 </head>
 
-<script src="scripts.js" defer></script>
+<script src="scripts/announcements.js" defer></script>
+<script src="scripts/trip-planner.js" defer></script>
 
 <body>
     <div class="short-announce" id="short-announce"><div class="announce-grid-container"><span></span><button>Κλείσιμο</button></div></div>
     <marquee>Καλό ταξίδι!</marquee>
     <div class="logo">Untitled Travel Agency</div>
-    <div class="grid-container">
+    <div class="content-grid-container">
         <nav>
             <ul>
                 <li><a href="index.html">Αγορά Εισιτηρίων</a></li>
@@ -21,6 +23,7 @@
             </ul>
         </nav>
         <main>
+        <div class="planner-container">
             <div class="search-area">
                 <label for="from-location">Από</label>
                 <select id="from-location">
@@ -34,6 +37,7 @@
                 <button id="searchtrips" disabled>Αναζήτηση</button>
             </div>
             <div class="departures" id="departures"><form><fieldset><legend>Δρομολόγια</legend><ul></ul></fieldset><button disabled>Αγορά</button></form></div>
+        </div>
         </main>
         <div class="sidebar" id="sidebar">Σύντομες Ανακοινώσεις</div>
         <footer>This Web Site was made for GK802</footer>
