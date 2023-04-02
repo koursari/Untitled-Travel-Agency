@@ -121,7 +121,7 @@ searchButton.addEventListener("click", populateDepartures);
 //Populate Announcement List
 let customAnnouncements = [
 {
-    title: "Primus",
+    title: "Prima",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 },
 {
