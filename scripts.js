@@ -33,7 +33,7 @@ function populateDepartures(){
         deRadio.setAttribute("id", i.timeID);
         deRadio.addEventListener("change", ()=>{btn.disabled = false});
         deLabel.textContent = i.text;
-        deLabel.setAttribute("for", i.timeID);
+        deLabel.setAttribute("for", li.timeID);
     });
     departureForm.style.display = "block";
 }
@@ -42,7 +42,7 @@ let searchButton = document.getElementById("searchtrips");
 searchButton.addEventListener("click", populateDepartures);
 
 //Populate Announcement List
-customAnnouncements = [
+let customAnnouncements = [
 {
     title: "Primus",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
