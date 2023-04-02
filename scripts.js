@@ -112,6 +112,20 @@ function populateDepartures(){
         deLabel.textContent = i.text;
         deLabel.setAttribute("for", i.timeID);
     });
+
+    //to make the form more accessible
+    let La = document.createElement("input");
+    La.setAttribute("name","origin");
+    La.setAttribute("value", locationA);
+    La.style.display = "none";
+    formUL.appendChild(La);
+
+    let Lb = document.createElement("input");
+    Lb.setAttribute("name","destination");
+    Lb.setAttribute("value", locationB);
+    Lb.style.display = "none";
+    formUL.appendChild(Lb);
+
     departureForm.style.display = "block";
 }
 
