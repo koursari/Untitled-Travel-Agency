@@ -3,14 +3,34 @@ body {
 }
 
 .short-announce {
-    display: none;
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
+
     left: 50%;
+    transform: translateX(-50%);
+
+    display: none;
+    width: 40vw;
     background-color: white;
-    border-radius: 10%;
+    border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 0 max(100vh, 100vw) rgba(0,0,0,0.9);
+}
+
+.announce-grid-container {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.announce-grid-container span {
+    grid-row: 1;
+}
+
+.announce-grid-container button {
+    grid-row: 2;
+    background-color: black;
+    color: white;
 }
 
 .logo {
