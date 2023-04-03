@@ -1,29 +1,50 @@
 //Populate Locations List
 let locations = [
-    "Anor Londo",
-    "Undead Parish",
-    "Depths",
-    "Sen's Fortress",
-    "Darkroot Basin",
-    "Blighttown",
-    "Ashen Lake"
+    {
+        name: "Anor Londo",
+        id: 0,
+    },
+    {
+        name: "Undead Parish",
+        id: 1,
+    },
+    {
+        name: "Depths",
+        id: 2,
+    },
+    {
+        name: "Sen's Fortress",
+        id: 3,
+    },
+    {
+        name: "Darkroot Basin",
+        id: 4,
+    },
+    {
+        name: "Blighttown",
+        id: 5,
+    },
+    {
+        name: "Ashen Lake",
+        id: 6,
+    }
 ];
 let connections = [
-    [3],
-    [2,3,4],
-    [1,5],
-    [0,1],
-    [1],
-    [2,6],
-    [5]
-
+    [0,3],
+    [1,2], [1,3], [1,4],
+    [2,1], [2,5],
+    [3,0], [3,1],
+    [4,1],
+    [5,2], [5,6],
+    [6,5]
 ];
 let originLocation = document.getElementById("from-location");
 originLocation.value = "";
 locations.forEach(i => {
     let loc = document.createElement("option");
     originLocation.appendChild(loc);
-    loc.textContent = i;
+    loc.setAttribute("value", i.id);
+    loc.textContent = i.name;
 });
 
 let destinationLocation = document.getElementById("destination-location");
@@ -39,7 +60,7 @@ function updateDestinations() {
     btn.disabled = true;
 
     //find what the user chose
-    let originIndex = locations.indexOf(originLocation.value);
+    let originID = originLocation.value;
     //update available destinations
     let destinationLocation = document.getElementById("destination-location");
     destinationLocation.innerHTML = ""; //clear destinations
@@ -52,10 +73,15 @@ function updateDestinations() {
     emptyDestination.setAttribute("hidden", "true");
     emptyDestination.textContent = "Προορισμός";
     //write actual available destinations
-    connections[originIndex].forEach(i => {
-        let loc = document.createElement("option");
-        destinationLocation.appendChild(loc);
-        loc.textContent = locations[i];
+    connections.forEach(i => {
+        if(i[0] == originID) {
+            let loc = document.createElement("option");
+            destinationLocation.appendChild(loc);
+            loc.setAttribute("value", i[1]);
+            let dname = "test";
+            locations.forEach(lc => {if (lc.id == i[1]) dname = lc.name;});
+            loc.textContent = dname;
+        }
     });
 }
 originLocation.addEventListener("change", updateDestinations);
