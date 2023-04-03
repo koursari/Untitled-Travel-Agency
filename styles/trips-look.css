@@ -14,7 +14,19 @@
     box-shadow: 5px 5px 10px black;
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.search-area * {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.selector-group {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2em;
 }
 
 .departures {
