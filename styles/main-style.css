@@ -124,4 +124,7 @@ main {
     .sidebar {
         display:none;
     }
+    main {
+        grid-column: 1/-1;
+    }
 }
