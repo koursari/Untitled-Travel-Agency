@@ -1,0 +1,4 @@
+#user-area fieldset{
+    display: grid;
+    grid-template-columns: auto auto;
+}
