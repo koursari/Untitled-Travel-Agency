@@ -8,15 +8,14 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const travelController = await import(`../controller/travel-controller.mjs`)
-// const travelModel = await import('../model/postgresql/travel-model-postgresql.mjs')
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
-router.route('/').get((req, res) => { res.redirect('/flights') });
+// router.route('/').get((req, res) => { res.redirect('/flights') });
+router.route('/').get((req, res) => {res.render('home')});
 
-// router.get('/tasks/remove/:removeTaskId', taskListController.removeTask);
+router.get('/flights/remove/:removeFlightId', travelController.removeFlight);
 // router.get('/tasks/toggle/:toggleTaskId', taskListController.toggleTask);
-// router.get('/tasks', taskListController.listAllTasksRender);
-// router.get('/tasks/add/', taskListController.addTask);
+router.get('/flights/add/', travelController.addFlight);
 router.get('/flights', travelController.listAllFlights);
 
 export default router;

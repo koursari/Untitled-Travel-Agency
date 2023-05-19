@@ -6,19 +6,33 @@
     </div>
     <div class="row">
         <div class="col-9">
-            <input type="text" name="flight" id="item" class="input-lg">
+            <input type="text" name="company" id="item1" class="input-lg">
+            <input type="text" name="departure" id="item2" class="input-lg">
+            <input type="time" name="dep_time" id="item3" class="input-lg">
+            <input type="text" name="destination" id="item4" class="input-lg">
+            <input type="time" name="arr_time" id="item5" class="input-lg">
+            <input type="integer" name="total_f_seats" id="item6" class="input-lg">
+            <input type="integer" name="total_b_seats" id="item7" class="input-lg">
+            <input type="integer" name="total_e_seats" id="item8" class="input-lg">
         </div>
         <div class="col">
             <button type="submit">New Flight</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col xl-mt-3">
+            <li class="list-group">Company - departure - dep_time - dep_time - arr_time - total_f_seats - total_b_seats - total_e_seats
+
+
+            </li>
+        </div>
+    </div>
     <div class="row ">
-        <div class="col md-mt-9">
+        <div class="col xl-mt-3">
             <ul class="list-group">
                 {{#each flights}}
-                    <li class="list-group-item"><a href="/flights/{{f_id}}" ></a> {{company}} - {{departure}} - {{dep_time}} - {{destination}} - {{arr_time}} - {{total_f_seats}} - {{total_b_seats}} -{{total_b_seats}}
-                    {{!-- <li class="list-group-item"><a href="/flights/{{f_id}}" ></a> - {{company}} - {{dep_time}} --}}
-
+                    <li class="list-group-item">
+                        <a href="/flights/{{f_id}}" >f_id</a> {{company}} - {{departure}} - {{dep_time}} - {{destination}} - {{arr_time}} - {{total_f_seats}} - {{total_b_seats}} -{{total_b_seats}}
                         <a href="/flights/remove/{{f_id}}">X</a>
                     </li>
                 {{/each}}

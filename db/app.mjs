@@ -45,8 +45,4 @@ app.engine('hbs', exphbs.engine({
 //και ορίζουμε πως θα χρησιμοποιήσουμε τη μηχανή template με όνομα 'hbs'
 app.set('view engine', 'hbs');
 
-app.get('/', function (req, res) {
-    res.send('Express application working ...');
-    });
-
 export { app as app };
