@@ -7,6 +7,12 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
+router.route('/index').get((req, res) => {res.render('index')});
+router.route('/about').get((req, res) => {res.render('about')});
+router.route('/profile').get((req, res) => {res.render('profile')});
+
+
+/*
 const travelController = await import(`../controller/travel-controller.mjs`)
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
@@ -24,5 +30,6 @@ router.get('/tickets', travelController.listAllTickets);
 router.get('/classes', travelController.listAllClasses);
 router.get('/classes/add/', travelController.addClass);
 router.get('/classes/remove/:removeFlightId', travelController.removeClass);
+*/
 
 export default router;
