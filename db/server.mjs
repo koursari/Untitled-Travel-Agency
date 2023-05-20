@@ -13,9 +13,9 @@ import { app } from './app.mjs';
 
 /**
  * Αν υπάρχει η μεταβλητή περιβάλλοντος 'PORT' χρησιμοποίησε την τιμή της,
- * αλλιώς χρησιμοποίησε τη θύρα 3000.
+ * αλλιώς χρησιμοποίησε τη θύρα 3003.
  */
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '3003';
 
 const server = app.listen(port, () => {
    console.log(`Listening to http://127.0.0.1:${port}`);
