@@ -2,10 +2,10 @@ import express from 'express'
 
 const router = express.Router();
 
-router.route('/').get((request, response) => {response.render('index')});
-router.route('/index').get((request, response) => {response.render('index')});
-router.route('/about').get((request, response) => {response.render('about')});
-router.route('/profile').get((request, response) => {response.render('profile')});
+router.route('/').get((request, response) => {response.render('index', {layout: 'userContent.hbs'})});
+router.route('/index').get((request, response) => {response.render('index', {layout: 'userContent.hbs'})});
+router.route('/about').get((request, response) => {response.render('about', {layout: 'userContent.hbs'})});
+router.route('/profile').get((request, response) => {response.render('profile', {layout: 'userContent.hbs'})});
 
 
 /*

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled Travel Agency</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/global-popup.css">
+    <link rel="stylesheet" href="styles/trips-look.css">
+    <link rel="stylesheet" href="styles/profile.css">
+    <!-- icon source: https://commons.wikimedia.org/wiki/File:Airplane_silhouette_maroon.svg -->
+    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/6/65/Airplane_silhouette_maroon.svg">
+</head>
+<script src="scripts/announcements.js" defer></script>
+<script src="scripts/trip-planner.js" defer></script>
+<body>
+    {{>info-popup}}
+    {{>top-stuff}}
+    <div id="website-content-grid">
+        {{>navigation}}
+        {{{body}}}
+        {{>sidebar}}
+        {{>footer}}
+    </div>
+</body>
+</html>
