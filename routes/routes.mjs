@@ -14,7 +14,6 @@ const travelController = await import(`../controller/travel-controller.mjs`)
 router.route('/').get((req, res) => {res.render('home')});
 
 router.get('/flights/remove/:removeFlightId', travelController.removeFlight);
-// router.get('/tasks/toggle/:toggleTaskId', taskListController.toggleTask);
 router.get('/flights/add/', travelController.addFlight);
 router.get('/flights', travelController.listAllFlights);
 
