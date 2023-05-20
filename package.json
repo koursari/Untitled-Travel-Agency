@@ -2,7 +2,7 @@
   "name": "travel-agency",
   "version": "1.0.0",
   "description": "",
-  "main": "server.mjs",
+  "main": "start.mjs",
   "scripts": {
 		"clean": "rm -rf node_modules",
 		"reinstall": "npm run clean && npm install",
