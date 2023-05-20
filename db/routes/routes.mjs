@@ -18,4 +18,6 @@ router.get('/flights/remove/:removeFlightId', travelController.removeFlight);
 router.get('/flights/add/', travelController.addFlight);
 router.get('/flights', travelController.listAllFlights);
 
+router.get('/users', travelController.listAllUsers);
+
 export default router;

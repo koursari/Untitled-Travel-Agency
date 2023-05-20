@@ -20,19 +20,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col xl-mt-3">
-            <li class="list-group">Company - departure - dep_time - dep_time - arr_time - total_f_seats - total_b_seats - total_e_seats
-
-
-            </li>
+        <div class="col mt-3 col-sm-9">
+               Id - Company - departure - d_date - dep_time - a_date - total_f_seats - total_b_seats - total_e_seats
         </div>
     </div>
     <div class="row ">
-        <div class="col xl-mt-3">
+        <div class="col mt-3">
             <ul class="list-group">
+                <a href="/">..</a><br>
                 {{#each flights}}
                     <li class="list-group-item">
-                        <a href="/flights/{{f_id}}" >f_id</a> {{company}} - {{departure}} - {{dep_time}} - {{destination}} - {{arr_time}} - {{total_f_seats}} - {{total_b_seats}} -{{total_b_seats}}
+                        <a href="/flights/{{f_id}}" >{{f_id}}.</a> {{company}} - {{departure}} - {{d_date}} - {{destination}} - {{a_date}} - {{total_f_seats}} - {{total_b_seats}} -{{total_b_seats}}
                         <a href="/flights/remove/{{f_id}}">X</a>
                     </li>
                 {{/each}}

@@ -4,12 +4,11 @@ import pool from '../../database.js'
 //get the flight list
 export let getAllFlights = async (req,res)=>{
   try {
-      const response = await pool.query('SELECT * FROM flight');
-      return response.rows;
+      const sql = await pool.query('SELECT * FROM flight');
+      return sql.rows;
   }
-  catch(error){
-      console.log(error);
-      res.send("Error: "+error);
+  catch(err) {
+    res.send(err);
   }
 } 
 
@@ -48,3 +47,15 @@ export let removeTask = async (f_id, userId) => {
         throw error
     }
 }
+
+
+//get the user list
+export let getAllUsers = async (req,res)=>{
+  try {
+      const sql = await pool.query('SELECT * FROM customer');
+      return sql.rows;
+  }
+  catch(err){
+      res.send(err);
+  }
+} 

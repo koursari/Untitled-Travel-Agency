@@ -14,9 +14,9 @@ CREATE TABLE flight (
 	"f_id" serial NOT NULL,
 	"company" varchar NOT NULL,
 	"departure" varchar NOT NULL,
-	"dep_time" TIME NOT NULL,
+	"d_date" timestamp without time zone NOT NULL,
 	"destination" varchar NOT NULL,
-	"arr_time" TIME NOT NULL,
+	"a_date" timestamp without time zone NOT NULL,
 	"total_f_seats" integer NOT NULL,
 	"total_b_seats" integer NOT NULL,
 	"total_e_seats" integer NOT NULL,	
@@ -57,5 +57,6 @@ INSERT INTO customer (username, password, first_name, last_name, phone, address,
 ('cxvxcv', 'xdsaxd12', 'Vasilis', 'Ioannidis', 6935552540, 'Kilkis 20', false),
 ('ece8035', 'asd123', 'Panos', 'Dastiridis', 6983477347, 'Kilkis 11', true);
 
-INSERT INTO flight(f_id, company, departure, dep_time, destination, arr_time, total_f_seats, total_b_seats, total_e_seats)
-	VALUES (DEFAULT, 'Ryanair', 'Athens', '13:30', 'Thessaloniki', '14:30', 20, 35, 50);
+INSERT INTO flight(f_id, company, departure, d_date, destination, a_date, total_f_seats, total_b_seats, total_e_seats) VALUES 
+(DEFAULT, 'Ryanair', 'Athens', '2023-6-12 13:30', 'Thessaloniki', '2023-6-12 14:30', 20, 35, 50),
+(DEFAULT, 'Ryanair', 'Athens', '2023-6-13 16:12', 'Iraklio', '2023-6-13 17:30', 20, 35, 50);
