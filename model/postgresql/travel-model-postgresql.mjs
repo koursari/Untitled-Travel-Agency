@@ -52,7 +52,7 @@ export let removeTask = async (f_id, userId) => {
 //get the user list
 export let getAllUsers = async (req,res)=>{
   try {
-      const sql = await pool.query('SELECT * FROM customer');
+      const sql = await pool.query('SELECT * FROM users');
       return sql.rows;
   }
   catch(err){

@@ -1,4 +1,6 @@
-CREATE TABLE customer (
+CREATE EXTENSION pgcrypto;
+
+CREATE TABLE users (
 	"username" varchar NOT NULL UNIQUE,
 	"password" varchar NOT NULL UNIQUE,
 	"first_name" varchar NOT NULL,
@@ -34,7 +36,7 @@ CREATE TABLE ticket (
 	CONSTRAINT ticket_f_id_fkey FOREIGN KEY (f_id)
         REFERENCES flight (f_id) ON DELETE CASCADE,
     CONSTRAINT ticket_username_fkey FOREIGN KEY (username)
-        REFERENCES customer (username) ON DELETE CASCADE
+        REFERENCES users (username) ON DELETE CASCADE
 );
 
 CREATE TABLE classes (
@@ -51,11 +53,11 @@ CREATE TABLE classes (
 
 
 
-INSERT INTO customer (username, password, first_name, last_name, phone, address, "isAdmin") VALUES 
-('toklarino', 'xdxd12', 'George', 'Magkas', 6972838183, 'Xanthis 52', false),
-('toot', '123fss', 'Chrysanthos', 'Manolidis', 6935455821, 'Korinthou 38', false),
-('cxvxcv', 'xdsaxd12', 'Vasilis', 'Ioannidis', 6935552540, 'Kilkis 20', false),
-('ece8035', 'asd123', 'Panos', 'Dastiridis', 6983477347, 'Kilkis 11', true);
+INSERT INTO users (username, password, first_name, last_name, phone, address, "isAdmin") VALUES 
+('toklarino', crypt('xdxd12', gen_salt('bf')), 'George', 'Magkas', 6972838183, 'Xanthis 52', false),
+('toot', crypt('123fss', gen_salt('bf')), 'Chrysanthos', 'Manolidis', 6935455821, 'Korinthou 38', false),
+('cxvxcv', crypt('xdsaxd12', gen_salt('bf')), 'Vasilis', 'Ioannidis', 6935552540, 'Kilkis 20', false),
+('ece8035', crypt('asd123', gen_salt('bf')), 'Panos', 'Dastiridis', 6983477347, 'Kilkis 11', true);
 
 INSERT INTO flight(f_id, company, departure, d_date, destination, a_date, total_f_seats, total_b_seats, total_e_seats) VALUES 
 (DEFAULT, 'Ryanair', 'Athens', '2023-6-12 13:30', 'Thessaloniki', '2023-6-12 14:30', 20, 35, 50),
