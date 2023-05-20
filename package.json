@@ -1,18 +1,15 @@
 {
-  "name": "db",
+  "name": "travel-agency",
   "version": "1.0.0",
   "description": "",
   "main": "server.mjs",
-  "directories": {
-    "example": "example"
-  },
   "scripts": {
 		"clean": "rm -rf node_modules",
 		"reinstall": "npm run clean && npm install",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"debug": "node ./node_modules/nodemon/bin/nodemon.js --inspect ./server.mjs",
-		"watch": "node ./node_modules/nodemon/bin/nodemon.js ./server.mjs",
-		"start": "npm ./server.mjs"
+		"debug": "nodemon --inspect .",
+		"watch": "nodemon .",
+		"start": "node ."
 	},
   "keywords": [],
   "author": "",
