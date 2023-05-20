@@ -1,9 +1,11 @@
 import express from 'express'
+
 const router = express.Router();
 
-router.route('/index').get((req, res) => {res.render('index')});
-router.route('/about').get((req, res) => {res.render('about')});
-router.route('/profile').get((req, res) => {res.render('profile')});
+router.route('/').get((request, response) => {response.render('index')});
+router.route('/index').get((request, response) => {response.render('index')});
+router.route('/about').get((request, response) => {response.render('about')});
+router.route('/profile').get((request, response) => {response.render('profile')});
 
 
 /*
