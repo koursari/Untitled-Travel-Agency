@@ -1,11 +1,5 @@
 import express from 'express'
 
-import dotenv from 'dotenv'
-if (process.env.NODE_ENV !== 'production') {
-    console.log('loading .env');
-    dotenv.config();
-}
-
 const app = express();
 
 import exphbs from 'express-handlebars'
