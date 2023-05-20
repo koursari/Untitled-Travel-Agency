@@ -38,7 +38,7 @@ export let getAllFlights = async (req,res)=>{
 
 
 //Αφαίρεση μιας εργασίας
-export let removeTask = async (f_id, userId) => {
+export let removeFlight = async (f_id, userId) => {
   try {
      const sql = await pool.query('DELETE FROM flight WHERE f_id=$1 RETURNING f_id', [f_id]);
      return true;
@@ -59,3 +59,33 @@ export let getAllUsers = async (req,res)=>{
       res.send(err);
   }
 } 
+
+export let getAllTickets = async (req,res)=>{
+  try {
+      const sql = await pool.query('SELECT * FROM ticket,flight WHERE ticket.f_id=flight.f_id');
+      return sql.rows;
+  }
+  catch(err){
+      res.send(err);
+  }
+} 
+
+export let getAllClasses = async (req,res)=>{
+  try {
+      const sql = await pool.query('SELECT * FROM classes,flight WHERE classes.f_id=flight.f_id');
+      return sql.rows;
+  }
+  catch(err){
+      res.send(err);
+  }
+} 
+
+export let removeClass = async (f_id, userId) => {
+  try {
+     const sql = await pool.query('DELETE FROM classes WHERE f_id=$1 RETURNING f_id', [f_id]);
+     return true;
+  }
+    catch (error) {
+        throw error
+    }
+}

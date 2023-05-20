@@ -43,7 +43,7 @@ CREATE TABLE classes (
 	"first" money NOT NULL,
 	"business" money NOT NULL,
 	"economy" money NOT NULL,
-	"f_id" integer NOT NULL,
+	"f_id" integer NOT NULL UNIQUE,
 	CONSTRAINT class_f_id_fkey FOREIGN KEY (f_id)
 	    REFERENCES flight (f_id) ON DELETE CASCADE
 );
@@ -62,3 +62,9 @@ INSERT INTO users (username, password, first_name, last_name, phone, address, "i
 INSERT INTO flight(f_id, company, departure, d_date, destination, a_date, total_f_seats, total_b_seats, total_e_seats) VALUES 
 (DEFAULT, 'Ryanair', 'Athens', '2023-6-12 13:30', 'Thessaloniki', '2023-6-12 14:30', 20, 35, 50),
 (DEFAULT, 'Ryanair', 'Athens', '2023-6-13 16:12', 'Iraklio', '2023-6-13 17:30', 20, 35, 50);
+
+INSERT INTO ticket(price, seat, username, f_id) VALUES 
+(105, 'B12', 'toot', 1),
+(200, 'F11', 'toklarino', 1),
+(90, 'E35', 'cxvxcv', 2),
+(55, 'E01', 'ece8035', 1);

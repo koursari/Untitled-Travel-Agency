@@ -20,4 +20,10 @@ router.get('/flights', travelController.listAllFlights);
 
 router.get('/users', travelController.listAllUsers);
 
+router.get('/tickets', travelController.listAllTickets);
+
+router.get('/classes', travelController.listAllClasses);
+router.get('/classes/add/', travelController.addClass);
+router.get('/classes/remove/:removeFlightId', travelController.removeClass);
+
 export default router;
