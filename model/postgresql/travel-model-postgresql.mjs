@@ -8,7 +8,7 @@ export let getAllFlights = async (req,res)=>{
       return sql.rows;
   }
   catch(err) {
-    res.send(err);
+    return res.json(409).send(err);
   }
 } 
 
@@ -44,7 +44,7 @@ export let removeFlight = async (f_id, userId) => {
      return true;
   }
     catch (error) {
-        throw error
+      return res.json(409).send(err);
     }
 }
 
@@ -56,7 +56,7 @@ export let getAllUsers = async (req,res)=>{
       return sql.rows;
   }
   catch(err){
-      res.send(err);
+    return res.json(409).send(err);
   }
 } 
 
@@ -66,7 +66,7 @@ export let getAllTickets = async (req,res)=>{
       return sql.rows;
   }
   catch(err){
-      res.send(err);
+    return res.json(409).send(err);
   }
 } 
 
@@ -76,7 +76,7 @@ export let getAllClasses = async (req,res)=>{
       return sql.rows;
   }
   catch(err){
-      res.send(err);
+    return res.json(409).send(err);
   }
 } 
 
@@ -85,7 +85,7 @@ export let removeClass = async (f_id, userId) => {
      const sql = await pool.query('DELETE FROM classes WHERE f_id=$1 RETURNING f_id', [f_id]);
      return true;
   }
-    catch (error) {
-        throw error
+    catch (err) {
+      return res.json(409).send(err);
     }
 }

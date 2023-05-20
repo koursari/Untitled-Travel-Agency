@@ -62,7 +62,7 @@ export async function removeFlight(req, res) {
       const allFlights = await model.getAllFlights(userId)
       res.render('flights', { flights: allFlights });
    } catch (err) {
-      res.send(err);
+      return res.json(409).send(err);
    }
 }
 
@@ -71,7 +71,7 @@ export async function listAllUsers(req, res) {
       const users = await model.getAllUsers(userId);
       res.render('users', { users: users });
    } catch (err) {
-      res.send(err);
+      return res.json(409).send(err);
    }
 }
 
@@ -80,7 +80,7 @@ export async function listAllTickets(req, res) {
       const ticket = await model.getAllTickets(userId);
       res.render('tickets', { ticket: ticket });
    } catch (err) {
-      res.send(err);
+      return res.json(409).send(err);
    }
 }
 
@@ -89,7 +89,7 @@ export async function listAllClasses(req, res) {
       const classes = await model.getAllClasses(userId);
       res.render('classes', { classes: classes });
    } catch (err) {
-      res.send(err);
+      return res.json(409).send(err);
    }
 }
 
@@ -103,7 +103,7 @@ export async function addClass(req, res) {
       const allClasses = await model.getAllClasses(userId)
       res.render('classes', { classes: allClasses });
    } catch (error) {
-      res.send(error);
+      return res.json(409).send(err);
    }
 }
 
@@ -113,6 +113,6 @@ export async function removeClass(req, res) {
       const allClasses = await model.getAllClasses(userId)
       res.render('classes', { classes: allClasses });
    } catch (err) {
-      res.send(err);
+      return res.json(409).send(err);
    }
 }
