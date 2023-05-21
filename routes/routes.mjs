@@ -8,7 +8,6 @@ router.route('/about').get((request, response) => {response.render('about', {lay
 router.route('/profile').get((request, response) => {response.render('profile', {layout: 'userContent.hbs'})});
 
 
-/*
 const travelController = await import(`../controller/travel-controller.mjs`)
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
@@ -26,6 +25,6 @@ router.get('/tickets', travelController.listAllTickets);
 router.get('/classes', travelController.listAllClasses);
 router.get('/classes/add/', travelController.addClass);
 router.get('/classes/remove/:removeFlightId', travelController.removeClass);
-*/
+
 
 export default router;
