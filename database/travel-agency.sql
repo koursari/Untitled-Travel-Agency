@@ -19,9 +19,12 @@ CREATE TABLE flight (
 	"d_date" timestamp without time zone NOT NULL,
 	"destination" varchar NOT NULL,
 	"a_date" timestamp without time zone NOT NULL,
-	"total_f_seats" integer NOT NULL,
-	"total_b_seats" integer NOT NULL,
-	"total_e_seats" integer NOT NULL,	
+	"t_f_seats" integer NOT NULL,
+	"first" money NOT NULL,
+	"t_b_seats" integer NOT NULL,
+	"business" money NOT NULL,
+	"t_e_seats" integer NOT NULL,
+	"economy" money NOT NULL,
 	PRIMARY KEY ("f_id")
 );
 
@@ -39,32 +42,23 @@ CREATE TABLE ticket (
         REFERENCES users (username) ON DELETE CASCADE
 );
 
-CREATE TABLE classes (
-	"first" money NOT NULL,
-	"business" money NOT NULL,
-	"economy" money NOT NULL,
-	"f_id" integer NOT NULL UNIQUE,
-	CONSTRAINT class_f_id_fkey FOREIGN KEY (f_id)
-	    REFERENCES flight (f_id) ON DELETE CASCADE
-);
-
 
 
 
 
 
 INSERT INTO users (username, password, first_name, last_name, phone, address, "isAdmin") VALUES 
-('toklarino', crypt('xdxd12', gen_salt('bf')), 'George', 'Magkas', 6972838183, 'Xanthis 52', false),
-('toot', crypt('123fss', gen_salt('bf')), 'Chrysanthos', 'Manolidis', 6935455821, 'Korinthou 38', false),
-('cxvxcv', crypt('xdsaxd12', gen_salt('bf')), 'Vasilis', 'Ioannidis', 6935552540, 'Kilkis 20', false),
-('ece8035', crypt('asd123', gen_salt('bf')), 'Panos', 'Dastiridis', 6983477347, 'Kilkis 11', true);
+('user1', crypt('user1', gen_salt('bf')), 'George', 'Magkas', 6972838183, 'Xanthis 52', false),
+('user2', crypt('user2', gen_salt('bf')), 'Chrysanthos', 'Manolidis', 6935455821, 'Korinthou 38', false),
+('user3', crypt('user3', gen_salt('bf')), 'Vasilis', 'Ioannidis', 6935552540, 'Kilkis 20', false),
+('ece8035', crypt('abc123', gen_salt('bf')), 'Panos', 'Dastiridis', 6983477347, 'Kilkis 11', true);
 
-INSERT INTO flight(f_id, company, departure, d_date, destination, a_date, total_f_seats, total_b_seats, total_e_seats) VALUES 
-(DEFAULT, 'Ryanair', 'Athens', '2023-6-12 13:30', 'Thessaloniki', '2023-6-12 14:30', 20, 35, 50),
-(DEFAULT, 'Ryanair', 'Athens', '2023-6-13 16:12', 'Iraklio', '2023-6-13 17:30', 20, 35, 50);
+INSERT INTO flight(f_id, company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy) VALUES 
+(DEFAULT, 'Ryanair', 'Athens', '2023-6-12 13:30', 'Thessaloniki', '2023-6-12 14:30', 20, 200, 35, 100, 50, 50),
+(DEFAULT, 'Ryanair', 'Athens', '2023-6-17 16:12', 'Iraklio', '2023-6-13 17:30', 20, 150, 35, 75, 50, 30);
 
 INSERT INTO ticket(price, seat, username, f_id) VALUES 
-(105, 'B12', 'toot', 1),
-(200, 'F11', 'toklarino', 1),
-(90, 'E35', 'cxvxcv', 2),
-(55, 'E01', 'ece8035', 1);
+(100, 'B12', 'user1', 1),
+(200, 'F11', 'user2', 1),
+(75, 'E35', 'user3', 2),
+(50, 'E01', 'user3', 1);

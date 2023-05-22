@@ -8,12 +8,15 @@
         <div class="col-9">
             <input type="text" name="company" id="item1" placeholder="Airline" class="input-lg">
             <input type="text" name="departure" id="item2" placeholder="Departure" class="input-lg">
-            <input type="time" name="dep_time" id="item3" placeholder="Date of Departure" class="input-lg">
+            <input type="datetime-local" name="d_date" id="item3" placeholder="Date of Departure" class="input-lg">
             <input type="text" name="destination" id="item4" placeholder="Destination" class="input-lg">
-            <input type="time" name="arr_time" id="item5" placeholder="Date of Arrival" class="input-lg">
-            <input type="integer" name="total_f_seats" id="item6" placeholder="Total first class seats" class="input-lg">
-            <input type="integer" name="total_b_seats" id="item7" placeholder="Total business class seats" class="input-lg">
-            <input type="integer" name="total_e_seats" id="item8" placeholder="Total economy class seats" class="input-lg">
+            <input type="datetime-local" name="a_date" id="item5" placeholder="Date of Arrival" class="input-lg">
+            <input type="integer" name="t_f_seats" id="item6" placeholder="Total first class seats" class="input-lg">
+            <input type="integer" name="first" id="item7" placeholder="First class price" class="input-lg">
+            <input type="integer" name="t_b_seats" id="item8" placeholder="Total business class seats" class="input-lg">
+            <input type="integer" name="business" id="item9" placeholder="Business class price" class="input-lg">
+            <input type="integer" name="t_e_seats" id="item10" placeholder="Total economy class seats" class="input-lg">
+            <input type="integer" name="economy" id="item11" placeholder="Economy class price" class="input-lg">
         </div>
         <div class="col">
             <button type="submit">New Flight</button>
@@ -21,7 +24,7 @@
     </div>
     <div class="row">
         <div class="col mt-3 col-sm-9">
-               Id - Company - departure - d_date - destination - a_date - total_f_seats - total_b_seats - total_e_seats
+               Id - Company - departure - d_date - destination - a_date - t_f_seats - first class price - total_b_seats - business price - total_e_seats -economy price
         </div>
     </div>
     <div class="row ">
@@ -30,7 +33,7 @@
                 <a href="/">..</a><br>
                 {{#each flights}}
                     <li class="list-group-item">
-                        <a href="/flights/{{f_id}}" >{{f_id}}.</a> {{company}} - {{departure}} - {{d_date}} - {{destination}} - {{a_date}} - {{total_f_seats}} - {{total_b_seats}} -{{total_b_seats}}
+                        <a href="/flights/{{f_id}}" >{{f_id}}.</a> {{company}} - {{departure}} - {{d_date}} - {{destination}} - {{a_date}} - {{t_f_seats}} - {{first}} - {{t_b_seats}} - {{business}} -{{t_e_seats}} - {{economy}}
                         <a href="/flights/remove/{{f_id}}">X</a>
                     </li>
                 {{/each}}
