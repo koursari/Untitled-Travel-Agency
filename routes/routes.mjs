@@ -1,5 +1,5 @@
 import express from 'express'
-import {customAnnouncements} from '../announcements.mjs'
+import {customAnnouncements} from '../database/announcements.mjs'
 
 const router = express.Router();
 
