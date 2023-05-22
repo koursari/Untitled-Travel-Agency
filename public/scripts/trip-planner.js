@@ -1,99 +1,58 @@
-//Populate Locations List
-let locations = [
-    {
-        name: "Anor Londo",
-        id: 0,
-    },
-    {
-        name: "Undead Parish",
-        id: 1,
-    },
-    {
-        name: "Depths",
-        id: 2,
-    },
-    {
-        name: "Sen's Fortress",
-        id: 3,
-    },
-    {
-        name: "Darkroot Basin",
-        id: 4,
-    },
-    {
-        name: "Blighttown",
-        id: 5,
-    },
-    {
-        name: "Ashen Lake",
-        id: 6,
-    }
-];
-let connections = [
-    [0,3],
-    [1,2], [1,3], [1,4],
-    [2,1], [2,5],
-    [3,0], [3,1],
-    [4,1],
-    [5,2], [5,6],
-    [6,5]
-];
-let originLocation = document.getElementById("from-location");
-originLocation.value = "";
-locations.forEach(i => {
-    let loc = document.createElement("option");
-    originLocation.appendChild(loc);
-    loc.setAttribute("value", i.id);
-    loc.textContent = i.name;
+let connectionInformation = document.getElementById("direct-connections");
+let divConnections = connectionInformation.querySelectorAll("div");
+let connections = new Array();
+divConnections.forEach(i => {
+    let from = i.dataset.from;
+    let to = i.dataset.to;
+    connections.push([from, to]);
 });
 
-let destinationLocation = document.getElementById("destination-location");
-destinationLocation.value = "";
+let originSelector = document.getElementById("from-location");
+let destinationSelector = document.getElementById("destination-location");
+destinationSelector.value = "";
 
-//Pick Destination based on Origin and Available Connections
-function updateDestinations() {
-    //clear Departures List and disable button
+function getNeighbors(x) {
+    let result = new Array();
+    connections.forEach(element => {
+        if (element[0] == x) result.push(element[1])
+    })
+    return result;
+}
+
+function resetFlightsList() {
     let departureForm = document.getElementById("departures");
     departureForm.style.display = "none";
     departureForm.querySelector("ul").innerHTML = "";
     let btn = document.getElementById("searchtrips");
     btn.disabled = true;
+}
 
-    //find what the user chose
-    let originID = originLocation.value;
-    //update available destinations
-    let destinationLocation = document.getElementById("destination-location");
-    destinationLocation.innerHTML = ""; //clear destinations
-    //write a placeholder option
-    let emptyDestination = document.createElement("option");
-    destinationLocation.appendChild(emptyDestination);
-    emptyDestination.setAttribute("value", "");
-    emptyDestination.setAttribute("disabled", "true");
-    emptyDestination.setAttribute("selected", "true");
-    emptyDestination.setAttribute("hidden", "true");
-    emptyDestination.textContent = "Προορισμός";
-    //write actual available destinations
-    connections.forEach(i => {
-        if(i[0] == originID) {
-            let loc = document.createElement("option");
-            destinationLocation.appendChild(loc);
-            loc.setAttribute("value", i[1]);
-            let dname = "test";
-            locations.forEach(lc => {if (lc.id == i[1]) dname = lc.name;});
-            loc.textContent = dname;
+function updateDestinations() {
+    //first make sure the flights list is reset
+    resetFlightsList();
+    //then hide all connections
+    destinations = destinationSelector.querySelectorAll("option");
+    destinations.forEach(element => {
+        element.hidden = true;
+        element.disabled = true;
+    });
+    destinationSelector.value = "";
+    //then show direct connections
+    let selectedOriginID = originSelector.value;
+    neighbors = getNeighbors(selectedOriginID);
+    destinations.forEach(element => {
+        id = element.value;
+        if(neighbors.includes(id)) {
+            element.hidden = false;
+            element.disabled = false;
         }
     });
 }
-originLocation.addEventListener("change", updateDestinations);
 
-document.getElementById("destination-location").addEventListener("change", () => {
-    let departureForm = document.getElementById("departures");
-    departureForm.style.display = "none";
-    departureForm.querySelector("ul").innerHTML = "";
-    let btn = document.getElementById("searchtrips");
-    btn.disabled = false;
-});
+originSelector.addEventListener("change", updateDestinations);
+destinationSelector.addEventListener("change", resetFlightsList);
 
+/*
 //Populate Departures List
 let customDepartures = [
     {
@@ -153,3 +112,4 @@ function populateDepartures(){
 
 let searchButton = document.getElementById("searchtrips");
 searchButton.addEventListener("click", populateDepartures);
+*/

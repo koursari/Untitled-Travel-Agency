@@ -5,17 +5,28 @@
             <label for="from-location">Από</label>
             <select id="from-location">
                 <option value="" disabled selected hidden>Προέλευση</option>
+                {{#each locationList}}
+                <option value="{{id}}">{{name}}</option>
+                {{/each}}
             </select>
             </div>
             <div class="selector-group">
             <label for="destination-location">Πρός</label>
             <select id="destination-location">
                 <option value="" disabled selected hidden>Προορισμός</option>
+                {{#each locationList}}
+                <option value="{{id}}" hidden>{{name}}</option>
+                {{/each}}
             </select>
             </div>
                 <input type="date">
             <button id="searchtrips" disabled>Αναζήτηση</button>
         </div>
         <div class="departures" id="departures"><form><fieldset><legend>Δρομολόγια</legend><ul></ul></fieldset><button disabled>Αγορά</button></form></div>
+    </div>
+    <div id="direct-connections">
+        {{#each connections}}
+        <div data-from="{{from}}" data-to="{{to}}"></div>
+        {{/each}}
     </div>
 </main>
