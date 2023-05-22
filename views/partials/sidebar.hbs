@@ -1,1 +1,7 @@
-<div class="sidebar" id="sidebar">Σύντομες Ανακοινώσεις</div>
+<div class="sidebar" id="sidebar">Σύντομες Ανακοινώσεις
+    <ul>
+        {{#each announcementList}}
+        <li id="{{a_id}}" data-date="{{date}}" data-text="{{textContent}}">{{title}}</li>
+        {{/each}}
+    </ul>
+</div>
