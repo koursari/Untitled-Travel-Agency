@@ -1,5 +1,5 @@
 {
     "verbose": true,
     "ext": "json, mjs, js, hbs, css",
-    "ignore": ["**/docs/**"]
+    "ignore": ["**/docs/**", "database"]
 }
