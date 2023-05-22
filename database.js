@@ -6,12 +6,12 @@ const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_P
 const pool = new Pool({
    connectionString: process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : connectionString,
    ssl: false
-   })
+})
 
-   //connect 
+//connect 
 pool.connect((err) => {
-      if (err) throw(err);
-   });
+   if (err) throw (err);
+});
 
-   //export the connection pool to use 
-module.exports =  pool ;
+//export the connection pool to use 
+module.exports = pool;
