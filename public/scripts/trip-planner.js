@@ -1,7 +1,6 @@
-let connectionInformation = document.getElementById("direct-connections");
-let divConnections = connectionInformation.querySelectorAll("div");
-let connections = new Array();
-divConnections.forEach(i => {
+const connectionInformation = document.getElementById("direct-connections").querySelectorAll("div");
+const connections = new Array();
+connectionInformation.forEach(i => {
     let from = i.dataset.from;
     let to = i.dataset.to;
     connections.push([from, to]);
@@ -28,9 +27,7 @@ function resetFlightsList() {
 }
 
 function updateDestinations() {
-    //first make sure the flights list is reset
-    resetFlightsList();
-    //then hide all connections
+    //Hde all connections
     destinations = destinationSelector.querySelectorAll("option");
     destinations.forEach(element => {
         element.hidden = true;
@@ -48,9 +45,14 @@ function updateDestinations() {
         }
     });
 }
+function changeInOrigin() {
+    resetFlightsList();
+    updateDestinations();
+}
+let changeInDestination = resetFlightsList;
 
-originSelector.addEventListener("change", updateDestinations);
-destinationSelector.addEventListener("change", resetFlightsList);
+originSelector.addEventListener("change", changeInOrigin);
+destinationSelector.addEventListener("change", changeInDestination);
 
 /*
 //Populate Departures List
