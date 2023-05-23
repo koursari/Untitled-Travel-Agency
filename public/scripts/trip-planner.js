@@ -1,3 +1,4 @@
+
 const connectionInformation = document.getElementById("direct-connections").querySelectorAll("div");
 const connections = new Array();
 connectionInformation.forEach(i => {

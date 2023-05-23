@@ -1,7 +1,17 @@
 //Locations List
 //We can list all locations with actual flights instead
-const locations = [
-    {
+
+const controller = await import("../controller/travel-controller.mjs");
+
+const userId = 'postgres';
+
+
+const departures = await controller.getAllDepartures(userId);
+const destinations = await controller.getAllDestinations(userId);
+console.log(departures, destinations);
+
+
+ const locations =  [ {
         name: "Anor Londo",
         short: "ALD",
         id: 0,
@@ -36,9 +46,9 @@ const locations = [
         short: "ASL",
         id: 6,
     }
-];
+ ];
 
-//probably won't be used as to allow for complicated flights
+// probably won't be used as to allow for complicated flights
 const directConnections = [
     {from: 0, to: 3},
     {from: 1, to: 2}, {from: 1, to: 3}, {from: 1, to: 4},

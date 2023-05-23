@@ -2,7 +2,8 @@
 
 //Δημιουργός (constructor) ενός αντικειμένου
 //Για να δημιουργηθεί ένα νέο αντικείμενο καλείται με const newTask = new Task('Περιγραφή μιας εργασίας');
-exports.Flight = function (company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy ) {
+exports.Flight = function (f_id, company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username ) {
+    this.f_id = f_id 
     this.company = company
     this.departure = departure
     this.d_date = d_date
@@ -14,12 +15,39 @@ exports.Flight = function (company, departure, d_date, destination, a_date, t_f_
     this.business = business
     this.t_e_seats = t_e_seats
     this.economy = economy    
+    this.admin_username = admin_username
 }
 
 
 
 //WIP for login/register module later
-exports.Users = function (username, password) {
+exports.Users = function (username, password, first_name, last_name, phone, address) {
     this.username = username
     this.password = password
+    this.first_name = first_name
+    this.last_name = last_name
+    this.phone = phone 
+    this.address = address
+}
+
+exports.Admin = function(username, password) {
+    this.username = username
+    this.password = password
+}
+
+exports.Ticket = function (t_id, price, seat, username, f_id) {
+    this.t_id = t_id
+    this.price = price
+    this.seat = seat
+    this.username = username
+    this.f_id = f_id
+}
+
+exports.Announcements = function (id, title, content, status, date, admin_username) {
+    this.id = id
+    this.title = title
+    this.content = content
+    this.status = status
+    this.date = date
+    this.admin_username =admin_username
 }

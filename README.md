@@ -17,7 +17,8 @@ One way of managing the database is as follows.
 - Change the **pg_hba.config** to allow connections following the **trust** authentication system
 > In a standard fedora installation this file is '/var/lib/pgsql/data/pg_hba.conf'
 - Start the postgresql server making sure that the configuration file has been loaded
-- Create a database with the appropriate name and load the .sql file to it
+- Create a database with the appropriate name, load the .sql file using the Query Tool and run it.
+- Populate the database for test purposes by running "node populate.mjs" in the terminal.
 > you may need to create a role for your postgresql server with the necessary attributes in order to use **createdb** and **psql** or have access to the filesystem
 Another way of managing the website is through pgAdmin 4.
 
