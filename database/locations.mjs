@@ -5,11 +5,33 @@ const controller = await import("../controller/travel-controller.mjs");
 
 const userId = 'postgres';
 
+//gets departures and destinations in an array
+const initLocations = await controller.getFlightConnections(userId);
 
-const departures = await controller.getAllDepartures(userId);
-const destinations = await controller.getAllDestinations(userId);
-console.log(departures, destinations);
+//different way of doing it by passing an Object into  array.reduce() // needs lodash.groupby // cleanup later
+// reformattedLocations = initLocations.reduce(function (r, a) {
+//     r[a.departure] = r[a.departure] || [];
+//     r[a.departure].push(a);
+//     return r;
+// }, Object.create(null)); 
 
+//similar method
+// const reformattedLocations = groupBy (initLocations, loc => loc.departure);
+
+
+//simple javascript
+function groupByKey(array, key) {
+    return array
+      .reduce((hash, obj) => {
+        if(obj[key] === undefined) return hash; 
+        return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
+      }, {})
+ }
+ 
+ const reformattedLocations = groupByKey(initLocations, 'departure');
+ console.log(reformattedLocations);
+
+// export {locations}
 
  const locations =  [ {
         name: "Anor Londo",

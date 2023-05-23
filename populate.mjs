@@ -84,6 +84,21 @@ let flights = [{
     t_e_seats: 50,
     economy: 30,
     admin_username: 'superuser'
+},
+{
+    f_id: 3,
+    company: 'Ryanair',
+    departure: 'Thessaloniki',
+    d_date: '2023-7-17 16:12',
+    destination: 'Iraklio',
+    a_date: '2023-7-13 17:30',
+    t_f_seats: 20,
+    first: 150,
+    t_b_seats: 35,
+    business: 75,
+    t_e_seats: 50,
+    economy: 30,
+    admin_username: 'superuser'
 }];
 
 for (let i = 0; i<flights.length; i++) {
@@ -122,4 +137,3 @@ for (let i=0; i<announcements.length; i++) {
         announcements[i].id, announcements[i].title, announcements[i].content, announcements[i].status, announcements[i].date, announcements[i].admin_username]);
 }
 
-process.exit(0);

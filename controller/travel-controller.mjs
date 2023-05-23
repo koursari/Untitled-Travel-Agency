@@ -43,8 +43,8 @@ export async function addFlight(req, res) {
    const newFlight = new myFlight(req.query.company, req.query.departure, req.query.d_date.replace('T', ' '), req.query.destination, req.query.a_date.replace('T', ' '), req.query.t_f_seats, req.query.first, req.query.t_b_seats, req.query.business, req.query.t_e_seats, req.query.economy);
    // console.log(newFlight.company);
    try {
-      const sql = await pool.query('INSERT INTO flight(company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING f_id',  
-      [newFlight.company,  newFlight.departure, newFlight.d_date, newFlight.destination, newFlight.a_date, newFlight.t_f_seats, newFlight.first, newFlight.t_b_seats, newFlight.business, newFlight.t_e_seats, newFlight.economy]);
+      const sql = await pool.query('INSERT INTO flight(company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING f_id',  
+      [newFlight.company,  newFlight.departure, newFlight.d_date, newFlight.destination, newFlight.a_date, newFlight.t_f_seats, newFlight.first, newFlight.t_b_seats, newFlight.business, newFlight.t_e_seats, newFlight.economy, 'superuser']);
 
       // const lastInsertId = await model.addFlight(newFlight, userId)
       const allFlights = await getAllFlights(userId)
@@ -100,9 +100,9 @@ export async function getAllDepartures (req,res) {
  } 
 
 
- export async function getAllDestinations (req,res) {
+ export async function getFlightConnections (req,res) {
    try {
-       const sql = await pool.query('SELECT f_id, destination FROM flight');
+       const sql = await pool.query('SELECT departure, destination FROM flight');
        return sql.rows;
    }
    catch(err) {
