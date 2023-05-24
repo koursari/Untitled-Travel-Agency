@@ -2,6 +2,11 @@ body {
     background-color: yellowgreen;
 }
 
+#header {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 #logo {
     font-size: 200%;
     text-align: center;
