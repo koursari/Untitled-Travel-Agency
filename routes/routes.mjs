@@ -15,7 +15,13 @@ router.route('/index').get((request, response) => {
         announcementList: customAnnouncements
     })
 });
-router.route('/about').get((request, response) => {response.render('about', {layout: 'userContent.hbs', announcementList: customAnnouncements})});
+router.route('/about').get((request, response) => {
+    response.render('about',
+    {
+        layout: 'userContent.hbs',
+        announcementList: customAnnouncements
+    })
+});
 router.route('/profile').get((request, response) => {
     response.render('profile',
     {
@@ -29,7 +35,9 @@ const travelController = await import(`../controller/travel-controller.mjs`)
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
 // router.route('/').get((req, res) => { res.redirect('/flights') });
-router.route('/').get((req, res) => {res.render('home')});
+router.route('/').get((request, response) => {
+    response.render('home')
+});
 
 router.get('/flights/remove/:removeFlightId', travelController.removeFlight);
 router.get('/flights/add/', travelController.addFlight);
