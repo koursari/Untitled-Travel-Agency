@@ -22,6 +22,9 @@ router.route('/about').get((request, response) => {
         announcementList: customAnnouncements
     })
 });
+//THIS IS THE ADMIN DASHBOARD
+//TO BE CHANGED WHEN WE START DOING SESSIONS
+//PROFILE SHOULD REDIRECT TO LOGIN
 router.route('/profile').get((request, response) => {
     response.render('profile',
     {
@@ -29,7 +32,14 @@ router.route('/profile').get((request, response) => {
         announcementList: customAnnouncements
     })
 });
-
+//USER MANAGEMENT
+router.route('/login').get((request, response) => {
+    response.render('login',
+    {
+        layout: 'userContent.hbs',
+        announcementList: customAnnouncements
+    })
+});
 
 const travelController = await import(`../controller/travel-controller.mjs`)
 
