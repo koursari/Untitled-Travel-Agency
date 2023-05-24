@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 })
 
 //Use routes as listed in the routes file
-import routes from './routes/routes.mjs'
+import { router as routes } from './routes/routes.mjs'
 app.use('/', routes);
 
 //Static Content

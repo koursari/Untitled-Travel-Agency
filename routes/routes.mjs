@@ -39,4 +39,4 @@ router.get('/users', travelController.listAllUsers);
 
 router.get('/tickets', travelController.listAllTickets);
 
-export default router;
+export { router };
