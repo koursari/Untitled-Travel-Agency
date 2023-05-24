@@ -1,0 +1,8 @@
+#main-about a {
+    display: flex;
+    justify-content: center;
+}
+
+#main-about #pic1 img {
+    border-radius: 20px;
+}
