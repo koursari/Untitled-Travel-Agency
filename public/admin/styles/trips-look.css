@@ -1,0 +1,51 @@
+.planner-container {
+    display: grid;
+    grid-template-rows: min-content auto;
+    row-gap: 10px;
+}
+
+.search-area {
+    background-color: purple;
+    color: orange;
+
+    grid-row: 1;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px black;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.search-area * {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.selector-group {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2em;
+}
+
+.departures {
+    background-color: purple;
+    color: orange;
+
+    display: none;
+
+    grid-row: 2;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px black;   
+}
+
+.departures form li {
+    list-style-type: none
+}
+
+.departures form button {
+    background-color: violet;
+    color: red;
+}

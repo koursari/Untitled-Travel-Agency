@@ -43,6 +43,29 @@ router.route('/login').get((request, response) => {
 
 const travelController = await import(`../controller/travel-controller.mjs`)
 
+
+router.route('/admin/flights').get((request, response) => {
+    response.render('about',
+    {
+        layout: 'userContent.hbs',
+        announcementList: customAnnouncements
+    })
+});
+router.route('/admin/users').get((request, response) => {
+    response.render('about',
+    {
+        layout: 'userContent.hbs',
+        announcementList: customAnnouncements
+    })
+});
+router.route('/admin/tickers').get((request, response) => {
+    response.render('about',
+    {
+        layout: 'userContent.hbs',
+        announcementList: customAnnouncements
+    })
+});
+
 //Καταχώριση συμπεριφοράς σε διάφορα path
 // router.route('/').get((req, res) => { res.redirect('/flights') });
 router.route('/').get((request, response) => {
