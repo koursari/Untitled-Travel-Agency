@@ -1,32 +1,33 @@
 import express from 'express'
-import {customAnnouncements} from '../database/announcements.mjs'
-import {locations, directConnections} from '../database/locations.mjs'
-
+const announcementsController = await import(`../controller/announcements-controller.mjs`);
 
 const router = express.Router();
 
 //router.route('/').get((request, response) => {response.render('index', {layout: 'userContent.hbs'})});
-router.route('/index').get((request, response) => {
+router.route('/index').get(async (request, response) => {
+    let announcements = await announcementsController.getAnnouncements();
     response.render('index',
     {
         layout: 'userContent.hbs',
-        locationList: locations,
-        connections: directConnections,
-        announcementList: customAnnouncements
+        locationList: null,
+        connections: null,
+        announcementList: announcements
     })
 });
-router.route('/about').get((request, response) => {
+router.route('/about').get(async (request, response) => {
+    let announcements = await announcementsController.getAnnouncements();
     response.render('about',
     {
         layout: 'userContent.hbs',
-        announcementList: customAnnouncements
+        announcementList: announcements
     })
 });
-router.route('/profile').get((request, response) => {
+router.route('/profile').get(async (request, response) => {
+    let announcements = await announcementsController.getAnnouncements();
     response.render('profile',
     {
         layout: 'userContent.hbs',
-        announcementList: customAnnouncements
+        announcementList: announcements
     })
 });
 
