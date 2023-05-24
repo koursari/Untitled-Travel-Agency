@@ -26,7 +26,7 @@ router.route('/about').get((request, response) => {
 //TO BE CHANGED WHEN WE START DOING SESSIONS
 //PROFILE SHOULD REDIRECT TO LOGIN
 router.route('/profile').get((request, response) => {
-    response.render('profile',
+    response.render('admin',
     {
         layout: 'userContent.hbs',
         announcementList: customAnnouncements
