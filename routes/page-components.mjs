@@ -23,6 +23,15 @@ export async function aboutpage(request, response) {
     })
 }
 
+export async function loginpage(request, response) {
+    let announcements = await announcementsController.getAnnouncements();
+    response.render('login',
+    {
+        layout: 'userContent.hbs',
+        announcementList: announcements
+    })
+}
+
 export async function adminDashboard(request, response) {
     let announcements = await announcementsController.getAnnouncements();
     response.render('admin',

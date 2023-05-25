@@ -9,6 +9,8 @@ router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 router.route('/profile').get(pages.adminDashboard);
 
+router.route('/login').get(pages.loginpage);
+
 router.route('/admin/flights').get(pages.adminDashboard);
 router.route('/admin/users').get(pages.adminDashboard);
 router.route('/admin/tickets').get(pages.adminDashboard);
