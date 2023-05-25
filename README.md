@@ -13,7 +13,6 @@ The database is managed through PostgreSQL.
 This is run as a separate server to which the main app connects.
 One way of managing the database is as follows.
 - Install **postgresql-server** for the main server
-- Install **postgresql-contrib** since the database requires the **pgcrypto** module
 - Change the **pg_hba.config** to allow connections following the **trust** authentication system
 > In a standard fedora installation this file is '/var/lib/pgsql/data/pg_hba.conf'
 - Start the postgresql server making sure that the configuration file has been loaded
@@ -22,10 +21,13 @@ One way of managing the database is as follows.
 > you may need to create a role for your postgresql server with the necessary attributes in order to use **createdb** and **psql** or have access to the filesystem
 Another way of managing the website is through pgAdmin 4.
 
-## Running and stopping database server
+### Running and stopping database server
 After installation and creation, you can run and stop the local database by executing the following commands in the windows admin cmd for the default install directory.
-"pg_ctl -D "C:\Program Files\PostgreSQL\15\data" start"
-"pg_ctl -D "C:\Program Files\PostgreSQL\15\data" stop"
+> "pg_ctl -D "C:\Program Files\PostgreSQL\15\data" start"
+> "pg_ctl -D "C:\Program Files\PostgreSQL\15\data" stop"
+In a linux distro with systemd the local database can be managed via
+> "# systemctl start postgresql.service"
+> "# systemctl stop postgresql.service"
 
 ## Start server (development)
 During development use "npm run watch" to run with nodemon which restarts node when triggered by changes.
