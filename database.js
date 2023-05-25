@@ -11,9 +11,8 @@ const pool = new Pool({
 })
 
 //connect 
-pool.connect((err) => {
-   if (err) throw (err);
-});
-
+pool.connect()
+   .then(() => console.log('connected'))
+   .catch(err => console.error('connection error', err.stack))
 //export the connection pool to use 
 module.exports = pool;
