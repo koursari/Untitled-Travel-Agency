@@ -1,7 +1,5 @@
 require('dotenv').config()
 const { Pool } = require('pg')
-//This file sets up the connection to the postgresql server
-//This is needed in the controller (which is used by routes), but also by travel-model-postgresql.mjs
 
 //create connection pool
 const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
