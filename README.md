@@ -24,9 +24,12 @@ Another way of managing the website is through pgAdmin 4.
 ### Running and stopping database server
 After installation and creation, you can run and stop the local database by executing the following commands in the windows admin cmd for the default install directory.
 > "pg_ctl -D "C:\Program Files\PostgreSQL\15\data" start"
+
 > "pg_ctl -D "C:\Program Files\PostgreSQL\15\data" stop"
+
 In a linux distro with systemd the local database can be managed via
 > "# systemctl start postgresql.service"
+
 > "# systemctl stop postgresql.service"
 
 ## Start server (development)
