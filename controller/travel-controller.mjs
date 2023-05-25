@@ -6,7 +6,7 @@
  */
 import { Flight as myFlight } from '../model/fields.js'
 import dotenv from 'dotenv';
-import pool from '../database.js'
+import pool from './database-connection.js'
 
 
 const userId = 'postgres';
