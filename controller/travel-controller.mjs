@@ -80,16 +80,6 @@ export async function removeFlight(removeFlightId) {
 
 /*
 //remove from the flight table
-export async function removeFlight(req, res) {
-   try {
-      // model.removeFlight(req.params.removeFlightId, userId)
-      const sql = await pool.query('DELETE FROM flight WHERE f_id=$1 RETURNING f_id', [req.params.removeFlightId]);
-      const allFlights = await getAllFlights(userId)
-      res.render('flights', { flights: allFlights });
-   } catch (err) {
-      return res.json(409).send(err);
-   }
-}
 
 //get and list the ticket table
 export async function listAllTickets(req, res) {

@@ -161,7 +161,7 @@ export async function manageFlightAdd(request, response) {
 
 export async function manageFlightRemove(request, response) {
     try {
-        await travelController.addFlight(request.params.removeFlightId);
+        await travelController.removeFlight(request.params.removeFlightId);
     } catch (err) {
         console.error(err);
     } finally {
