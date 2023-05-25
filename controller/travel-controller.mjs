@@ -24,7 +24,7 @@ export async function listAllUsers() {
    const userList = await pool.query('SELECT * FROM users');
    return userList.rows;
 }
-await announcementsController.getAnnouncements();
+
 export async function listAllTickets() {
    const ticketList = await pool.query('SELECT * FROM ticket,flight WHERE ticket.f_id=flight.f_id');
    return ticketList.rows;
