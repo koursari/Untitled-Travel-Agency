@@ -22,6 +22,11 @@ One way of managing the database is as follows.
 > you may need to create a role for your postgresql server with the necessary attributes in order to use **createdb** and **psql** or have access to the filesystem
 Another way of managing the website is through pgAdmin 4.
 
+## Running and stopping database server
+After installation and creation, you can run and stop the local database by executing the following commands in the windows admin cmd for the default install directory.
+"pg_ctl -D "C:\Program Files\PostgreSQL\15\data" start"
+"pg_ctl -D "C:\Program Files\PostgreSQL\15\data" stop"
+
 ## Start server (development)
 During development use "npm run watch" to run with nodemon which restarts node when triggered by changes.
 
