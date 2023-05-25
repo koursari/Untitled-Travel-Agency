@@ -158,3 +158,14 @@ export async function manageFlightAdd(request, response) {
         response.redirect('/admin/flights');
     }
 }
+
+export async function manageFlightRemove(request, response) {
+    try {
+        await travelController.addFlight(request.params.removeFlightId);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        response.redirect('/admin/flights');
+    }
+}
+

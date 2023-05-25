@@ -6,4 +6,6 @@ const insertFlightString = 'INSERT INTO ' +
 const lsFlightsString = 'SELECT * FROM flight';
 const lsUsersString = 'SELECT * FROM users';
 
-export { lsFlightsString, lsUsersString, insertFlightString }
+const rmFlightString = 'DELETE FROM flight WHERE f_id=$1 RETURNING f_id';
+
+export { lsFlightsString, lsUsersString, insertFlightString, rmFlightString }

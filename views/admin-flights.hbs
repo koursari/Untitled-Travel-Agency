@@ -34,8 +34,8 @@
                 <a href="/profile">..</a><br>
                 {{#each flights}}
                     <li class="list-group-item">
-                        <a href="/flights/{{f_id}}" >{{f_id}}.</a> {{company}} - {{departure}} - {{d_date}} - {{destination}} - {{a_date}} - {{t_f_seats}} - {{first}} - {{t_b_seats}} - {{business}} -{{t_e_seats}} - {{economy}}
-                        <a href="/flights/remove/{{f_id}}">X</a>
+                        <a href="/admin/flights/{{f_id}}" >{{f_id}}.</a> {{company}} - {{departure}} - {{d_date}} - {{destination}} - {{a_date}} - {{t_f_seats}} - {{first}} - {{t_b_seats}} - {{business}} -{{t_e_seats}} - {{economy}}
+                        <a href="/admin/flights/remove/{{f_id}}">X</a>
                     </li>
                 {{/each}}
             </ul>

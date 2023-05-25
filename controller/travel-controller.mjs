@@ -2,7 +2,7 @@ import { Flight as myFlight } from '../model/fields.js'
 import dotenv from 'dotenv';
 import pool from './database-connection.js'
 
-import {lsFlightsString, lsUsersString, insertFlightString} from './db-strings.mjs'
+import {lsFlightsString, lsUsersString, insertFlightString, rmFlightString} from './db-strings.mjs'
 
 
 
@@ -74,9 +74,10 @@ export async function addFlight(
    );
 }
 
-export async function removeFlight() {
-
+export async function removeFlight(removeFlightId) {
+   await pool.query(rmFlightString, [removeFlightId]);
 }
+
 /*
 //remove from the flight table
 export async function removeFlight(req, res) {
