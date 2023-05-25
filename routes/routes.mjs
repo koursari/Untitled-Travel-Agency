@@ -11,9 +11,6 @@ router.route('/').get(pages.homepage);
 router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
-
-router.route('/profile').get(pages.adminDashboard);
-
 router.route('/admin/flights').get(pages.flightsView);
 router.route('/admin/users').get(pages.usersView);
 router.route('/admin/tickets').get(pages.ticketsView);
@@ -22,14 +19,9 @@ router.get('/admin/flights/add/', pages.manageFlightAdd);
 router.get('/admin/flights/remove/:removeFlightId', pages.manageFlightRemove);
 
 //USER MANAGEMENT
-//router.route('/login').get(pages.loginpage);
-router.get('/login', checkAuthenticated, (req, res) => {
-    res.render('login',
-        {
-            layout: 'userContent.hbs',
-            announcementList: null
-        })
-})
+//Have a different landing page between admin/user
+router.route('/profile').get(checkNotAuthenticated, pages.adminDashboard);
+router.get('/login', checkAuthenticated, pages.loginpage);
 
 router.post('/login/user',
     passport.authenticate('local', {
@@ -39,18 +31,19 @@ router.post('/login/user',
     })
 );
 
-function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return res.redirect("/profile");
+//Helper functions
+function checkAuthenticated(request, response, next) {
+    if (request.isAuthenticated()) {
+        return response.redirect("/profile");
     }
     next();
 }
 
-function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
+function checkNotAuthenticated(request, response, next) {
+    if (request.isAuthenticated()) {
         return next();
     }
-    res.redirect("/login");
+    response.redirect("/login");
 }
 
 

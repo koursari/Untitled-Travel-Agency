@@ -168,4 +168,3 @@ export async function manageFlightRemove(request, response) {
         response.redirect('/admin/flights');
     }
 }
-

@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 // import { Users as myUser } from '../model/fields.js'
-import pool from '../database.js'
+import pool from './database-connection.js'
 
 export function initialize (passport) {
 passport.use(new LocalStrategy(async function doLogin(username, password, cb) {
