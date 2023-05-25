@@ -3,6 +3,7 @@ import exphbs from 'express-handlebars'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
+import flash from 'express-flash'
 
 const app = express();
 
@@ -33,7 +34,7 @@ app.use(session({
 app.use(passport.initialize());
 // Store our variables to be persisted across the whole session. Works with app.use(Session) above
 app.use(passport.session());
-// app.use(flash()); //we'll see if we use flash too, else delete later
+app.use(flash());
 
 
  
