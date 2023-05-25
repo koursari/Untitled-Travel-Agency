@@ -21,8 +21,8 @@ const initLocations = await controller.getFlightConnections(userId);
 const groupByKey = (list, key, { omitKey = false }) => list.reduce((hash, { [key]: value, ...rest }) => ({ ...hash, [value]: (hash[value] || []).concat(omitKey ? { ...rest } : { [key]: value, ...rest }) }), {})
 
 const reformattedLocations = groupByKey(initLocations, 'departure', {omitKey:true});
-console.log(reformattedLocations);
-console.log(Object.keys(reformattedLocations), Object.values(reformattedLocations));
+// console.log(reformattedLocations); 
+// console.log(Object.keys(reformattedLocations), Object.values(reformattedLocations));
 
 // let locArray = new Array();
 // Object.keys(reformattedLocations).forEach(element => {

@@ -1,14 +1,16 @@
+{{!-- some temporary code to test login insered at the top --}}
+
 <main>
-    <form id="user-login-area">
+    <form id="user-login-area" method="POST" action="/login/user">
         <!--
             add server side js to validate user and start session
             -->
         <fieldset>
             <legend>Στοιχεία σύνδεσης</legend>
             <label for="username-box">Όνομα χρήστη</label>
-            <input type="text" id="username-box">
+            <input name="username" type="text" id="username-box">
             <label for="password-box">Κωδικός χρήστη</label>
-            <input type="password" id="password-box">
+            <input name="password" type="password" id="password-box">
         </fieldset>
         <button>Σύνδεση</button>
     </form>

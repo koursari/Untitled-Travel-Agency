@@ -88,18 +88,18 @@ export async function listAllTickets(req, res) {
    }
 }
 
-//get the departure location list
-export async function getAllDepartures (req,res) {
-   try {
-       const sql = await pool.query('SELECT DISTINCT departure FROM flight');
-       return sql.rows;
-   }
-   catch(err) {
-     return res.json(409).send(err);
-   }
- } 
+// get username and password for User login
+// export async function doLogin (req,res) {
+//    try {
+//        const sql = await pool.query('SELECT username, password FROM Users');
+//        return sql.rows;
+//    }
+//    catch(err) {
+//      return res.json(409).send(err);
+//    }
+//  } 
 
-
+//export departure and destination for search
  export async function getFlightConnections (req,res) {
    try {
        const sql = await pool.query('SELECT departure, destination FROM flight');
