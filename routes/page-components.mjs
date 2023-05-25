@@ -15,7 +15,8 @@ export async function homepage(request, response) {
                 locationList: null,
                 connections: null,
                 announcements: announcementList
-            })
+            }
+        )
     }
 }
 
@@ -31,7 +32,8 @@ export async function aboutpage(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList
-            })
+            }
+        )
     }
 }
 
@@ -47,7 +49,8 @@ export async function loginpage(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList
-            })
+            }
+        )
     }
 }
 
@@ -63,7 +66,8 @@ export async function adminDashboard(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList
-            })
+            }
+        )
     }
 }
 
@@ -79,11 +83,12 @@ export async function flightsView(request, response) {
         console.error(err);
     } finally {
         response.render('admin-flights',
-        {
-            layout: 'main.hbs',
-            announcements: announcementList,
-            flights: flightList
-        })
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                flights: flightList
+            }
+        )
     }
 }
 
@@ -99,11 +104,12 @@ export async function usersView(request, response) {
         console.error(err);
     } finally {
         response.render('admin-users',
-        {
-            layout: 'main.hbs',
-            announcements: announcementList,
-            users: userList
-        })
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                users: userList
+            }
+        )
     }
 }
 
@@ -119,10 +125,36 @@ export async function ticketsView(request, response) {
         console.error(err);
     } finally {
         response.render('admin-tickets',
-        {
-            layout: 'main.hbs',
-            announcements: announcementList,
-            tickets: ticketList
-        })
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                tickets: ticketList
+            }
+        )
+    }
+}
+
+export async function manageFlightAdd(request, response) {
+    let announcementList = null;
+    let flightList = null;
+    try {
+        await travelController.addFlight(
+            request.query.company,
+            request.query.departure,
+            request.query.d_date,
+            request.query.destination,
+            request.query.a_date,
+            request.query.t_f_seats,
+            request.query.first,
+            request.query.t_b_seats,
+            request.query.business,
+            request.query.t_e_seats,
+            request.query.economy
+        );
+    } catch (err) {
+        console.error(err);
+    } finally {
+        //maybe use middlewares here?
+        response.redirect('/admin/flights');
     }
 }
