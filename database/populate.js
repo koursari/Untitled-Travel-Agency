@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 // import { Flight as myFlight, Users as myUser, Admin as myAdmin, Ticket as myTicket, Announcements as myAnnouncements } from '../model/fields.js'
-import pool from './database.js'
+import pool from '../controller/database-connection.mjs'
 
 let saltRounds = 10;
 
