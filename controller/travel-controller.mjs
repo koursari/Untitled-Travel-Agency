@@ -15,6 +15,21 @@ if (process.env.NODE_ENV !== 'production') {
    dotenv.config();
 }
 
+export async function listAllFlights() {
+   const flightList = await pool.query('SELECT * FROM flight');
+   return flightList.rows;
+}
+
+export async function listAllUsers() {
+   const userList = await pool.query('SELECT * FROM users');
+   return userList.rows;
+}
+await announcementsController.getAnnouncements();
+export async function listAllTickets() {
+   const ticketList = await pool.query('SELECT * FROM ticket,flight WHERE ticket.f_id=flight.f_id');
+   return ticketList.rows;
+}
+/*
 //display the flight table
 export async function listAllFlights (req, res) {
    try {
@@ -109,3 +124,4 @@ export async function getAllDepartures (req,res) {
      return res.json(409).send(err);
    }
  } 
+ */

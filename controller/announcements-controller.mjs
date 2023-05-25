@@ -11,11 +11,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export async function getAnnouncements() {
-   try {
-      let myAnnouncements = await customAnnouncements; //TO DO: get from DB
-      return myAnnouncements;
-   } catch(err) {
-      console.log(err);
-      return [];
-   }
+   let myAnnouncements = customAnnouncements; //TO DO: get from DB
+   return myAnnouncements;
 }
