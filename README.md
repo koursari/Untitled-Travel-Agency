@@ -5,7 +5,7 @@ This application is a webserver with a postgres database connection that manages
 The project dependencies are as follows.
 - **dotenv** is required so that the configuration does not have to be hardcoded
 - **express** and **express-handlebars** is the server
-- **pg** and **node-postgres** for the database connection
+- **pg** for the database connection
 The dependencies can be installed with "npm i"
 
 ## Setting up the database
