@@ -5,8 +5,8 @@
             <label for="from-location">Από</label>
             <select id="from-location">
                 <option value="" disabled selected hidden>Προέλευση</option>
-                {{#each locationList}}
-                <option value="{{id}}">{{name}}</option>
+                {{#each locations}}
+                <option value="{{this}}">{{this}}</option>
                 {{/each}}
             </select>
             </div>
@@ -14,8 +14,8 @@
             <label for="destination-location">Πρός</label>
             <select id="destination-location">
                 <option value="" disabled selected hidden>Προορισμός</option>
-                {{#each locationList}}
-                <option value="{{id}}" hidden>{{name}}</option>
+                {{#each locations}}
+                <option value="{{this}}" hidden>{{this}}</option>
                 {{/each}}
             </select>
             </div>
@@ -26,7 +26,7 @@
     </div>
     <div id="direct-connections">
         {{#each connections}}
-        <div data-from="{{from}}" data-to="{{to}}"></div>
+        <div data-from="{{departure}}" data-to="{{destination}}"></div>
         {{/each}}
     </div>
 </main>

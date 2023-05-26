@@ -78,20 +78,12 @@ export async function removeFlight(removeFlightId) {
    await pool.query(rmFlightString, [removeFlightId]);
 }
 
-/*
-//remove from the flight table
-
-//get and list the ticket table
-export async function listAllTickets(req, res) {
-   try {
-      const sql = await pool.query('SELECT * FROM ticket,flight WHERE ticket.f_id=flight.f_id');
-      // const ticket = await model.getAllTickets(userId);
-      res.render('tickets', { ticket: sql.rows });
-   } catch (err) {
-      return res.json(409).send(err);
-   }
+export async function getFlightConnections() {
+   const sql = await pool.query('SELECT departure, destination FROM flight');
+   return sql.rows;
 }
 
+/*
 // get username and password for User login
 // export async function doLogin (req,res) {
 //    try {

@@ -1,10 +1,15 @@
 const announcementsController = await import(`../controller/announcements-controller.mjs`);
 const travelController = await import(`../controller/travel-controller.mjs`);
+const graphController = await import(`../controller/travel-graph-controller.mjs`);
 
 export async function homepage(request, response) {
     let announcementList = null;
+    let locationList = null;
+    let connectionList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
+        locationList = await graphController.listAllLocations();
+        connectionList = await graphController.listAllConnections();
     } catch (err) {
         announcementList = [];
         console.log(err);
@@ -12,8 +17,8 @@ export async function homepage(request, response) {
         response.render('index',
             {
                 layout: 'main.hbs',
-                locationList: null,
-                connections: null,
+                locations: locationList,
+                connections: connectionList,
                 announcements: announcementList
             }
         )
