@@ -19,7 +19,8 @@ export async function homepage(request, response) {
                 layout: 'main.hbs',
                 locations: locationList,
                 connections: connectionList,
-                announcements: announcementList
+                announcements: announcementList,
+                isLoggedIn: false
             }
         )
     }
@@ -36,7 +37,8 @@ export async function aboutpage(request, response) {
         response.render('about',
             {
                 layout: 'main.hbs',
-                announcements: announcementList
+                announcements: announcementList,
+                isLoggedIn: false
             }
         )
     }
@@ -53,7 +55,8 @@ export async function loginpage(request, response) {
         response.render('login',
             {
                 layout: 'main.hbs',
-                announcements: announcementList
+                announcements: announcementList,
+                isLoggedIn: false
             }
         )
     }
@@ -70,7 +73,8 @@ export async function adminDashboard(request, response) {
         response.render('admin',
             {
                 layout: 'main.hbs',
-                announcements: announcementList
+                announcements: announcementList,
+                isLoggedIn: false
             }
         )
     }
@@ -91,7 +95,8 @@ export async function flightsView(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                flights: flightList
+                flights: flightList,
+                isLoggedIn: false
             }
         )
     }
@@ -112,7 +117,8 @@ export async function usersView(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                users: userList
+                users: userList,
+                isLoggedIn: false
             }
         )
     }
@@ -133,7 +139,8 @@ export async function ticketsView(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                tickets: ticketList
+                tickets: ticketList,
+                isLoggedIn: false
             }
         )
     }

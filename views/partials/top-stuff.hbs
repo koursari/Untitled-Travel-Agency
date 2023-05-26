@@ -1,5 +1,9 @@
 <div id="header">
+    {{#if isLoggedIn}}
+    <a href="/logout">Αποσύνδεση</a>
+    {{else}}
     <a href="/login">Σύνδεση/Εγγραφή</a>
+    {{/if}}
     <!-- if logged in: show Logout -->
     <marquee>Καλό ταξίδι!</marquee>
 </div>
