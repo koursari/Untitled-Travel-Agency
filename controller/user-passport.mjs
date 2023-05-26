@@ -81,7 +81,7 @@ export function initialize(passport) {
     });
 }
 
-export async function checkRegister(reg, cb) {
+export async function registerUser(reg, cb) {
     let sql = await pool.query('SELECT username FROM admin WHERE admin.username=$1 LIMIT 0 1', [reg.reg_username]); //Check against the admin usernames
     let data = sql.rows;
     if (data.length > 0) {

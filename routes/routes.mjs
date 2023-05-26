@@ -1,6 +1,6 @@
 import express from 'express'
 import passport from 'passport';
-import { checkRegister } from '../controller/user-passport.mjs';
+import { registerUser } from '../controller/user-passport.mjs';
 
 const pages = await import(`./page-components.mjs`)
 
@@ -46,7 +46,9 @@ router.get('/logout', (req, res) => {
 });
 
 //register route
-router.post('/register/try', checkRegister(req.body, res), pages.loginpage);
+router.post('/register/try', (req, res) => {
+    registerUser(req.body)
+}, pages.loginpage);
 
 //Helper functions
 function checkAuthenticated(request, response, next) {
