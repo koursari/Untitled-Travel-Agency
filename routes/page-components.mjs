@@ -56,13 +56,15 @@ export async function loginpage(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                isLoggedIn: false
+                isLoggedIn: false,
+                username: request.user
             }
         )
     }
 }
 
 export async function adminDashboard(request, response) {
+    // console.log(request.user.username, request.user.type);
     let announcementList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
@@ -70,15 +72,45 @@ export async function adminDashboard(request, response) {
         announcementList = [];
         console.error(err);
     } finally {
-        response.render('admin',
-            {
-                layout: 'main.hbs',
-                announcements: announcementList,
-                isLoggedIn: false
-            }
-        )
+        if (request.user.type === 'admin') {
+            response.render('admin',
+                {
+                    layout: 'main.hbs',
+                    announcements: announcementList,
+                    isLoggedIn: false,
+                    username: request.user.username     //We can display the logged in username somewhere in the page with this
+                }
+            )
+        } else if (request.user.type === 'user') {
+            response.render('profile',
+                {
+                    layout: 'main.hbs',
+                    announcementList: announcementList,
+                    isLoggedIn: false,                          //Is this used in anything?
+                    username: request.user.username                 //We can display the logged in username somewhere in the page with this
+                })
+        }
     }
 }
+
+// export async function userProfile(req, res) {
+//     //add user profile option, limited in comparison to admin, only tickets booked etc
+//     let announcementList = null;
+//     try {
+//         announcementList = await announcementsController.listAllAnnouncements();
+//     } catch (err) {
+//         announcementList = [];
+//         console.error(err);
+//     } finally {
+//         res.render('profile',
+//             {
+//                 layout: 'main.hbs',
+//                 announcementList: announcementList,
+//                 isLoggedIn: false,                          //Is this used in anything?
+//                 username: req.user.username                 //We can display the logged in username somewhere in the page with this
+//             })
+//     }
+// }
 
 export async function flightsView(request, response) {
     let announcementList = null;
@@ -183,7 +215,8 @@ export async function manageFlightAdd(request, response) {
             request.query.t_b_seats,
             request.query.business,
             request.query.t_e_seats,
-            request.query.economy
+            request.query.economy,
+            request.user.username  // req.user.username passes the session user that is logged in
         );
     } catch (err) {
         console.error(err);

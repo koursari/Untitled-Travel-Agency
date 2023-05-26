@@ -2,8 +2,7 @@
 
 //Δημιουργός (constructor) ενός αντικειμένου
 //Για να δημιουργηθεί ένα νέο αντικείμενο καλείται με const newTask = new Task('Περιγραφή μιας εργασίας');
-exports.Flight = function (f_id, company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username ) {
-    this.f_id = f_id 
+exports.Flight = function (company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username ) {
     this.company = company
     this.departure = departure
     this.d_date = d_date

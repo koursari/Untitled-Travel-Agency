@@ -7,6 +7,7 @@ CREATE TABLE admin (
 CREATE TABLE users (
 	"username" varchar NOT NULL UNIQUE,
 	"password" varchar NOT NULL UNIQUE,
+	"email" varchar NOT NULL,
 	"first_name" varchar NOT NULL,
 	"last_name" varchar NOT NULL,
 	"phone" bigint NOT NULL,

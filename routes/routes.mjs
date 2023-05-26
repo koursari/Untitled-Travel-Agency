@@ -5,8 +5,6 @@ const pages = await import(`./page-components.mjs`)
 
 const router = express.Router();
 
-// const userModel = await import(`../controller/user-controller.mjs`)
-
 router.route('/').get(pages.homepage);
 router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
@@ -21,16 +19,30 @@ router.get('/admin/flights/remove/:removeFlightId', pages.manageFlightRemove);
 
 //USER MANAGEMENT
 //Have a different landing page between admin/user
-router.route('/profile').get(checkNotAuthenticated, pages.adminDashboard);
+router.get('/profile', checkNotAuthenticated, pages.adminDashboard);
+
 router.get('/login', checkAuthenticated, pages.loginpage);
 
-router.post('/login/user',
+router.post('/login/try',
     passport.authenticate('local', {
         successRedirect: "/profile",
         failureRedirect: "/login",
         failureFlash: true
     })
 );
+
+//logout route
+router.get('/logout', (req, res) => {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        res.render('login', {
+            layout: 'main.hbs',
+            // announcements: announcementList,
+            isLoggedIn: false,
+            message: 'You are logged out successfully.'
+        })
+    });
+});
 
 //Helper functions
 function checkAuthenticated(request, response, next) {
@@ -47,5 +59,16 @@ function checkNotAuthenticated(request, response, next) {
     response.redirect("/login");
 }
 
+// function checkType(req, res, next) {
+//     if (req.user.type === 'admin') {
+//         pages.adminDashboard;
+//         return next();
+//     } else if (req.user.type === 'user') {
+//         pages.userProfile;
+//         return next();
+//     } else {
+//         res.send('err');
+//     }
+// }
 
 export { router };

@@ -1,5 +1,4 @@
 let flights = [{
-    f_id: 1,
     company: 'Ryanair',
     departure: 'Athens',
     d_date: '2023-6-12 13:30',
@@ -14,7 +13,6 @@ let flights = [{
     admin_username: 'superuser'
 },
 {
-    f_id: 2,
     company: 'Ryanair',
     departure: 'Athens',
     d_date: '2023-6-17 16:12',
@@ -29,7 +27,6 @@ let flights = [{
     admin_username: 'superuser'
 },
 {
-    f_id: 3,
     company: 'Ryanair',
     departure: 'Thessaloniki',
     d_date: '2023-7-17 16:12',
