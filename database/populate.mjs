@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 let saltRounds = 10;
 
-import pool from '../database-connection.js'
+import pool from '../controller/database-connection.js'
 
 import { flights } from './populate-data/flights.mjs'
 import { announcements } from './populate-data/announcements.mjs'

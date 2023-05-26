@@ -7,14 +7,14 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
-import pool from '../database-connection.js'
+import pool from './database-connection.js'
 
 export function initialize(passport) {
     passport.use(new LocalStrategy(async function doLogin(username, password, cb) {
-        let sql = await pool.query('SELECT username, password FROM admin WHERE admin.username=$1 LIMIT 0 1', [username]);
+        let sql = await pool.query('SELECT username, password FROM admin WHERE admin.username=$1', [username]);
         let data = sql.rows;
         if (data.length === 0) {      //Checking if username exists in ADMIN table 
-            sql = await pool.query('SELECT username, password FROM users WHERE users.username=$1 LIMIT 0 1', [username]); //Check if username exists in USERS table
+            sql = await pool.query('SELECT username, password FROM users WHERE users.username=$1', [username]); //Check if username exists in USERS table
             data = sql.rows;
             if (data.length === 0) {
                 return cb(null, false, { message: 'Incorrect username or password.' });
@@ -82,29 +82,29 @@ export function initialize(passport) {
 }
 
 export async function registerUser(reg, cb) {
-    let sql = await pool.query('SELECT username FROM admin WHERE admin.username=$1 LIMIT 0 1', [reg.reg_username]); //Check against the admin usernames
+    let sql = await pool.query('SELECT username FROM admin WHERE admin.username=$1', [reg.reg_username]); //Check against the admin usernames
     let data = sql.rows;
     if (data.length > 0) {
         return cb(null, false, { message: "Username already in use." });
     } else {
-        sql = await pool.query('SELECT password FROM admin WHERE admin.password=$1 LIMIT 0 1', [reg.reg_password]);  //Check against the admin passwords
+        sql = await pool.query('SELECT password FROM admin WHERE admin.password=$1', [reg.reg_password]);  //Check against the admin passwords
         data = sql.rows;
         if (data.length > 0) {
             return cb(null, false, { message: 'Password already in use.' });
         }
         else {
-            let sql = await pool.query('SELECT username FROM users WHERE users.username=$1 LIMIT 0 1', [reg.reg_username]);  //Check against the user table
+            let sql = await pool.query('SELECT username FROM users WHERE users.username=$1', [reg.reg_username]);  //Check against the user table
             let data = sql.rows;
             if (data.length > 0) {
                 return cb(null, false, { message: "Username already in use." });
             } else {
-                sql = await pool.query('SELECT password FROM users WHERE users.password=$1 LIMIT 0 1', [reg.reg_password]);  //Check against the user table
+                sql = await pool.query('SELECT password FROM users WHERE users.password=$1', [reg.reg_password]);  //Check against the user table
                 data = sql.rows;
                 if (data.length > 0) {
                     return cb(null, false, { message: 'Password already in use.' });
                 } else {
                     let hashedPassword = bcrypt.hashSync(reg.reg_password, 10);
-                    await pool.query('INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6. $7)',
+                    await pool.query('INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)',
                         [
                             reg.reg_username,
                             hashedPassword,

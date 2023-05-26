@@ -47,7 +47,12 @@ router.get('/logout', (req, res) => {
 
 //register route
 router.post('/register/try', (req, res) => {
-    registerUser(req.body)
+    let err;
+    registerUser(req.body, (err, res)); 
+    if (err) {
+        console.log(err);
+        res.redirect('/login');
+    }
 }, pages.loginpage);
 
 //Helper functions

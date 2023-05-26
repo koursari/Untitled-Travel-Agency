@@ -1,6 +1,6 @@
 import { Flight as myFlight } from '../model/fields.js'
 import dotenv from 'dotenv';
-import pool from '../database-connection.js'
+import pool from './database-connection.js'
 
 import {lsFlightsString, lsUsersString, insertFlightString, rmFlightString} from './db-strings.mjs'
 
