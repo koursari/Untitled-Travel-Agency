@@ -36,6 +36,8 @@ router.post('/login/try',
 router.get('/logout', (req, res) => {
     req.logout(function (err) {
         if (err) { return next(err); }
+        console.log('User logged out successfully!');
+        // console.log(req.flash('message', 'You are logged out successfully!'));
         res.render('login', {
             layout: 'main.hbs',
             // announcements: announcementList,
@@ -47,7 +49,7 @@ router.get('/logout', (req, res) => {
 
 //register route
 router.post('/register/try', (req, res) => {
-    registerUser(req.body, (err, res) => {         
+    registerUser(req.body, (err, res) => {
         if (err) {
             console.log(err);
             req.flash("message", res.message);  //flash message for failed register

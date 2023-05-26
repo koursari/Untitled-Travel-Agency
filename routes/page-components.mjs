@@ -80,7 +80,7 @@ export async function adminDashboard(request, response) {
                     announcements: announcementList,
                     isLoggedIn: false,
                     username: request.user.username,    //We can display the logged in username somewhere in the page with this
-                    message: request.flash('success_msg')
+                    message: request.flash('message')
                 }
             )
         } else if (request.user.type === 'user') {
@@ -90,7 +90,7 @@ export async function adminDashboard(request, response) {
                     announcementList: announcementList,
                     isLoggedIn: false,                          //Is this used in anything?
                     username: request.user.username,                 //We can display the logged in username somewhere in the page with this
-                    message: request.flash('failure_msg')
+                    message: request.flash('message')
                 })
         }
     }

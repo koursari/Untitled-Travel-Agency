@@ -1,17 +1,23 @@
 {{!-- some temporary code to test login insered at the top --}}
 
 <main>
-        <!--
+    {{!-- <div id="message">
+        {{#if message}}
+        <li>{{message}}</li>
+        {{/if}}
+    </div> --}}
+    <form id="user-login-area" method="POST" action="/login/try">
+    <!--
             add server side js to validate user and start session
             -->
-        <fieldset>
-            <legend>Στοιχεία σύνδεσης</legend>
-            <label for="username-box">Όνομα χρήστη</label>
-            <input name="username" type="text" id="username-box">
-            <label for="password-box">Κωδικός χρήστη</label>
-            <input name="password" type="password" id="password-box">
-        </fieldset>
-        <button>Σύνδεση</button>
+    <fieldset>
+        <legend>Στοιχεία σύνδεσης</legend>
+        <label for="username-box">Όνομα χρήστη</label>
+        <input name="username" type="text" id="username-box">
+        <label for="password-box">Κωδικός χρήστη</label>
+        <input name="password" type="password" id="password-box">
+    </fieldset>
+    <button>Σύνδεση</button>
     </form>
     <!--
         to do:
