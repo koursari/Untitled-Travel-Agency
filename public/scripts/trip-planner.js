@@ -1,4 +1,4 @@
-
+try {
 const connectionInformation = document.getElementById("direct-connections").querySelectorAll("div");
 const connections = new Array();
 connectionInformation.forEach(i => {
@@ -54,7 +54,9 @@ let changeInDestination = resetFlightsList;
 
 originSelector.addEventListener("change", changeInOrigin);
 destinationSelector.addEventListener("change", changeInDestination);
-
+} catch {
+    console.log("Oops, wrong page")
+}
 /*
 //Populate Departures List
 let customDepartures = [
