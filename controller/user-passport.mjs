@@ -9,6 +9,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 import pool from './database-connection.js'
 
+
+//Creates the strategy that passport is using to validate the login credentials of the POST request
+//Checks against the admin and user tables, and creates a session if either one is valiated, using the serialize and deserialize functions below.
+//Passes the username and type('admin/user') of the account to the req.user object used in our session. Can be accessed in any request afterwards.
 export function initialize(passport) {
     passport.use(new LocalStrategy(async function doLogin(username, password, cb) {
         let sql = await pool.query('SELECT username, password FROM admin WHERE admin.username=$1', [username]);
@@ -26,7 +30,7 @@ export function initialize(passport) {
                         console.log('User logged in successfully.');
                         return cb(null, {
                             username: data[0].username,
-                            type: 'user',
+                            type: 'user',                                 
                             message: 'User logged in successfully.'
                         });
                     } else {
@@ -85,23 +89,23 @@ export async function registerUser(reg, cb) {
     let sql = await pool.query('SELECT username FROM admin WHERE admin.username=$1', [reg.reg_username]); //Check against the admin usernames
     let data = sql.rows;
     if (data.length > 0) {
-        return cb(null, false, { message: "Username already in use." });
+        return cb(null, { message: "Username already in use." });
     } else {
         sql = await pool.query('SELECT password FROM admin WHERE admin.password=$1', [reg.reg_password]);  //Check against the admin passwords
         data = sql.rows;
         if (data.length > 0) {
-            return cb(null, false, { message: 'Password already in use.' });
+            return cb(null, { message: 'Password already in use.' });
         }
         else {
-            let sql = await pool.query('SELECT username FROM users WHERE users.username=$1', [reg.reg_username]);  //Check against the user table
-            let data = sql.rows;
+            sql = await pool.query('SELECT username FROM users WHERE users.username=$1', [reg.reg_username]);  //Check against the user table
+            data = sql.rows;
             if (data.length > 0) {
-                return cb(null, false, { message: "Username already in use." });
+                return cb(null, { message: "Username already in use." });
             } else {
                 sql = await pool.query('SELECT password FROM users WHERE users.password=$1', [reg.reg_password]);  //Check against the user table
                 data = sql.rows;
                 if (data.length > 0) {
-                    return cb(null, false, { message: 'Password already in use.' });
+                    return cb(null, { message: 'Password already in use.' });
                 } else {
                     let hashedPassword = bcrypt.hashSync(reg.reg_password, 10);           //hash+salt the password
                     await pool.query('INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)',

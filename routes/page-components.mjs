@@ -57,7 +57,8 @@ export async function loginpage(request, response) {
                 layout: 'main.hbs',
                 announcements: announcementList,
                 isLoggedIn: false,
-                username: request.user
+                username: request.user,
+                message: request.flash('message')
             }
         )
     }
@@ -78,7 +79,8 @@ export async function adminDashboard(request, response) {
                     layout: 'main.hbs',
                     announcements: announcementList,
                     isLoggedIn: false,
-                    username: request.user.username     //We can display the logged in username somewhere in the page with this
+                    username: request.user.username,    //We can display the logged in username somewhere in the page with this
+                    message: request.flash('success_msg')
                 }
             )
         } else if (request.user.type === 'user') {
@@ -87,7 +89,8 @@ export async function adminDashboard(request, response) {
                     layout: 'main.hbs',
                     announcementList: announcementList,
                     isLoggedIn: false,                          //Is this used in anything?
-                    username: request.user.username                 //We can display the logged in username somewhere in the page with this
+                    username: request.user.username,                 //We can display the logged in username somewhere in the page with this
+                    message: request.flash('failure_msg')
                 })
         }
     }

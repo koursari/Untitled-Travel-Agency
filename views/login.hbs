@@ -1,7 +1,6 @@
 {{!-- some temporary code to test login insered at the top --}}
 
 <main>
-    <form id="user-login-area" method="POST" action="/login/try">
         <!--
             add server side js to validate user and start session
             -->
@@ -26,11 +25,12 @@
         <fieldset>
             <legend>Στοιχεία σύνδεσης</legend>
             <label for="username-box">Όνομα χρήστη</label>
-            <input name="reg_username" type="text" id="username-box" placeholder="Όνομα χρήστη"  required>
+            <input name="reg_username" type="text" id="username-box" placeholder="Όνομα χρήστη" required>
             <label for="password-box">Κωδικός χρήστη</label>
             <input name="reg_password" type="password" id="password-box" placeholder="Κωδικός χρήστη" required>
             <label for="validate-password-box">Επιβεβαίωση κωδικού χρήστη</label>
-            <input name="reg_validate_password" type="password" id="validate-password-box" placeholder="Επιβεβαίωση κωδικού" required>
+            <input name="reg_validate_password" type="password" id="validate-password-box"
+                placeholder="Επιβεβαίωση κωδικού" required>
         </fieldset>
         <fieldset>
             <legend>Προσωπικά στοιχεία</legend>

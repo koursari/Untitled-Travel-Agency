@@ -40,20 +40,21 @@ router.get('/logout', (req, res) => {
             layout: 'main.hbs',
             // announcements: announcementList,
             isLoggedIn: false,
-            message: 'You are logged out successfully.'
+            message: req.flash('message', 'You are logged out successfully!')
         })
     });
 });
 
 //register route
 router.post('/register/try', (req, res) => {
-    registerUser(req.body, (err, res) => {
+    registerUser(req.body, (err, res) => {         
         if (err) {
             console.log(err);
+            req.flash("message", res.message);  //flash message for failed register
             res.redirect('/login');
         }
     })
-    console.log("Successfully created user!");       //implement flash messages later
+    req.flash("message", res.message)      //flash message for successful register
     res.redirect('/login');
 }, pages.loginpage);
 
