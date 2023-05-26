@@ -1,6 +1,6 @@
 //figure out different paths
-// require('dotenv').config( {path:__dirname+'/../.env'}) 
-require('dotenv').config()
+require('dotenv').config( {path:__dirname+'/../.env'}) 
+// require('dotenv').config()
 const { Pool } = require('pg')
 
 //create connection pool
