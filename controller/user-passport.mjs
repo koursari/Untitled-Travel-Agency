@@ -103,7 +103,7 @@ export async function registerUser(reg, cb) {
                 if (data.length > 0) {
                     return cb(null, false, { message: 'Password already in use.' });
                 } else {
-                    let hashedPassword = bcrypt.hashSync(reg.reg_password, 10);
+                    let hashedPassword = bcrypt.hashSync(reg.reg_password, 10);           //hash+salt the password
                     await pool.query('INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)',
                         [
                             reg.reg_username,

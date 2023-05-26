@@ -47,12 +47,14 @@ router.get('/logout', (req, res) => {
 
 //register route
 router.post('/register/try', (req, res) => {
-    let err;
-    registerUser(req.body, (err, res)); 
-    if (err) {
-        console.log(err);
-        res.redirect('/login');
-    }
+    registerUser(req.body, (err, res) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/login');
+        }
+    })
+    console.log("Successfully created user!");       //implement flash messages later
+    res.redirect('/login');
 }, pages.loginpage);
 
 //Helper functions
