@@ -124,6 +124,28 @@ export async function usersView(request, response) {
     }
 }
 
+export async function announcementsView(request, response) {
+    let announcementList = null;
+    let userList = null;
+    try {
+        announcementList = await announcementsController.listAllAnnouncements();
+        userList = await travelController.listAllUsers();
+    } catch (err) {
+        announcementList = [];
+        userList = [];
+        console.error(err);
+    } finally {
+        response.render('admin-announcements',
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                users: userList,
+                isLoggedIn: false
+            }
+        )
+    }
+}
+
 export async function ticketsView(request, response) {
     let announcementList = null;
     let ticketList = null;

@@ -14,6 +14,7 @@ router.route('/about').get(pages.aboutpage);
 router.route('/admin/flights').get(pages.flightsView);
 router.route('/admin/users').get(pages.usersView);
 router.route('/admin/tickets').get(pages.ticketsView);
+router.route('/admin/announcements').get(pages.announcementsView);
 
 router.get('/admin/flights/add/', pages.manageFlightAdd);
 router.get('/admin/flights/remove/:removeFlightId', pages.manageFlightRemove);

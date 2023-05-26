@@ -1,0 +1,22 @@
+<main>
+<form method="GET" action="/users">
+    <div class="row">
+        <div class="col mt-3 col-sm-9">
+               Username - Password - First Name - Last Name - Phone - Address - isAdmin
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col mt-3">
+            <ul class="list-group">
+                <a href="/profile">..</a><br>
+                {{#each users}}
+                    <li class="list-group-item">
+                        {{username}} - {{password}} - {{first_name}} - {{last_name}} - {{phone}} - {{address}} - {{isAdmin}}
+                        {{!-- <a href="/flights/remove/{{f_id}}">X</a> --}}
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</form>
+</main>
