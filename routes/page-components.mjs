@@ -93,25 +93,6 @@ export async function adminDashboard(request, response) {
     }
 }
 
-// export async function userProfile(req, res) {
-//     //add user profile option, limited in comparison to admin, only tickets booked etc
-//     let announcementList = null;
-//     try {
-//         announcementList = await announcementsController.listAllAnnouncements();
-//     } catch (err) {
-//         announcementList = [];
-//         console.error(err);
-//     } finally {
-//         res.render('profile',
-//             {
-//                 layout: 'main.hbs',
-//                 announcementList: announcementList,
-//                 isLoggedIn: false,                          //Is this used in anything?
-//                 username: req.user.username                 //We can display the logged in username somewhere in the page with this
-//             })
-//     }
-// }
-
 export async function flightsView(request, response) {
     let announcementList = null;
     let flightList = null;

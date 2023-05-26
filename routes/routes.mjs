@@ -1,5 +1,6 @@
 import express from 'express'
 import passport from 'passport';
+import { checkRegister } from '../controller/user-passport.mjs';
 
 const pages = await import(`./page-components.mjs`)
 
@@ -44,6 +45,9 @@ router.get('/logout', (req, res) => {
     });
 });
 
+//register route
+router.post('/register/try', checkRegister(req.body, res), pages.loginpage);
+
 //Helper functions
 function checkAuthenticated(request, response, next) {
     if (request.isAuthenticated()) {
@@ -58,17 +62,5 @@ function checkNotAuthenticated(request, response, next) {
     }
     response.redirect("/login");
 }
-
-// function checkType(req, res, next) {
-//     if (req.user.type === 'admin') {
-//         pages.adminDashboard;
-//         return next();
-//     } else if (req.user.type === 'user') {
-//         pages.userProfile;
-//         return next();
-//     } else {
-//         res.send('err');
-//     }
-// }
 
 export { router };

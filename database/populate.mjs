@@ -14,10 +14,11 @@ try {
 
     for (let i = 0; i < users.length; i++) {
         let hashedPassword = bcrypt.hashSync(users[i].password, saltRounds);
-        await pool.query('INSERT INTO users (username, password, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6)',
+        await pool.query('INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)',
             [
                 users[i].username,
                 hashedPassword,
+                users[i].email,
                 users[i].first_name,
                 users[i].last_name,
                 users[i].phone,
