@@ -1,22 +1,35 @@
 <main>
-<form method="GET" action="/admin/announcements">
-    <div class="row">
-        <div class="col mt-3 col-sm-9">
-               ID - Status - Title - Content - Date - Admin Username
+    <form method="GET" action="/admin/announcements/add">
+        <fieldset>
+            <legend>Προσθήκη ανακοίνωσης</legend>
+            <div id="announcements-info-input">
+                <input type="text" name="title" id="item1" placeholder="Title" class="input-lg">
+                <input type="text" name="content" id="item2" placeholder="Content" class="input-lg">
+                <input type="radio" name="status" id="item3" value="true" checked>
+                <label for="item3">Ενεργή ανακοίνωση</label>
+                <input type="radio" name="status" id="item4" value="false">
+                <label for="item4">Ανενεργή ανακοίνωση</label>
+            </div>
+            <button type="submit">New Announcement</button>
+        </fieldset>
+    </form>
+    <div id="existing-announcements-list">
+        <div id="announcement-template">
+            ID - Status - Title - Content - Date - Admin Username
         </div>
+        <ul class="list-group">
+            <a href="/admin">Επιστροφή</a><br>
+            {{#each managedAnnouncements}}
+            <li class="list-group-item">
+                {{id}} -
+                {{status}} -
+                {{title}} -
+                {{content}} -
+                {{date}} -
+                {{admin_username}}
+                <a href="/announcements/remove/{{id}}">X</a>
+            </li>
+            {{/each}}
+        </ul>
     </div>
-    <div class="row ">
-        <div class="col mt-3">
-            <ul class="list-group">
-                <a href="/profile">..</a><br>
-                {{#each managedAnnouncements}}
-                    <li class="list-group-item">
-                        {{id}} - {{status}} - {{title}} - {{content}} - {{date}} - {{admin_username}}
-                        {{!-- <a href="/flights/remove/{{f_id}}">X</a> --}}
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-</form>
-</main>
+    </main>
