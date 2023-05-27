@@ -22,6 +22,7 @@ const insFlightString = 'INSERT INTO ' +
 const lsFlightsString = 'SELECT * FROM flight';
 const lsUsersString = 'SELECT * FROM users';
 const lsAllAnnouncementsString = 'SELECT * FROM announcements';
+const lsActiveAnnouncementsString = 'SELECT * FROM announcements WHERE announcements.status=true';
 
 const rmFlightString = 'DELETE FROM flight WHERE f_id=$1 RETURNING f_id';
 
@@ -30,8 +31,12 @@ const insAdminUsersString = 'INSERT INTO admin (username, password) VALUES ($1, 
 const insUsersString = 'INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)';
 
 const insAnnouncementsString = 'INSERT INTO announcements (title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5)';
+const insAnnouncementsStringWithID = 'INSERT INTO announcements (id, title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5, $6)';
 
 const lsConnectionsString = 'SELECT departure, destination FROM flight';
+
+const lsSpecificAnnouncementString = 'SELECT * FROM announcements WHERE id=$1';
+const rmAnnouncementString = 'DELETE FROM announcements WHERE id=$1 RETURNING id';
 
 export {
    pool,
@@ -42,6 +47,10 @@ export {
    insAdminUsersString,
    insUsersString,
    insAnnouncementsString,
+   insAnnouncementsStringWithID,
    lsAllAnnouncementsString,
-   lsConnectionsString
+   lsActiveAnnouncementsString,
+   lsConnectionsString,
+   lsSpecificAnnouncementString,
+   rmAnnouncementString
 }

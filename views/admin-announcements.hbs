@@ -21,13 +21,15 @@
             <a href="/admin">Επιστροφή</a><br>
             {{#each managedAnnouncements}}
             <li class="list-group-item">
+                <a href="/admin/announcements/toggle/{{id}}">
                 {{id}} -
                 {{status}} -
                 {{title}} -
                 {{content}} -
                 {{date}} -
                 {{admin_username}}
-                <a href="/announcements/remove/{{id}}">X</a>
+                </a>
+                <a href="/admin/announcements/remove/{{id}}">X</a>
             </li>
             {{/each}}
         </ul>

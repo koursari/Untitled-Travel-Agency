@@ -253,8 +253,37 @@ export async function manageUserAdd(){}
 
 export async function manageUserRemove(){}
 
-export async function manageAnnouncementAdd(){}
+export async function manageAnnouncementAdd(request, response, next){
+    try {
+        await announcementsController.addAnnouncement(
+            request.query.title,
+            request.query.content,
+            request.query.status,
+            request.user.username
+        );
+    } catch (err) {
+        console.error(err);
+    } finally {
+        return next();
+    }
+}
 
-export async function manageAnnouncementToggle(){}
+export async function manageAnnouncementToggle(request, response, next) {
+    try {
+        await announcementsController.toggleAnnouncement(request.params.toggleAnnouncementId);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        return next();
+    }
+}
 
-export async function manageAnnouncementRemove(){}
+export async function manageAnnouncementRemove(request, response, next) {
+    try {
+        await announcementsController.removeAnnouncement(request.params.removeAnnouncementId);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        return next();
+    }
+}

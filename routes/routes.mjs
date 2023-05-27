@@ -28,8 +28,13 @@ router.route('/admin/tickets').get(isAuthenticated, isAdminSeekingAdminDashboard
 router.route('/admin/announcements').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.announcementsView);
 
 //Forbidden for non-admin, plus requiring redirection
+//Flights
 router.get('/admin/flights/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightAdd, manageFlightRedirect);
 router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightRemove, manageFlightRedirect);
+//Announcements
+router.get('/admin/announcements/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementAdd, manageAnnouncementRedirect);
+router.get('/admin/announcements/remove/:removeAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementRemove, manageAnnouncementRedirect);
+router.get('/admin/announcements/toggle/:toggleAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementToggle, manageAnnouncementRedirect);
 //ADD FOR USERS/TICKETS/ANNOUNCEMENTS
 
 //Login/Logout/Register
@@ -89,6 +94,10 @@ function isSimpleUserSeekingProfile(request, response, next) {
 
 function manageFlightRedirect(request, response) {
     response.redirect('/admin/flights');
+}
+
+function manageAnnouncementRedirect(request, response) {
+    response.redirect('/admin/announcements');
 }
 
 function logoutRedirect(request, response) {
