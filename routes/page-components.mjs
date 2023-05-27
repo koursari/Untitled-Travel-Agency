@@ -2,6 +2,16 @@ const announcementsController = await import(`../controller/announcements-contro
 const travelController = await import(`../controller/travel-controller.mjs`);
 const graphController = await import(`../controller/travel-graph-controller.mjs`);
 
+function fillLogStatus(request) {
+    try {
+        if (request.user.username != undefined) {
+            return true;
+        }
+    } catch {
+        return false;
+    }
+}
+
 export async function homepage(request, response) {
     let announcementList = null;
     let locationList = null;
@@ -20,7 +30,7 @@ export async function homepage(request, response) {
                 locations: locationList,
                 connections: connectionList,
                 announcements: announcementList,
-                isLoggedIn: false
+                isLoggedIn: fillLogStatus(request)
             }
         )
     }
@@ -38,7 +48,7 @@ export async function aboutpage(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                isLoggedIn: false
+                isLoggedIn: fillLogStatus(request)
             }
         )
     }
@@ -56,7 +66,7 @@ export async function loginpage(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                isLoggedIn: false,
+                isLoggedIn:  fillLogStatus(request),
                 username: request.user,
                 message: request.flash('message')
             }
@@ -78,7 +88,7 @@ export async function adminDashboard(request, response) {
                 {
                     layout: 'main.hbs',
                     announcements: announcementList,
-                    isLoggedIn: false,
+                    isLoggedIn:  fillLogStatus(request),
                     username: request.user.username,    //We can display the logged in username somewhere in the page with this
                     message: request.flash('message')
                 }
@@ -88,7 +98,7 @@ export async function adminDashboard(request, response) {
                 {
                     layout: 'main.hbs',
                     announcementList: announcementList,
-                    isLoggedIn: false,                          //Is this used in anything?
+                    isLoggedIn:  fillLogStatus(request),                          //Is this used in anything?
                     username: request.user.username,                 //We can display the logged in username somewhere in the page with this
                     message: request.flash('message')
                 })
@@ -113,7 +123,7 @@ export async function flightsView(request, response) {
                     layout: 'main.hbs',
                     announcements: announcementList,
                     flights: flightList,
-                    isLoggedIn: false
+                    isLoggedIn:  fillLogStatus(request)
                 }
             )
         } else {
@@ -139,7 +149,7 @@ export async function usersView(request, response) {
                     layout: 'main.hbs',
                     announcements: announcementList,
                     users: userList,
-                    isLoggedIn: false
+                    isLoggedIn:  fillLogStatus(request)
                 }
             )
         } else {
@@ -165,7 +175,7 @@ export async function announcementsView(request, response) {
                     layout: 'main.hbs',
                     announcements: announcementList,
                     users: userList,
-                    isLoggedIn: false
+                    isLoggedIn:  fillLogStatus(request)
                 }
             )
         } else {
@@ -191,7 +201,7 @@ export async function ticketsView(request, response) {
                     layout: 'main.hbs',
                     announcements: announcementList,
                     tickets: ticketList,
-                    isLoggedIn: false
+                    isLoggedIn:  fillLogStatus(request)
                 }
             )
         } else {
