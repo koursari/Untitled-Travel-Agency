@@ -1,9 +1,6 @@
 import { Flight as myFlight } from '../model/fields.js'
 import dotenv from 'dotenv';
-import {pool} from './database-connection.mjs'
-
-import {lsFlightsString, lsUsersString, insertFlightString, rmFlightString} from './db-strings.mjs'
-
+import {pool, lsFlightsString, lsUsersString, insFlightString, rmFlightString, lsConnectionsString} from './database-connection.mjs'
 
 
 const userId = 'postgres';
@@ -59,7 +56,7 @@ export async function addFlight(
       admin_username
    );
    console.log(newFlight);
-   const sql = await pool.query(insertFlightString,
+   const sql = await pool.query(insFlightString,
       [
          newFlight.company,
          newFlight.departure,
@@ -82,6 +79,5 @@ export async function removeFlight(removeFlightId) {
 }
 
 export async function getFlightConnections() {
-   const sql = await pool.query('SELECT departure, destination FROM flight');
-   return sql.rows;
+   const sql = await pool.query(lsConnectionsString);
 }

@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import {pool} from './database-connection.mjs'
+import {pool, lsAllAnnouncementsString} from './database-connection.mjs'
 
 const userId = 'postgres';
 
@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 export async function listAllAnnouncements() {
    //to do
    //add separate function for Announcements only if they have status == true
-   const announcementList = await pool.query('SELECT * FROM announcements');
+   const announcementList = await pool.query(lsAllAnnouncementsString);
    return announcementList.rows;
 }
 

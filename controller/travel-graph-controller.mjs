@@ -1,4 +1,4 @@
-const controller = await import("../controller/travel-controller.mjs");
+const controller = await import("./flight-controller.mjs");
 
 const userId = 'postgres';
 

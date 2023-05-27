@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 let saltRounds = 10;
 
-import {pool} from '../controller/database-connection.mjs'
+import {insAdminUsersString, insUsersString, insFlightString, insAnnouncementsString, pool} from '../controller/database-connection.mjs'
 //to load the .env file correctly, the current script must be run while
-//the working directory is the project root folder
+//the working directory is the project root folderconst userId = 'postgres';
 
 import { flights } from './populate-data/flights.mjs'
 import { announcements } from './populate-data/announcements.mjs'
@@ -12,11 +12,11 @@ import { admin, users } from './populate-data/users.mjs'
 try {
     // Populate admin table with 1 admin user
     admin[0].password = bcrypt.hashSync(admin[0].password, saltRounds);
-    await pool.query('INSERT INTO admin (username, password) VALUES ($1, $2)', [admin[0].username, admin[0].password]);
+    await pool.query(insAdminUsersString, [admin[0].username, admin[0].password]);
 
     for (let i = 0; i < users.length; i++) {
         let hashedPassword = bcrypt.hashSync(users[i].password, saltRounds);
-        await pool.query('INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        await pool.query(insUsersString,
             [
                 users[i].username,
                 hashedPassword,
@@ -32,7 +32,7 @@ try {
 
     //Populate flight list with 2 entries
     for (let i = 0; i < flights.length; i++) {
-        await pool.query('INSERT INTO flight(company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+        await pool.query(insFlightString,
             [
                 flights[i].company,
                 flights[i].departure,
@@ -50,9 +50,8 @@ try {
         );
     }
 
-
     for (let i = 0; i < announcements.length; i++) {
-        await pool.query('INSERT INTO announcements (title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5)',
+        await pool.query(insAnnouncementsString,
             [
                 announcements[i].title,
                 announcements[i].content,

@@ -10,8 +10,38 @@ const pool = new pg.Pool({
    ssl: false
 })
 
-pool.connect()
-   .then(() => console.log('connected'))
-   .catch(err => console.error('connection error', err.stack))
+pool.connect().then(() => console.log('connected')).catch(err => console.error('connection error', err.stack));
 
-export { pool }
+//DATABASE STRINGS FOR EASIER HANDLING
+
+const insFlightString = 'INSERT INTO ' +
+'flight(f_id, company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username) ' +
+'VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) '+
+'RETURNING f_id';
+
+const lsFlightsString = 'SELECT * FROM flight';
+const lsUsersString = 'SELECT * FROM users';
+const lsAllAnnouncementsString = 'SELECT * FROM announcements';
+
+const rmFlightString = 'DELETE FROM flight WHERE f_id=$1 RETURNING f_id';
+
+const insAdminUsersString = 'INSERT INTO admin (username, password) VALUES ($1, $2)';
+
+const insUsersString = 'INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+
+const insAnnouncementsString = 'INSERT INTO announcements (title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5)';
+
+const lsConnectionsString = 'SELECT departure, destination FROM flight';
+
+export {
+   pool,
+   insFlightString,
+   lsFlightsString,
+   lsUsersString,
+   rmFlightString,
+   insAdminUsersString,
+   insUsersString,
+   insAnnouncementsString,
+   lsAllAnnouncementsString,
+   lsConnectionsString
+}
