@@ -22,14 +22,14 @@
             <button id="searchtrips" disabled>Αναζήτηση</button>
         </div>
         <div class="departures" id="departures">
-            <form method="GET" action="/reserve">
+            <form method="POST" action="/reserve">
                 <fieldset>
                 <legend>Δρομολόγια</legend>
                 <ul>
                     {{#each flights}}
                     <li>
                         <div class="flight" data-f_id="{{f_id}}" data-from="{{departure}}" data-to="{{destination}}">
-                            <input type="radio" name="flight" value="{{f_id}}" id="flight-{{f_id}}-radio">
+                            <input type="radio" name="f_id" value="{{f_id}}" id="flight-{{f_id}}-radio">
                             <!-- To Do: fill this out via JS so that the date format is more readable -->
                             <label for="flight-{{f_id}}-radio">Ξεκινάει στις {{d_date}} και φτάνει στις {{a_date}}</label>
                         </div>
@@ -37,7 +37,7 @@
                     {{/each}}
                 </ul>
                 </fieldset>
-                <button disabled>Αγορά</button>
+                <button>Αγορά</button>
                 </form>
         </div>
     </div>
