@@ -2,7 +2,7 @@
 
 //prototype, no UI implementation 
 
-import pool from './database-connection.js'
+import {pool} from './database-connection.mjs'
 import { Ticket as myTicket } from '../model/fields.js';
 
 

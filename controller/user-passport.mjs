@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
-import pool from './database-connection.js'
+import {pool} from './database-connection.mjs'
 
 
 //Creates the strategy that passport is using to validate the login credentials of the POST request

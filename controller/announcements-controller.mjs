@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import pool from './database-connection.js'
+import {pool} from './database-connection.mjs'
 
 const userId = 'postgres';
 
