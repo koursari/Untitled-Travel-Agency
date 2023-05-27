@@ -13,7 +13,7 @@ router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
 //Pages only accessible for logged in users
-router.get('/reserve', (req, res) => {
+router.get('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
     console.log(req.query.flight);
 });
 
@@ -105,4 +105,10 @@ function manageFlightRedirect(reuest, response) {
     response.redirect('/admin/flights');
 }
 
+function isSimpleUserPurchasing(request, response) {
+    if(request.user.type !== 'admin') {
+        return next();
+    }
+    response.redirect("/")
+}
 export { router };
