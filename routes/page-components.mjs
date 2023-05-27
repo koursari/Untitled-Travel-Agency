@@ -243,3 +243,17 @@ export async function manageFlightRemove(request, response) {
         response.redirect('/login');
     }
 }
+
+export async function manageTicketAdd(){}
+
+export async function manageTicketRemove(){}
+
+export async function manageUserAdd(){}
+
+export async function manageUserRemove(){}
+
+export async function manageAnnouncementAdd(){}
+
+export async function manageAnnouncementToggle(){}
+
+export async function manageAnnouncementRemove(){}
