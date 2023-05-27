@@ -34,6 +34,8 @@ router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeek
 
 //Login/Logout/Register
 router.get('/login', isNotAuthenticated, pages.loginpage);
+router.get('/logout', isAuthenticatedLoggingOut, pages.logout, logoutRedirect);
+
 
 router.post('/login/try',
     passport.authenticate('local', {
@@ -42,9 +44,6 @@ router.post('/login/try',
         failureFlash: true
     })
 );
-
-//logout route
-router.get('/logout', isAuthenticated, pages.logout, logoutRedirect);
 
 //register route
 router.post('/register/try', (req, res) => {
@@ -102,4 +101,12 @@ function isSimpleUserPurchasing(request, response, next) {
     }
     response.redirect("/")
 }
+
+function isAuthenticatedLoggingOut(request, response, next) {
+    if (request.isAuthenticated()) {
+        return next();
+    }
+    response.redirect("/");
+}
+
 export { router };
