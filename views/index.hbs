@@ -30,4 +30,9 @@
         <div data-from="{{departure}}" data-to="{{destination}}"></div>
         {{/each}}
     </div>
+    <div id="flights">
+        {{#each flights}}
+        {{departure}} - {{destination}}
+        {{/each}}
+    </div>
 </main>

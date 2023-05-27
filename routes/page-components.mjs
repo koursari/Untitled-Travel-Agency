@@ -1,5 +1,5 @@
 const announcementsController = await import(`../controller/announcements-controller.mjs`);
-const travelController = await import(`../controller/travel-controller.mjs`);
+const flightsController = await import(`../controller/flight-controller.mjs`);
 const graphController = await import(`../controller/travel-graph-controller.mjs`);
 
 function fillLogStatus(request) {
@@ -16,12 +16,15 @@ export async function homepage(request, response) {
     let announcementList = null;
     let locationList = null;
     let connectionList = null;
+    let flightsList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
         locationList = await graphController.listAllLocations();
         connectionList = await graphController.listAllConnections();
+        flightsList = await flightsController.listAllFlights();
     } catch (err) {
         announcementList = [];
+        flightsList = [];
         console.log(err);
     } finally {
         response.render('index',
@@ -29,6 +32,7 @@ export async function homepage(request, response) {
                 layout: 'main.hbs',
                 locations: locationList,
                 connections: connectionList,
+                flights: flightsList,
                 announcements: announcementList,
                 isLoggedIn: fillLogStatus(request)
             }
@@ -120,7 +124,7 @@ export async function flightsView(request, response) {
     let flightList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
-        flightList = await travelController.listAllFlights();
+        flightList = await flightsController.listAllFlights();
     } catch (err) {
         announcementList = [];
         flightList = [];
@@ -142,7 +146,7 @@ export async function usersView(request, response) {
     let userList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
-        userList = await travelController.listAllUsers();
+        userList = await flightsController.listAllUsers();
     } catch (err) {
         announcementList = [];
         userList = [];
@@ -168,7 +172,7 @@ export async function announcementsView(request, response) {
     let userList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
-        userList = await travelController.listAllUsers();
+        userList = await flightsController.listAllUsers();
     } catch (err) {
         announcementList = [];
         userList = [];
@@ -194,7 +198,7 @@ export async function ticketsView(request, response) {
     let ticketList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
-        ticketList = await travelController.listAllTickets();
+        ticketList = await flightsController.listAllTickets();
     } catch (err) {
         announcementList = [];
         ticketList = [];
@@ -217,7 +221,7 @@ export async function ticketsView(request, response) {
 
 export async function manageFlightAdd(request, response, next) {
     try {
-        await travelController.addFlight(
+        await flightsController.addFlight(
             request.query.company,
             request.query.departure,
             request.query.d_date,
@@ -240,7 +244,7 @@ export async function manageFlightAdd(request, response, next) {
 
 export async function manageFlightRemove(request, response, next) {
     try {
-        await travelController.removeFlight(request.params.removeFlightId);
+        await flightsController.removeFlight(request.params.removeFlightId);
     } catch (err) {
         console.error(err);
     } finally {

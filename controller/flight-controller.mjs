@@ -11,6 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 export async function listAllFlights() {
    const flightList = await pool.query(lsFlightsString);
+   console.log(flightList.rows)
    return flightList.rows;
 }
 
@@ -80,4 +81,5 @@ export async function removeFlight(removeFlightId) {
 
 export async function getFlightConnections() {
    const sql = await pool.query(lsConnectionsString);
+   return sql.rows;
 }
