@@ -9,6 +9,7 @@ connectionInformation.forEach(i => {
 
 let originSelector = document.getElementById("from-location");
 let destinationSelector = document.getElementById("destination-location");
+originSelector.value = "";
 destinationSelector.value = "";
 
 function getNeighbors(x) {
