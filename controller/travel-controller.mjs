@@ -17,38 +17,9 @@ export async function listAllFlights() {
    return flightList.rows;
 }
 
-<<<<<<< HEAD
 export async function listAllUsers() {
    const userList = await pool.query(lsUsersString);
    return userList.rows;
-=======
-//get the flight table
-export async function getAllFlights (req,res) {
-   try {
-       const sql = await pool.query('SELECT * FROM flight');
-       return sql.rows;
-   }
-   catch(err) {
-     return res.json(409).send(err);
-   }
- } 
-
- //add to flight table
-export async function addFlight(req, res) {
-   //Κατασκευάζουμε μια νέα πτήση και τη βάζουμε στην βάση:
-   const newFlight = new myFlight('default', req.query.company, req.query.departure, req.query.d_date.replace('T', ' '), req.query.destination, req.query.a_date.replace('T', ' '), req.query.t_f_seats, req.query.first, req.query.t_b_seats, req.query.business, req.query.t_e_seats, req.query.economy);
-   console.log(newFlight.d_date);
-   try {
-      const sql = await pool.query('INSERT INTO flight(company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING f_id',  
-      [newFlight.company,  newFlight.departure, newFlight.d_date, newFlight.destination, newFlight.a_date, newFlight.t_f_seats, newFlight.first, newFlight.t_b_seats, newFlight.business, newFlight.t_e_seats, newFlight.economy, 'superuser']);
-
-      // const lastInsertId = await model.addFlight(newFlight, userId)
-      const allFlights = await getAllFlights(userId)
-      res.render('flights', { flights: allFlights });
-   } catch (error) {
-      res.send(error);
-   }
->>>>>>> 0d7687c (..)
 }
 
 export async function listAllTickets() {
@@ -73,6 +44,7 @@ export async function addFlight(
    //maybe add check for valid flight info
    //possibly in the constructor of the object
    const newFlight = new myFlight(
+      'default',
       company,
       departure,
       d_date.replace('T', ' '),
@@ -87,6 +59,7 @@ export async function addFlight(
    );
    const sql = await pool.query(insertFlightString,
       [
+         newFlight.f_id,
          newFlight.company,
          newFlight.departure,
          '2023-6-12 13:30',
@@ -107,7 +80,6 @@ export async function removeFlight(removeFlightId) {
    await pool.query(rmFlightString, [removeFlightId]);
 }
 
-<<<<<<< HEAD
 export async function getFlightConnections() {
    const sql = await pool.query('SELECT departure, destination FROM flight');
    return sql.rows;
@@ -124,8 +96,6 @@ export async function getFlightConnections() {
 //      return res.json(409).send(err);
 //    }
 //  } 
-=======
->>>>>>> 0d7687c (..)
 
 //export departure and destination for search
  export async function getFlightConnections (req,res) {
