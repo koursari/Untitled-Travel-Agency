@@ -1,15 +1,13 @@
-// Function to authenticate and register users
-
 import bcrypt from 'bcrypt';
-import dotenv from 'dotenv';
 import { Strategy as LocalStrategy } from 'passport-local';
-if (process.env.NODE_ENV !== 'production') {
-    dotenv.config();
-}
 
-import {pool} from './database-connection.mjs'
+import {pool, lsUsersString} from './database-connection.mjs'
 
-
+export async function listAllUsers() {
+    const userList = await pool.query(lsUsersString);
+    return userList.rows;
+ }
+ 
 //Creates the strategy that passport is using to validate the login credentials of the POST request
 //Checks against the admin and user tables, and creates a session if either one is valiated, using the serialize and deserialize functions below.
 //Passes the username and type('admin/user') of the account to the req.user object used in our session. Can be accessed in any request afterwards.

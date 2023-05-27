@@ -14,11 +14,6 @@ export async function listAllFlights() {
    return flightList.rows;
 }
 
-export async function listAllUsers() {
-   const userList = await pool.query(lsUsersString);
-   return userList.rows;
-}
-
 export async function listAllTickets() {
    const ticketList = await pool.query('SELECT * FROM ticket,flight WHERE ticket.f_id=flight.f_id');
    return ticketList.rows;
