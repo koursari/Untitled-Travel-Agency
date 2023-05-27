@@ -24,6 +24,7 @@
         </div>
         <div class="departures" id="departures"><form><fieldset><legend>Δρομολόγια</legend><ul></ul></fieldset><button disabled>Αγορά</button></form></div>
     </div>
+    <!-- Data taken from server and saved for client-side processing via js -->
     <div id="direct-connections">
         {{#each connections}}
         <div data-from="{{departure}}" data-to="{{destination}}"></div>
