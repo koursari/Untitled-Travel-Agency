@@ -25,16 +25,14 @@ export async function ticketSearch(req, cb) {
     //FIND and GROUP reserved seats, calculate the total of reserved seats for said f_id 
     let reserved = await pool.query('SELECT ticket.f_id, seat_class, COUNT(seat_no) FROM ticket WHERE ticket.f_id=$1 GROUP BY ticket.f_id, seat_class', [req.f_id]);
     let data = reserved.rows;
-    console.log(data);
 
     //get total number of seats for each class of said flight
     let query = await pool.query('SELECT t_f_seats, t_b_seats, t_e_seats FROM flight WHERE flight.f_id=$1', [req.f_id]);
     let total = query.rows;
-    console.log(total);
-    let result_f = total.t_f_seats;
-    let result_e = total.t_e_seats;
-    let result_b = total.t_b_seats;
-    console.log(result_b, result_e, result_f);
+
+    let result_f = total[0].t_f_seats;
+    let result_e = total[0].t_e_seats;
+    let result_b = total[0].t_b_seats;
 
     //if there are reserved tickets
     //code to check for seat_class letter and then subtract the count column from the appropriate t_seats column

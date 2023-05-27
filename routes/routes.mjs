@@ -19,9 +19,9 @@ router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
     ticketSearch(req.body, (err, res) => {
         if (err) {
             console.log(err);
-            // res.redirect('/login');
         }
-        console.log(res);
+        //replace with redirect/render
+        console.log(res); 
     })
 });
 
