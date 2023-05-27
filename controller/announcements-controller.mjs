@@ -13,3 +13,15 @@ export async function listAllAnnouncements() {
    const announcementList = await pool.query('SELECT * FROM announcements');
    return announcementList.rows;
 }
+
+export async function toggleAnnouncement() {
+
+}
+
+export async function createAnnouncement() {
+
+}
+
+export async function deleteAnnouncement() {
+   
+}
