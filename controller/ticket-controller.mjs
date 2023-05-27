@@ -2,9 +2,18 @@
 
 //prototype, no UI implementation 
 
-import {pool} from './database-connection.mjs'
+import { pool, lsTicketsOfFlightString, rmTicketString } from './database-connection.mjs'
 import { Ticket as myTicket } from '../model/fields.js';
 
+
+export async function listAllTicketsOfFlight(flightID) {
+    const ticketList = await pool.query(lsTicketsOfFlightString, [flightID]);
+    return ticketList.rows;
+}
+
+export async function removeTicket(ticketID) {
+    await pool.query(rmTicketString, [ticketID]);
+}
 
 export async function ticketSearch(req, cb) {
     let sql = await pool.query('SELECT * FROM flight WHERE flight.departure=$1 AND flight.destination=$2 AND flight.d_date=$3', [req.departure, req.destinaton, req.d_date]);

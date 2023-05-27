@@ -28,8 +28,7 @@
             <a href="/admin">Επιστροφή</a><br>
             {{#each flights}}
             <li class="flight-list-item">
-                <!--a href="/admin/flights/{{f_id}}">{{f_id}}.</a-->
-                <!-- TODO: click on f_id to show tickets of flight -->
+                <a href="/admin/tickets?flightId={{f_id}}">{{f_id}}.</a>
                 {{f_id}}.
                 {{company}} -
                 {{departure}} -

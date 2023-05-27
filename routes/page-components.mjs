@@ -2,6 +2,7 @@ const announcementsController = await import(`../controller/announcements-contro
 const flightsController = await import(`../controller/flight-controller.mjs`);
 const graphController = await import(`../controller/travel-graph-controller.mjs`);
 const userController = await import(`../controller/user-passport.mjs`)
+const ticketController = await import(`../controller/ticket-controller.mjs`)
 
 function fillLogStatus(request) {
     try {
@@ -189,9 +190,15 @@ export async function announcementsView(request, response) {
 export async function ticketsView(request, response) {
     let announcementList = null;
     let ticketList = null;
+    let chosenFlight = null;
+    try {
+        chosenFlight = request.query.flightId;
+    } catch {
+        chosenFlight = null;
+    }
     try {
         announcementList = await announcementsController.listActiveAnnouncements();
-        ticketList = await flightsController.listAllTickets();
+        ticketList = await ticketController.listAllTicketsOfFlight(chosenFlight);
     } catch (err) {
         announcementList = [];
         ticketList = [];
@@ -247,7 +254,16 @@ export async function logout(request, response, next) {
 
 export async function manageTicketAdd(){}
 
-export async function manageTicketRemove(){}
+export async function manageTicketRemove(request, response, next) {
+    try {
+        await ticketController.removeTicket(request.params.removeTicketId);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        return next();
+    }
+}
+
 
 export async function manageUserAdd(){}
 

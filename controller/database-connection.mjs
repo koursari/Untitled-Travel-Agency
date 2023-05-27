@@ -38,6 +38,9 @@ const lsConnectionsString = 'SELECT departure, destination FROM flight';
 const lsSpecificAnnouncementString = 'SELECT * FROM announcements WHERE id=$1';
 const rmAnnouncementString = 'DELETE FROM announcements WHERE id=$1 RETURNING id';
 
+const lsTicketsOfFlightString = 'SELECT * FROM ticket WHERE ticket.f_id=$1';
+const rmTicketString = 'DELETE FROM ticket WHERE ticket.t_id=$1';
+
 export {
    pool,
    insFlightString,
@@ -52,5 +55,7 @@ export {
    lsActiveAnnouncementsString,
    lsConnectionsString,
    lsSpecificAnnouncementString,
-   rmAnnouncementString
+   rmAnnouncementString,
+   lsTicketsOfFlightString,
+   rmTicketString
 }

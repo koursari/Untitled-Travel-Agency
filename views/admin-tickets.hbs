@@ -1,22 +1,32 @@
 <main>
-<form method="GET" action="/tickets">
-    <div class="row">
-        <div class="col mt-3 col-sm-9">
-               username - t_id - price - seat - f_id - departure - destination - d_date
+    <!--
+    Μας νοιάζει οι admin να μπορούν να αγοράσουν εισητήριο εκ μέρους κάποιου;
+    <form method="GET" action="/admin/τιcket/add">
+        <fieldset>
+            <legend>Προσθήκη εισητηρίου</legend>
+            <button type="submit">New Ticket</button>
+        </fieldset>
+    </form>
+    -->
+    <div id="existing-tickets-list">
+        <div id="ticket-template">
+            username - t_id - price - seat - f_id - departure - destination - d_date
         </div>
+        <ul class="list-group">
+            <a href="/admin/flights">Επιστροφή</a><br>
+            {{#each ticket}}
+            <li class="ticket-list-item">
+                {{t_id}}.
+                {{username}} -
+                {{price}} -
+                {{seat}} -
+                {{f_id}} -
+                {{departure}} -
+                {{destination}} -
+                {{d_date}}
+                <a href="/ticket/remove/{{t_id}}">X</a>
+            </li>
+            {{/each}}
+        </ul>
     </div>
-    <div class="row ">
-        <div class="col mt-3">
-            <ul class="list-group">
-                <a href="/profile">..</a><br> 
-                {{#each ticket}}
-                    <li class="list-group-item">
-                        {{t_id}}. {{username}} - {{price}} - {{seat}} - <a href="/../flights">{{f_id}}</a> - {{departure}} - {{destination}} - {{d_date}}
-                        {{!-- <a href="/flights/remove/{{f_id}}">X</a> --}}
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-</form>
 </main>

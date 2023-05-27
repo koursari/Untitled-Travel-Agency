@@ -35,6 +35,8 @@ router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeek
 router.get('/admin/announcements/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementAdd, manageAnnouncementRedirect);
 router.get('/admin/announcements/remove/:removeAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementRemove, manageAnnouncementRedirect);
 router.get('/admin/announcements/toggle/:toggleAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementToggle, manageAnnouncementRedirect);
+//Tickets
+router.get('/admin/tickets/remove/:removeTicketId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageTicketRemove, manageTicketRedirect);
 //ADD FOR USERS/TICKETS/ANNOUNCEMENTS
 
 //Login/Logout/Register
@@ -116,6 +118,18 @@ function isAuthenticatedLoggingOut(request, response, next) {
         return next();
     }
     response.redirect("/");
+}
+
+function manageTicketRedirect(request, response, next) {
+    let wasOnFlight = null;
+    let redirectUrl = null;
+    try {
+        wasOnFlight = request.query.flightId;
+        redirectUrl = '/admin/tickets?flightId=' + wasOnFlight;
+    } catch {
+        redirectUrl = '/admin/flights'
+    }
+    response.redirect(redirectUrl);
 }
 
 export { router };
