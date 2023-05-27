@@ -18,7 +18,7 @@ export async function homepage(request, response) {
     let connectionList = null;
     let flightsList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
         locationList = await graphController.listAllLocations();
         connectionList = await graphController.listAllConnections();
         flightsList = await flightsController.listAllFlights();
@@ -43,7 +43,7 @@ export async function homepage(request, response) {
 export async function aboutpage(request, response) {
     let announcementList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
     } catch (err) {
         announcementList = [];
         console.log(err);
@@ -61,7 +61,7 @@ export async function aboutpage(request, response) {
 export async function loginpage(request, response) {
     let announcementList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
     } catch (err) {
         announcementList = [];
         console.log(err);
@@ -81,7 +81,7 @@ export async function loginpage(request, response) {
 export async function userProfile(request, response) {
     let announcementList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
     } catch (err) {
         announcementList = [];
         console.error(err);
@@ -102,7 +102,7 @@ export async function adminDashboard(request, response) {
     // console.log(request.user.username, request.user.type);
     let announcementList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
     } catch (err) {
         announcementList = [];
         console.error(err);
@@ -123,7 +123,7 @@ export async function flightsView(request, response) {
     let announcementList = null;
     let flightList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
         flightList = await flightsController.listAllFlights();
     } catch (err) {
         announcementList = [];
@@ -145,7 +145,7 @@ export async function usersView(request, response) {
     let announcementList = null;
     let userList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
         userList = await flightsController.listAllUsers();
     } catch (err) {
         announcementList = [];
@@ -171,7 +171,7 @@ export async function announcementsView(request, response) {
     let announcementList = null;
     let userList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
         userList = await flightsController.listAllUsers();
     } catch (err) {
         announcementList = [];
@@ -197,7 +197,7 @@ export async function ticketsView(request, response) {
     let announcementList = null;
     let ticketList = null;
     try {
-        announcementList = await announcementsController.listActiveAnnouncements();
+        announcementList = await announcementsController.listAAnnouncements();
         ticketList = await flightsController.listAllTickets();
     } catch (err) {
         announcementList = [];

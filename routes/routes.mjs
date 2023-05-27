@@ -12,6 +12,11 @@ router.route('/').get(pages.homepage);
 router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
+//Pages only accessible for logged in users
+router.get('/reserve', (req, res) => {
+    console.log(req.query.flight);
+});
+
 //Different landing pending on user type
 router.get('/profile', isAuthenticated, isSimpleUserSeekingProfile, pages.userProfile);
 router.get('/admin', isAuthenticated, isAdminSeekingAdminDashboard, pages.adminDashboard);
