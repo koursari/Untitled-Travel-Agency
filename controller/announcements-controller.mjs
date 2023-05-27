@@ -8,14 +8,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export async function listAllAnnouncements() {
-   //to do
-   //add separate function for Announcements only if they have status == true
    const announcementList = await pool.query(lsAllAnnouncementsString);
    return announcementList.rows;
 }
 
 export async function listActiveAnnouncements() {
-   
+   return listAllAnnouncements();   
 }
 
 export async function toggleAnnouncement() {
