@@ -22,8 +22,9 @@ router.route('/admin/users').get(isAuthenticated, isAdminSeekingAdminDashboard, 
 router.route('/admin/tickets').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.ticketsView);
 router.route('/admin/announcements').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.announcementsView);
 
-router.get('/admin/flights/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightAddAndView);
-router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightRemoveAndView);
+//Forbidden for non-admin, plus requiring redirection
+router.get('/admin/flights/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightAdd, manageFlightRedirect);
+router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightRemove, manageFlightRedirect);
 
 //Login/Logout/Register
 router.get('/login', checkAuthenticated, pages.loginpage);
@@ -100,6 +101,10 @@ function isSimpleUserSeekingProfile(request, response, next) {
         return next();
     }
     response.redirect("/admin")
+}
+
+function manageFlightRedirect(reuest, response) {
+    response.redirect('/admin/flights');
 }
 
 export { router };

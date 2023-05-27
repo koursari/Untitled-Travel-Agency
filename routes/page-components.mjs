@@ -215,7 +215,7 @@ export async function ticketsView(request, response) {
     }
 }
 
-export async function manageFlightAddAndView(request, response) {
+export async function manageFlightAdd(request, response, next) {
     try {
         await travelController.addFlight(
             request.query.company,
@@ -234,17 +234,17 @@ export async function manageFlightAddAndView(request, response) {
     } catch (err) {
         console.error(err);
     } finally {
-        response.redirect('/admin/flights');
+        return next();
     }
 }
 
-export async function manageFlightRemoveAndView(request, response) {
+export async function manageFlightRemove(request, response, next) {
     try {
         await travelController.removeFlight(request.params.removeFlightId);
     } catch (err) {
         console.error(err);
     } finally {
-        response.redirect('/admin/flights');
+        return next();
     }
 }
 
