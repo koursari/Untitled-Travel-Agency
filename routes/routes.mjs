@@ -1,7 +1,8 @@
 import express from 'express'
 import passport from 'passport';
-import flash from 'express-flash';
+// import flash from 'express-flash';
 import { registerUser } from '../controller/user-passport.mjs';
+import { ticketSearch } from '../controller/ticket-controller.mjs';
 
 const pages = await import(`./page-components.mjs`)
 
@@ -13,8 +14,15 @@ router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
 //Pages only accessible for logged in users
-router.get('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
-    console.log(req.query.flight);
+router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
+    console.log(req.body.f_id);
+    ticketSearch(req.body, (err, res) => {
+        if (err) {
+            console.log(err);
+            // res.redirect('/login');
+        }
+        console.log(res);
+    })
 });
 
 //Different landing pending on user type
@@ -74,14 +82,14 @@ function isNotAuthenticated(request, response, next) {
 }
 
 function isAdminSeekingAdminDashboard(request, response, next) {
-    if(request.user.type === 'admin') {
+    if (request.user.type === 'admin') {
         return next();
     }
     response.redirect("/profile")
 }
 
 function isSimpleUserSeekingProfile(request, response, next) {
-    if(request.user.type !== 'admin') {
+    if (request.user.type !== 'admin') {
         return next();
     }
     response.redirect("/admin")
@@ -96,7 +104,7 @@ function logoutRedirect(request, response) {
 }
 
 function isSimpleUserPurchasing(request, response, next) {
-    if(request.user.type !== 'admin') {
+    if (request.user.type !== 'admin') {
         return next();
     }
     response.redirect("/")
