@@ -1,5 +1,6 @@
 import express from 'express'
 import passport from 'passport';
+import flash from 'express-flash';
 import { registerUser } from '../controller/user-passport.mjs';
 
 const pages = await import(`./page-components.mjs`)
@@ -10,13 +11,13 @@ router.route('/').get(pages.homepage);
 router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
-router.route('/admin/flights').get(pages.flightsView);
-router.route('/admin/users').get(pages.usersView);
-router.route('/admin/tickets').get(pages.ticketsView);
-router.route('/admin/announcements').get(pages.announcementsView);
+router.route('/admin/flights').get(checkNotAuthenticated, pages.flightsView);
+router.route('/admin/users').get(checkNotAuthenticated, pages.usersView);
+router.route('/admin/tickets').get(checkNotAuthenticated, pages.ticketsView);
+router.route('/admin/announcements').get(checkNotAuthenticated, pages.announcementsView);
 
-router.get('/admin/flights/add/', pages.manageFlightAdd);
-router.get('/admin/flights/remove/:removeFlightId', pages.manageFlightRemove);
+router.get('/admin/flights/add/', checkNotAuthenticated, pages.manageFlightAdd);
+router.get('/admin/flights/remove/:removeFlightId', checkNotAuthenticated, pages.manageFlightRemove);
 
 //USER MANAGEMENT
 //Have a different landing page between admin/user
@@ -42,7 +43,8 @@ router.get('/logout', (req, res) => {
             layout: 'main.hbs',
             // announcements: announcementList,
             isLoggedIn: false,
-            message: req.flash('message', 'You are logged out successfully!')
+            // log_message: req.flash('logout_msg', 'You are logged out successfully!')
+            message: 'You have logged out successfully!'
         })
     });
 });

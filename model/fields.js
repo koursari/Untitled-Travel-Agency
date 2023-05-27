@@ -34,10 +34,11 @@ exports.Admin = function(username, password) {
     this.password = password
 }
 
-exports.Ticket = function (t_id, price, seat, username, f_id) {
+exports.Ticket = function (t_id, price, seat_class, seat_no, username, f_id) {
     this.t_id = t_id
     this.price = price
-    this.seat = seat
+    this.seat_class = seat_class
+    this.seat_no = seat_no
     this.username = username
     this.f_id = f_id
 }
