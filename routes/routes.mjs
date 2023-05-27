@@ -44,20 +44,7 @@ router.post('/login/try',
 );
 
 //logout route
-router.get('/logout', (req, res) => {
-    req.logout(function (err) {
-        if (err) { return next(err); }
-        console.log('User logged out successfully!');
-        // console.log(req.flash('message', 'You are logged out successfully!'));
-        res.render('login', {
-            layout: 'main.hbs',
-            // announcements: announcementList,
-            isLoggedIn: false,
-            // log_message: req.flash('logout_msg', 'You are logged out successfully!')
-            message: 'You have logged out successfully!'
-        })
-    });
-});
+router.get('/logout', isAuthenticated, pages.logout, logoutRedirect);
 
 //register route
 router.post('/register/try', (req, res) => {
@@ -101,8 +88,12 @@ function isSimpleUserSeekingProfile(request, response, next) {
     response.redirect("/admin")
 }
 
-function manageFlightRedirect(reuest, response) {
+function manageFlightRedirect(request, response) {
     response.redirect('/admin/flights');
+}
+
+function logoutRedirect(request, response) {
+    response.redirect('/');
 }
 
 function isSimpleUserPurchasing(request, response) {

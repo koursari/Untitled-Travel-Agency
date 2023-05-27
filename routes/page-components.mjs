@@ -252,6 +252,10 @@ export async function manageFlightRemove(request, response, next) {
     }
 }
 
+export async function logout(request, response, next) {
+    request.logout(next)
+}
+
 export async function manageTicketAdd(){}
 
 export async function manageTicketRemove(){}
