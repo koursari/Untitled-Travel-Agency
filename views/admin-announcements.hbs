@@ -1,17 +1,17 @@
 <main>
-<form method="GET" action="/users">
+<form method="GET" action="/admin/announcements">
     <div class="row">
         <div class="col mt-3 col-sm-9">
-               Username - Password - First Name - Last Name - Phone - Address - isAdmin
+               ID - Status - Title - Content - Date - Admin Username
         </div>
     </div>
     <div class="row ">
         <div class="col mt-3">
             <ul class="list-group">
                 <a href="/profile">..</a><br>
-                {{#each users}}
+                {{#each managedAnnouncements}}
                     <li class="list-group-item">
-                        {{username}} - {{password}} - {{first_name}} - {{last_name}} - {{phone}} - {{address}} - {{isAdmin}}
+                        {{id}} - {{status}} - {{title}} - {{content}} - {{date}} - {{admin_username}}
                         {{!-- <a href="/flights/remove/{{f_id}}">X</a> --}}
                     </li>
                 {{/each}}

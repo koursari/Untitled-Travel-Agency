@@ -170,17 +170,16 @@ export async function announcementsView(request, response) {
     try {
         announcementList = await announcementsController.listActiveAnnouncements();
         announcementManagementList = await announcementsController.listAllAnnouncements();
-        userList = await flightsController.listAllUsers();
     } catch (err) {
         announcementList = [];
-        userList = [];
+        announcementManagementList = [];
         console.error(err);
     } finally {
         response.render('admin-announcements',
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                announcementManagement: announcementManagementList,
+                managedAnnouncements: announcementManagementList,
                 isLoggedIn: fillLogStatus(request)
             }
         )
