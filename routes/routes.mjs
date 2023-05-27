@@ -96,7 +96,7 @@ function logoutRedirect(request, response) {
     response.redirect('/');
 }
 
-function isSimpleUserPurchasing(request, response) {
+function isSimpleUserPurchasing(request, response, next) {
     if(request.user.type !== 'admin') {
         return next();
     }
