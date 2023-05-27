@@ -25,9 +25,10 @@ router.route('/admin/announcements').get(isAuthenticated, isAdminSeekingAdminDas
 //Forbidden for non-admin, plus requiring redirection
 router.get('/admin/flights/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightAdd, manageFlightRedirect);
 router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightRemove, manageFlightRedirect);
+//ADD FOR USERS/TICKETS/ANNOUNCEMENTS
 
 //Login/Logout/Register
-router.get('/login', checkAuthenticated, pages.loginpage);
+router.get('/login', isNotAuthenticated, pages.loginpage);
 
 router.post('/login/try',
     passport.authenticate('local', {
@@ -66,27 +67,19 @@ router.post('/register/try', (req, res) => {
     res.redirect('/login');
 }, pages.loginpage);
 
-//Helper functions
-function checkAuthenticated(request, response, next) {
-    if (request.isAuthenticated()) {
-        return response.redirect("/profile");
-    }
-    next();
-}
-
-function checkNotAuthenticated(request, response, next) {
-    if (request.isAuthenticated()) {
-        return next();
-    }
-    response.redirect("/login");
-}
-
-//More helpers
+//Middleware Helpers
 function isAuthenticated(request, response, next) {
     if (request.isAuthenticated()) {
         return next();
     }
     response.redirect("/login");
+}
+
+function isNotAuthenticated(request, response, next) {
+    if (!(request.isAuthenticated())) {
+        return next();
+    }
+    response.redirect("/profile");
 }
 
 function isAdminSeekingAdminDashboard(request, response, next) {
