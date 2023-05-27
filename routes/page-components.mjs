@@ -1,6 +1,7 @@
 const announcementsController = await import(`../controller/announcements-controller.mjs`);
 const flightsController = await import(`../controller/flight-controller.mjs`);
 const graphController = await import(`../controller/travel-graph-controller.mjs`);
+const userController = await import(`../controller/user-passport.mjs`)
 
 function fillLogStatus(request) {
     try {
@@ -146,7 +147,7 @@ export async function usersView(request, response) {
     let userList = null;
     try {
         announcementList = await announcementsController.listActiveAnnouncements();
-        userList = await flightsController.listAllUsers();
+        userList = await userController.listAllUsers();
     } catch (err) {
         announcementList = [];
         userList = [];
@@ -169,9 +170,10 @@ export async function usersView(request, response) {
 
 export async function announcementsView(request, response) {
     let announcementList = null;
-    let userList = null;
+    let announcementManagementList = null;
     try {
         announcementList = await announcementsController.listActiveAnnouncements();
+        announcementManagementList = await announcementsController.listAllAnnouncements();
         userList = await flightsController.listAllUsers();
     } catch (err) {
         announcementList = [];
@@ -183,7 +185,7 @@ export async function announcementsView(request, response) {
                 {
                     layout: 'main.hbs',
                     announcements: announcementList,
-                    users: userList,
+                    announcementManagement: announcementManagementList,
                     isLoggedIn:  fillLogStatus(request)
                 }
             )
