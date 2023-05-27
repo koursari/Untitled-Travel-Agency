@@ -7,6 +7,7 @@ CREATE TABLE admin (
 CREATE TABLE users (
 	"username" varchar NOT NULL UNIQUE,
 	"password" varchar NOT NULL UNIQUE,
+	"email" varchar NOT NULL,
 	"first_name" varchar NOT NULL,
 	"last_name" varchar NOT NULL,
 	"phone" bigint NOT NULL,
@@ -38,7 +39,8 @@ CREATE TABLE flight (
 CREATE TABLE ticket (
 	"t_id" serial NOT NULL,
 	"price" money NOT NULL,
-	"seat" varchar NOT NULL,
+	"seat_class" varchar NOT NULL,
+	"seat_no" integer NOT NULL,
 	"username" varchar NOT NULL,
 	"f_id" integer NOT NULL,
 	PRIMARY KEY ("t_id"),

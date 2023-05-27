@@ -7,7 +7,7 @@ import flash from 'express-flash'
 
 const app = express();
 
-import { initialize as initPassport } from './controller/user-controller.mjs';
+import { initialize as initPassport } from './controller/user-passport.mjs';
 
 initPassport(passport);
 
@@ -35,7 +35,6 @@ app.use(passport.initialize());
 // Store our variables to be persisted across the whole session. Works with app.use(Session) above
 app.use(passport.session());
 app.use(flash());
-
 
  
 

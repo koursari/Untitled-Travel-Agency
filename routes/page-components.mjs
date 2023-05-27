@@ -56,13 +56,16 @@ export async function loginpage(request, response) {
             {
                 layout: 'main.hbs',
                 announcements: announcementList,
-                isLoggedIn: false
+                isLoggedIn: false,
+                username: request.user,
+                message: request.flash('message')
             }
         )
     }
 }
 
 export async function adminDashboard(request, response) {
+    // console.log(request.user.username, request.user.type);
     let announcementList = null;
     try {
         announcementList = await announcementsController.listAllAnnouncements();
@@ -70,13 +73,26 @@ export async function adminDashboard(request, response) {
         announcementList = [];
         console.error(err);
     } finally {
-        response.render('admin',
-            {
-                layout: 'main.hbs',
-                announcements: announcementList,
-                isLoggedIn: false
-            }
-        )
+        if (request.user.type === 'admin') {
+            response.render('admin',
+                {
+                    layout: 'main.hbs',
+                    announcements: announcementList,
+                    isLoggedIn: false,
+                    username: request.user.username,    //We can display the logged in username somewhere in the page with this
+                    message: request.flash('message')
+                }
+            )
+        } else if (request.user.type === 'user') {
+            response.render('profile',
+                {
+                    layout: 'main.hbs',
+                    announcementList: announcementList,
+                    isLoggedIn: false,                          //Is this used in anything?
+                    username: request.user.username,                 //We can display the logged in username somewhere in the page with this
+                    message: request.flash('message')
+                })
+        }
     }
 }
 
@@ -91,14 +107,18 @@ export async function flightsView(request, response) {
         flightList = [];
         console.error(err);
     } finally {
-        response.render('admin-flights',
-            {
-                layout: 'main.hbs',
-                announcements: announcementList,
-                flights: flightList,
-                isLoggedIn: false
-            }
-        )
+        if (request.user.type === 'admin') {
+            response.render('admin-flights',
+                {
+                    layout: 'main.hbs',
+                    announcements: announcementList,
+                    flights: flightList,
+                    isLoggedIn: false
+                }
+            )
+        } else {
+            response.redirect('/login');
+        }
     }
 }
 
@@ -113,14 +133,18 @@ export async function usersView(request, response) {
         userList = [];
         console.error(err);
     } finally {
-        response.render('admin-users',
-            {
-                layout: 'main.hbs',
-                announcements: announcementList,
-                users: userList,
-                isLoggedIn: false
-            }
-        )
+        if (request.user.type === 'admin') {
+            response.render('admin-users',
+                {
+                    layout: 'main.hbs',
+                    announcements: announcementList,
+                    users: userList,
+                    isLoggedIn: false
+                }
+            )
+        } else {
+            response.redirect('/login');
+        }
     }
 }
 
@@ -135,14 +159,18 @@ export async function announcementsView(request, response) {
         userList = [];
         console.error(err);
     } finally {
-        response.render('admin-announcements',
-            {
-                layout: 'main.hbs',
-                announcements: announcementList,
-                users: userList,
-                isLoggedIn: false
-            }
-        )
+        if (request.user.type === 'admin') {
+            response.render('admin-announcements',
+                {
+                    layout: 'main.hbs',
+                    announcements: announcementList,
+                    users: userList,
+                    isLoggedIn: false
+                }
+            )
+        } else {
+            response.redirect('/login');
+        }
     }
 }
 
@@ -157,48 +185,61 @@ export async function ticketsView(request, response) {
         ticketList = [];
         console.error(err);
     } finally {
-        response.render('admin-tickets',
-            {
-                layout: 'main.hbs',
-                announcements: announcementList,
-                tickets: ticketList,
-                isLoggedIn: false
-            }
-        )
+        if (request.user.type === 'admin') {
+            response.render('admin-tickets',
+                {
+                    layout: 'main.hbs',
+                    announcements: announcementList,
+                    tickets: ticketList,
+                    isLoggedIn: false
+                }
+            )
+        } else {
+            response.redirect('/login');
+        }
     }
 }
 
 export async function manageFlightAdd(request, response) {
     let announcementList = null;
     let flightList = null;
-    try {
-        await travelController.addFlight(
-            request.query.company,
-            request.query.departure,
-            request.query.d_date,
-            request.query.destination,
-            request.query.a_date,
-            request.query.t_f_seats,
-            request.query.first,
-            request.query.t_b_seats,
-            request.query.business,
-            request.query.t_e_seats,
-            request.query.economy
-        );
-    } catch (err) {
-        console.error(err);
-    } finally {
-        //maybe use middlewares here?
-        response.redirect('/admin/flights');
+    if (request.user.type === 'admin') {
+        try {
+            await travelController.addFlight(
+                request.query.company,
+                request.query.departure,
+                request.query.d_date,
+                request.query.destination,
+                request.query.a_date,
+                request.query.t_f_seats,
+                request.query.first,
+                request.query.t_b_seats,
+                request.query.business,
+                request.query.t_e_seats,
+                request.query.economy,
+                request.user.username  // req.user.username passes the session user that is logged in
+            );
+        } catch (err) {
+            console.error(err);
+        } finally {
+            //maybe use middlewares here?
+            response.redirect('/admin/flights');
+        }
+    } else {
+        response.redirect('/login');
     }
 }
 
 export async function manageFlightRemove(request, response) {
-    try {
-        await travelController.removeFlight(request.params.removeFlightId);
-    } catch (err) {
-        console.error(err);
-    } finally {
-        response.redirect('/admin/flights');
+    if (request.user.type === 'admin') {
+        try {
+            await travelController.removeFlight(request.params.removeFlightId);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            response.redirect('/admin/flights');
+        }
+    } else {
+        response.redirect('/login');
     }
 }

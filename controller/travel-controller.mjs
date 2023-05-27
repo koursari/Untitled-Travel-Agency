@@ -38,7 +38,8 @@ export async function addFlight(
    t_b_seats,
    business,
    t_e_seats,
-   economy
+   economy,
+   admin_username
 ) {
    //to do
    //maybe add check for valid flight info
@@ -55,23 +56,24 @@ export async function addFlight(
       t_b_seats,
       business,
       t_e_seats,
-      economy
+      economy,
+      admin_username
    );
    const sql = await pool.query(insertFlightString,
       [
          newFlight.f_id,
          newFlight.company,
          newFlight.departure,
-         '2023-6-12 13:30',
+         newFlight.d_date,
          newFlight.destination,
-         '2023-6-12 13:30',
+         newFlight.a_date,
          newFlight.t_f_seats,
          newFlight.first,
          newFlight.t_b_seats,
          newFlight.business,
          newFlight.t_e_seats,
          newFlight.economy,
-         'superuser'
+         newFlight.admin_username
       ]
    );
 }
@@ -84,27 +86,3 @@ export async function getFlightConnections() {
    const sql = await pool.query('SELECT departure, destination FROM flight');
    return sql.rows;
 }
-
-/*
-// get username and password for User login
-// export async function doLogin (req,res) {
-//    try {
-//        const sql = await pool.query('SELECT username, password FROM Users');
-//        return sql.rows;
-//    }
-//    catch(err) {
-//      return res.json(409).send(err);
-//    }
-//  } 
-
-//export departure and destination for search
- export async function getFlightConnections (req,res) {
-   try {
-       const sql = await pool.query('SELECT departure, destination FROM flight');
-       return sql.rows;
-   }
-   catch(err) {
-     return res.json(409).send(err);
-   }
- } 
- */

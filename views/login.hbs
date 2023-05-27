@@ -1,18 +1,23 @@
 {{!-- some temporary code to test login insered at the top --}}
 
 <main>
-    <form id="user-login-area" method="POST" action="/login/user">
-        <!--
+    <div id="message">
+        {{#if message}}
+        <li>{{message}}</li>
+        {{/if}}
+    </div>
+    <form id="user-login-area" method="POST" action="/login/try">
+    <!--
             add server side js to validate user and start session
             -->
-        <fieldset>
-            <legend>Στοιχεία σύνδεσης</legend>
-            <label for="username-box">Όνομα χρήστη</label>
-            <input name="username" type="text" id="username-box">
-            <label for="password-box">Κωδικός χρήστη</label>
-            <input name="password" type="password" id="password-box">
-        </fieldset>
-        <button>Σύνδεση</button>
+    <fieldset>
+        <legend>Στοιχεία σύνδεσης</legend>
+        <label for="username-box">Όνομα χρήστη</label>
+        <input name="username" type="text" id="username-box">
+        <label for="password-box">Κωδικός χρήστη</label>
+        <input name="password" type="password" id="password-box">
+    </fieldset>
+    <button>Σύνδεση</button>
     </form>
     <!--
         to do:
@@ -22,28 +27,29 @@
         add server-side js to create the user 
         -->
     <button id="not-registered">Δεν έχω προφιλ</button>
-    <form id="user-signup-area">
+    <form id="user-signup-area" method="POST" action="/register/try">
         <fieldset>
             <legend>Στοιχεία σύνδεσης</legend>
             <label for="username-box">Όνομα χρήστη</label>
-            <input type="text" id="username-box">
+            <input name="reg_username" type="text" id="username-box" placeholder="Όνομα χρήστη" required>
             <label for="password-box">Κωδικός χρήστη</label>
-            <input type="password" id="password-box">
+            <input name="reg_password" type="password" id="password-box" placeholder="Κωδικός χρήστη" required>
             <label for="validate-password-box">Επιβεβαίωση κωδικού χρήστη</label>
-            <input type="password" id="validate-password-box">
+            <input name="reg_validate_password" type="password" id="validate-password-box"
+                placeholder="Επιβεβαίωση κωδικού" required>
         </fieldset>
         <fieldset>
             <legend>Προσωπικά στοιχεία</legend>
-            <label for="first-name-box">Όνομα</label>
-            <input type="text" id="first-name-box">
-            <label for="last-name-box">Επώνυμο</label>
-            <input type="text" id="last-name-box">
-            <label for="phone-box">Τηλέφωνο επικοινωνίας</label>
-            <input type="tel" id="phone-box">
-            <label for="address-box">Διεύθυνση</label>
-            <input type="text" id="address-box">
             <label for="email-box">Διεύθυνση eMail</label>
-            <input type="email" id="email-box">
+            <input name="reg_email" type="email" id="email-box" placeholder="Διεύθυνση eMail" required>
+            <label for="first-name-box">Όνομα</label>
+            <input name="reg_first_name" type="text" id="first-name-box" placeholder="Όνομα" required>
+            <label for="last-name-box">Επώνυμο</label>
+            <input name="reg_last_name" type="text" id="last-name-box" placeholder="Επώνυμο" required>
+            <label for="phone-box">Τηλέφωνο επικοινωνίας</label>
+            <input name="reg_phone" type="tel" id="phone-box" placeholder="Τηλέφωνο επικοινωνίας" required>
+            <label for="address-box">Διεύθυνση</label>
+            <input name="reg_address" type="text" id="address-box" placeholder="Διεύθυνση" required>
         </fieldset>
         <button>Εγγραφή</button>
     </form>

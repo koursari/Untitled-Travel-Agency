@@ -14,10 +14,11 @@ try {
 
     for (let i = 0; i < users.length; i++) {
         let hashedPassword = bcrypt.hashSync(users[i].password, saltRounds);
-        await pool.query('INSERT INTO users (username, password, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6)',
+        await pool.query('INSERT INTO users (username, password, email, first_name, last_name, phone, address) VALUES ($1, $2, $3, $4, $5, $6, $7)',
             [
                 users[i].username,
                 hashedPassword,
+                users[i].email,
                 users[i].first_name,
                 users[i].last_name,
                 users[i].phone,
@@ -29,9 +30,8 @@ try {
 
     //Populate flight list with 2 entries
     for (let i = 0; i < flights.length; i++) {
-        await pool.query('INSERT INTO flight(f_id, company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
+        await pool.query('INSERT INTO flight(company, departure, d_date, destination, a_date, t_f_seats, first, t_b_seats, business, t_e_seats, economy, admin_username) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
             [
-                flights[i].f_id,
                 flights[i].company,
                 flights[i].departure,
                 flights[i].d_date,
@@ -50,9 +50,8 @@ try {
 
 
     for (let i = 0; i < announcements.length; i++) {
-        await pool.query('INSERT INTO announcements (id, title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5, $6)',
+        await pool.query('INSERT INTO announcements (title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5)',
             [
-                announcements[i].id,
                 announcements[i].title,
                 announcements[i].content,
                 announcements[i].status,
