@@ -7,10 +7,16 @@ const pages = await import(`./page-components.mjs`)
 
 const router = express.Router();
 
+//Pages accessible by all
 router.route('/').get(pages.homepage);
 router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
+//Different landing pending on user type
+router.get('/profile', isAuthenticated, isSimpleUserSeekingProfile, pages.userProfile);
+router.get('/admin', isAuthenticated, isAdminSeekingAdminDashboard, pages.adminDashboard);
+
+//Forbidden for non-admin
 router.route('/admin/flights').get(checkNotAuthenticated, pages.flightsView);
 router.route('/admin/users').get(checkNotAuthenticated, pages.usersView);
 router.route('/admin/tickets').get(checkNotAuthenticated, pages.ticketsView);
@@ -19,10 +25,7 @@ router.route('/admin/announcements').get(checkNotAuthenticated, pages.announceme
 router.get('/admin/flights/add/', checkNotAuthenticated, pages.manageFlightAdd);
 router.get('/admin/flights/remove/:removeFlightId', checkNotAuthenticated, pages.manageFlightRemove);
 
-//USER MANAGEMENT
-//Have a different landing page between admin/user
-router.get('/profile', checkNotAuthenticated, pages.adminDashboard);
-
+//Login/Logout/Register
 router.get('/login', checkAuthenticated, pages.loginpage);
 
 router.post('/login/try',
@@ -75,6 +78,28 @@ function checkNotAuthenticated(request, response, next) {
         return next();
     }
     response.redirect("/login");
+}
+
+//More helpers
+function isAuthenticated(request, response, next) {
+    if (request.isAuthenticated()) {
+        return next();
+    }
+    response.redirect("/login");
+}
+
+function isAdminSeekingAdminDashboard(request, response, next) {
+    if(request.user.type === 'admin') {
+        return next();
+    }
+    response.redirect("/profile")
+}
+
+function isSimpleUserSeekingProfile(request, response, next) {
+    if(request.user.type !== 'admin') {
+        return next();
+    }
+    response.redirect("/admin")
 }
 
 export { router };

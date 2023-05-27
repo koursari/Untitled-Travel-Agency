@@ -74,6 +74,26 @@ export async function loginpage(request, response) {
     }
 }
 
+export async function userProfile(request, response) {
+    let announcementList = null;
+    try {
+        announcementList = await announcementsController.listAllAnnouncements();
+    } catch (err) {
+        announcementList = [];
+        console.error(err);
+    } finally {
+        response.render('profile',
+            {
+                layout: 'main.hbs',
+                announcementList: announcementList,
+                isLoggedIn: fillLogStatus(request),
+                username: request.user.username,
+                message: request.flash('message')
+            }
+        )
+    }
+}
+
 export async function adminDashboard(request, response) {
     // console.log(request.user.username, request.user.type);
     let announcementList = null;
@@ -83,26 +103,15 @@ export async function adminDashboard(request, response) {
         announcementList = [];
         console.error(err);
     } finally {
-        if (request.user.type === 'admin') {
-            response.render('admin',
-                {
-                    layout: 'main.hbs',
-                    announcements: announcementList,
-                    isLoggedIn:  fillLogStatus(request),
-                    username: request.user.username,    //We can display the logged in username somewhere in the page with this
-                    message: request.flash('message')
-                }
-            )
-        } else if (request.user.type === 'user') {
-            response.render('profile',
-                {
-                    layout: 'main.hbs',
-                    announcementList: announcementList,
-                    isLoggedIn:  fillLogStatus(request),                          //Is this used in anything?
-                    username: request.user.username,                 //We can display the logged in username somewhere in the page with this
-                    message: request.flash('message')
-                })
-        }
+        response.render('admin',
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                isLoggedIn: fillLogStatus(request),
+                username: request.user.username,    //We can display the logged in username somewhere in the page with this
+                message: request.flash('message')
+            }
+        )
     }
 }
 
