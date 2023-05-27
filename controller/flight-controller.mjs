@@ -11,7 +11,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 export async function listAllFlights() {
    const flightList = await pool.query(lsFlightsString);
-   console.log(flightList.rows)
    return flightList.rows;
 }
 
@@ -56,7 +55,6 @@ export async function addFlight(
       economy,
       admin_username
    );
-   console.log(newFlight);
    const sql = await pool.query(insFlightString,
       [
          newFlight.company,
