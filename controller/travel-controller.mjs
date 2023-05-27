@@ -45,7 +45,6 @@ export async function addFlight(
    //maybe add check for valid flight info
    //possibly in the constructor of the object
    const newFlight = new myFlight(
-      'DEFAULT',
       company,
       departure,
       d_date.replace('T', ' '),
@@ -62,7 +61,6 @@ export async function addFlight(
    console.log(newFlight);
    const sql = await pool.query(insertFlightString,
       [
-         newFlight.f_id,
          newFlight.company,
          newFlight.departure,
          newFlight.d_date,
