@@ -153,18 +153,14 @@ export async function usersView(request, response) {
         userList = [];
         console.error(err);
     } finally {
-        if (request.user.type === 'admin') {
-            response.render('admin-users',
-                {
-                    layout: 'main.hbs',
-                    announcements: announcementList,
-                    users: userList,
-                    isLoggedIn:  fillLogStatus(request)
-                }
-            )
-        } else {
-            response.redirect('/login');
-        }
+        response.render('admin-users',
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                users: userList,
+                isLoggedIn: fillLogStatus(request)
+            }
+        )
     }
 }
 
@@ -180,18 +176,14 @@ export async function announcementsView(request, response) {
         userList = [];
         console.error(err);
     } finally {
-        if (request.user.type === 'admin') {
-            response.render('admin-announcements',
-                {
-                    layout: 'main.hbs',
-                    announcements: announcementList,
-                    announcementManagement: announcementManagementList,
-                    isLoggedIn:  fillLogStatus(request)
-                }
-            )
-        } else {
-            response.redirect('/login');
-        }
+        response.render('admin-announcements',
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                announcementManagement: announcementManagementList,
+                isLoggedIn: fillLogStatus(request)
+            }
+        )
     }
 }
 
@@ -206,18 +198,14 @@ export async function ticketsView(request, response) {
         ticketList = [];
         console.error(err);
     } finally {
-        if (request.user.type === 'admin') {
-            response.render('admin-tickets',
-                {
-                    layout: 'main.hbs',
-                    announcements: announcementList,
-                    tickets: ticketList,
-                    isLoggedIn:  fillLogStatus(request)
-                }
-            )
-        } else {
-            response.redirect('/login');
-        }
+        response.render('admin-tickets',
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                tickets: ticketList,
+                isLoggedIn: fillLogStatus(request)
+            }
+        )
     }
 }
 
