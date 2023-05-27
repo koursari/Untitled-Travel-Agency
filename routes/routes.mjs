@@ -17,13 +17,13 @@ router.get('/profile', isAuthenticated, isSimpleUserSeekingProfile, pages.userPr
 router.get('/admin', isAuthenticated, isAdminSeekingAdminDashboard, pages.adminDashboard);
 
 //Forbidden for non-admin
-router.route('/admin/flights').get(checkNotAuthenticated, pages.flightsView);
-router.route('/admin/users').get(checkNotAuthenticated, pages.usersView);
-router.route('/admin/tickets').get(checkNotAuthenticated, pages.ticketsView);
-router.route('/admin/announcements').get(checkNotAuthenticated, pages.announcementsView);
+router.route('/admin/flights').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.flightsView);
+router.route('/admin/users').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.usersView);
+router.route('/admin/tickets').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.ticketsView);
+router.route('/admin/announcements').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.announcementsView);
 
-router.get('/admin/flights/add/', checkNotAuthenticated, pages.manageFlightAdd);
-router.get('/admin/flights/remove/:removeFlightId', checkNotAuthenticated, pages.manageFlightRemove);
+router.get('/admin/flights/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightAddAndView);
+router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightRemoveAndView);
 
 //Login/Logout/Register
 router.get('/login', checkAuthenticated, pages.loginpage);

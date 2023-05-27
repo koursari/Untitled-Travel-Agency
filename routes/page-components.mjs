@@ -126,18 +126,14 @@ export async function flightsView(request, response) {
         flightList = [];
         console.error(err);
     } finally {
-        if (request.user.type === 'admin') {
-            response.render('admin-flights',
-                {
-                    layout: 'main.hbs',
-                    announcements: announcementList,
-                    flights: flightList,
-                    isLoggedIn:  fillLogStatus(request)
-                }
-            )
-        } else {
-            response.redirect('/login');
-        }
+        response.render('admin-flights',
+            {
+                layout: 'main.hbs',
+                announcements: announcementList,
+                flights: flightList,
+                isLoggedIn: fillLogStatus(request)
+            }
+        )
     }
 }
 
@@ -219,47 +215,36 @@ export async function ticketsView(request, response) {
     }
 }
 
-export async function manageFlightAdd(request, response) {
-    let announcementList = null;
-    let flightList = null;
-    if (request.user.type === 'admin') {
-        try {
-            await travelController.addFlight(
-                request.query.company,
-                request.query.departure,
-                request.query.d_date,
-                request.query.destination,
-                request.query.a_date,
-                request.query.t_f_seats,
-                request.query.first,
-                request.query.t_b_seats,
-                request.query.business,
-                request.query.t_e_seats,
-                request.query.economy,
-                request.user.username  // req.user.username passes the session user that is logged in
-            );
-        } catch (err) {
-            console.error(err);
-        } finally {
-            //maybe use middlewares here?
-            response.redirect('/admin/flights');
-        }
-    } else {
-        response.redirect('/login');
+export async function manageFlightAddAndView(request, response) {
+    try {
+        await travelController.addFlight(
+            request.query.company,
+            request.query.departure,
+            request.query.d_date,
+            request.query.destination,
+            request.query.a_date,
+            request.query.t_f_seats,
+            request.query.first,
+            request.query.t_b_seats,
+            request.query.business,
+            request.query.t_e_seats,
+            request.query.economy,
+            request.user.username  // req.user.username passes the session user that is logged in
+        );
+    } catch (err) {
+        console.error(err);
+    } finally {
+        response.redirect('/admin/flights');
     }
 }
 
-export async function manageFlightRemove(request, response) {
-    if (request.user.type === 'admin') {
-        try {
-            await travelController.removeFlight(request.params.removeFlightId);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            response.redirect('/admin/flights');
-        }
-    } else {
-        response.redirect('/login');
+export async function manageFlightRemoveAndView(request, response) {
+    try {
+        await travelController.removeFlight(request.params.removeFlightId);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        response.redirect('/admin/flights');
     }
 }
 
