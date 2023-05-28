@@ -14,24 +14,28 @@
         </fieldset>
     </form>
     <div id="existing-announcements-list">
-        <div id="announcement-template">
-            ID - Status - Title - Content - Date - Admin Username
-        </div>
-        <ul class="list-group">
-            <a href="/admin">Επιστροφή</a><br>
+        <a href="/admin">Επιστροφή</a><br>
+        <table class="dashboard-table">
+            <tr>
+                <th>ID (toggle)</th>
+                <th>Status</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Admin Username</th>
+                <th>REMOVE</th>
+            </tr>
             {{#each managedAnnouncements}}
-            <li class="list-group-item">
-                <a href="/announcements/toggle/{{id}}">
-                {{id}} -
-                {{status}} -
-                {{title}} -
-                {{content}} -
-                {{date}} -
-                {{admin_username}}
-                </a>
-                <a href="/announcements/remove/{{id}}">X</a>
-            </li>
+            <tr>
+                <td><a href="/announcements/toggle/{{id}}">{{id}}</a></td>
+                <td>{{status}}</td>
+                <td>{{title}}</td>
+                <td>{{content}}</td>
+                <td>{{date}}</td>
+                <td>{{admin_username}}</td>
+                <td><a href="/announcements/remove/{{id}}">X</a></td>
+            </tr>
             {{/each}}
-        </ul>
+        </table>
     </div>
-    </main>
+</main>

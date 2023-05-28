@@ -11,8 +11,6 @@
 }
 
 .dashboard-table {
-    width: 50%;
-    margin: 0 auto;
     box-shadow: 5px 5px 10px black;
     overflow: hidden;
     border-radius: 20px;
