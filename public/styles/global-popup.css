@@ -11,7 +11,7 @@
 
 .announce-grid-container {
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto auto;
 
     position: absolute;
     top: 50%;
@@ -26,12 +26,20 @@
     padding: 10px;
 }
 
-.announce-grid-container span {
-    grid-row: 1;
+.announce-grid-container * {
+    text-align: center;
 }
-
 .announce-grid-container button {
-    grid-row: 2;
+    grid-row: -1;
     background-color: black;
     color: white;
+}
+
+.announce-grid-container #pop-title {
+    font-weight: bolder;
+}
+
+.announce-grid-container #pop-date {
+    color:gray;
+    font-weight: lighter;
 }
