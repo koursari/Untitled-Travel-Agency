@@ -45,6 +45,9 @@ const rmTicketString = 'DELETE FROM ticket WHERE ticket.t_id=$1';
 
 const findFlightFromTicketString = 'SELECT f_id FROM ticket WHERE t_id=$1';
 
+const lsFlightCapacityString = 'SELECT t_f_seats, first, t_b_seats, business, t_e_seats, economy FROM flight WHERE flight.f_id=$1';
+const lsReservations = 'SELECT ticket.f_id, seat_class, COUNT(seat_no) FROM ticket WHERE ticket.f_id=$1 GROUP BY ticket.f_id, seat_class';
+
 export {
    pool,
    insFlightString,
@@ -63,5 +66,7 @@ export {
    rmAnnouncementString,
    lsTicketsOfFlightString,
    rmTicketString,
-   findFlightFromTicketString
+   findFlightFromTicketString,
+   lsFlightCapacityString,
+   lsReservations
 }

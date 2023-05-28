@@ -300,13 +300,12 @@ export async function manageAnnouncementRemove(request, response, next) {
 }
 
 export async function returnSeatingInfo(request, response) {
-    console.log(request.query.returnSeats)
+    let availability = await ticketController.ticketSearch(request.query.returnSeats)
     response.json(
         {
-            "f_available": "01",
-            "b_available": "01",
-            "e_available": "01",
-            
+            "f_available": availability[0],
+            "b_available": availability[1],
+            "e_available": availability[2]
         }
     );
 }

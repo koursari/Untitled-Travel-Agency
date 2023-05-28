@@ -2,7 +2,9 @@ import {
     pool,
     lsTicketsOfFlightString,
     rmTicketString,
-    findFlightFromTicketString
+    findFlightFromTicketString,
+    lsFlightCapacityString,
+    lsReservations
 } from './database-connection.mjs'
 
 
@@ -17,13 +19,13 @@ export async function removeTicket(ticketID) {
     return flightOfTicket.rows[0].f_id
 }
 
-export async function ticketSearch(req, cb) {
+export async function ticketSearch(flightID) {
     //FIND and GROUP reserved seats, calculate the total of reserved seats for said f_id 
-    let reserved = await pool.query('SELECT ticket.f_id, seat_class, COUNT(seat_no) FROM ticket WHERE ticket.f_id=$1 GROUP BY ticket.f_id, seat_class', [req.f_id]);
+    let reserved = await pool.query(lsReservations, [flightID]);
     let data = reserved.rows;
 
     //get total number of seats for each class of said flight
-    let query = await pool.query('SELECT t_f_seats, first, t_b_seats, business, t_e_seats, economy FROM flight WHERE flight.f_id=$1', [req.f_id]);
+    let query = await pool.query(lsFlightCapacityString, [flightID]);
     let available = query.rows;
 
     //if there are reserved tickets
@@ -40,17 +42,11 @@ export async function ticketSearch(req, cb) {
         }
     }
 
-    //returns the f_id sent via POST request, and the number of each available seat in the callback
-    //cb(err, result)) format
-    return cb(null, {
-        f_id: req.f_id,
-        f_seats: available[0].t_f_seats,
-        f_cost: available[0].first,
-        b_seats: available[0].t_b_seats,
-        b_cost: available[0].business,
-        e_seats: available[0].t_e_seats,
-        e_cost: available[0].economy
-    });
+    return [
+        available[0].t_f_seats,
+        available[0].t_b_seats,
+        available[0].t_e_seats
+    ]
 }
 
 
