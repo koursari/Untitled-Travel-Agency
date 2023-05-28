@@ -5,7 +5,7 @@ import {
     rmTicketString,
     findFlightFromTicketString,
     lsFlightCapacityString,
-    lsReservations
+    lsReservationsString
 } from './database-connection.mjs'
 
 import { Ticket as myTicket } from '../model/fields.js'
