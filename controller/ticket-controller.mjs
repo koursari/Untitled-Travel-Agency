@@ -1,6 +1,9 @@
-//Funtions to handle available flight searches and ticket reservations. 
-
-import { pool, lsTicketsOfFlightString, rmTicketString, findFlightFromTicketString } from './database-connection.mjs'
+import {
+    pool,
+    lsTicketsOfFlightString,
+    rmTicketString,
+    findFlightFromTicketString
+} from './database-connection.mjs'
 
 
 export async function listAllTicketsOfFlight(flightID) {

@@ -1,7 +1,10 @@
 import bcrypt from 'bcrypt';
 import { Strategy as LocalStrategy } from 'passport-local';
 
-import {pool, lsUsersString} from './database-connection.mjs'
+import {
+    pool,
+    lsUsersString
+} from './database-connection.mjs'
 
 export async function listAllUsers() {
     const userList = await pool.query(lsUsersString);

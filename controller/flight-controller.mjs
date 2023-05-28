@@ -1,6 +1,12 @@
 import { Flight as myFlight } from '../model/fields.js'
 import dotenv from 'dotenv';
-import {pool, lsFlightsString, lsUsersString, insFlightString, rmFlightString, lsConnectionsString} from './database-connection.mjs'
+import {
+   pool,
+   lsFlightsString,
+   insFlightString,
+   rmFlightString,
+   lsConnectionsString
+} from './database-connection.mjs'
 
 
 const userId = 'postgres';

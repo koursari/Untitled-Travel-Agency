@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 import {
    pool,
    lsAllAnnouncementsString,
@@ -10,12 +9,6 @@ import {
 } from './database-connection.mjs'
 
 import {Announcements as myAnnouncement} from '../model/fields.js';
-
-const userId = 'postgres';
-
-if (process.env.NODE_ENV !== 'production') {
-   dotenv.config();
-}
 
 export async function listAllAnnouncements() {
    const announcementList = await pool.query(lsAllAnnouncementsString);

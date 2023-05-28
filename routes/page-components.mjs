@@ -252,8 +252,6 @@ export async function logout(request, response, next) {
     request.logout(next)
 }
 
-export async function manageTicketAdd(){}
-
 export async function manageTicketRemove(request, response, next) {
     let flightOfTicket = null;
     try {
@@ -265,11 +263,6 @@ export async function manageTicketRemove(request, response, next) {
         return next();
     }
 }
-
-
-export async function manageUserAdd(){}
-
-export async function manageUserRemove(){}
 
 export async function manageAnnouncementAdd(request, response, next){
     try {
