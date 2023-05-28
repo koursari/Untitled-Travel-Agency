@@ -21,12 +21,17 @@ try {
     let ticketSubmit = document.getElementById("purchase");
     ticketSubmit.disabled = true;
     
-    let departureFormFlights = departureForm.querySelectorAll("input");
+    let departureFormFlights = departureForm.querySelectorAll("#flight-options input");
     departureFormFlights.forEach(element => {
-        element.removeAttribute("checked");
+        element.checked = false;
+        let itsLabelDTime = document.querySelector("#dtime-"+element.value);
+        let itsLabelATime = document.querySelector("#atime-"+element.value);
+        let d = new Date(element.dataset.d_date);
+        let a = new Date(element.dataset.a_date);
+        itsLabelDTime.innerText = new Intl.DateTimeFormat('el-GR', { dateStyle: 'short', timeStyle: 'long', timeZone: 'Europe/Athens' }).format(d);
+        itsLabelATime.innerText = new Intl.DateTimeFormat('el-GR', { dateStyle: 'short', timeStyle: 'long', timeZone: 'Europe/Athens' }).format(a);
         element.addEventListener("change", flightPick)
     });
-
 
     function getNeighbors(x) {
         let result = new Array();
@@ -39,6 +44,9 @@ try {
     function resetFlightsList() {  
         departureForm.style.display = "none";
         seatPickerField.style.display = "none"
+        departureFormFlights.forEach(element => {
+            element.checked = false;
+        });
         seatPickerButton.disabled = true;
         ticketSubmit.disabled = true;
         let btn = document.getElementById("searchtrips");
@@ -84,14 +92,14 @@ try {
         formLegend.innerText = "Δρομολόγια: " + locationA + " - " + locationB;
 
         //hide unrelated flights
-        let flightListDivs = departureForm.querySelectorAll("div");
-        flightListDivs.forEach(element => {
+        let flightOptions = departureForm.querySelectorAll("#flight-options input");
+        flightOptions.forEach(element => {
             if ((element.dataset.from == locationA) && (element.dataset.to == locationB)) {
-                element.style.display = "block";
+                //the parent element is the list element so it includes both <input> and <legend>
+                element.parentElement.style.display = "block";
             } else {
-                element.style.display = "none";
+                element.parentElement.style.display = "none";
             }
-            console.log();
         });
         departureForm.style.display = "block";
     }
@@ -99,6 +107,19 @@ try {
     async function flightPick() {
         seatPickerButton.disabled = false;
         //write costs and available seats
+        let chosenFlight = document.querySelector('input[name="f_id"]:checked').value;
+        let existingFlightinfo = document.querySelector("#flight-"+chosenFlight+"-radio");
+        console.log(existingFlightinfo);
+
+        let firstClassOption = document.querySelector("#f_seat_cost");
+        firstClassOption.innerText = existingFlightinfo.dataset.f_cost;
+
+        let businessClassOption = document.querySelector("#b_seat_cost");
+        businessClassOption.innerText = existingFlightinfo.dataset.b_cost;
+
+        let economyClassOption = document.querySelector("#e_seat_cost");
+        economyClassOption.innerText = existingFlightinfo.dataset.e_cost;
+
         let infoJSON = await fetch("?returnSeats=true");
         let infoData = await infoJSON.json();
         console.log(infoData.foo)
