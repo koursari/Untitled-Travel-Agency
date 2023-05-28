@@ -2,7 +2,7 @@ import express from 'express'
 import passport from 'passport';
 // import flash from 'express-flash';
 import { registerUser } from '../controller/user-passport.mjs';
-import { ticketSearch } from '../controller/ticket-controller.mjs';
+import { ticketReserve, ticketSearch } from '../controller/ticket-controller.mjs';
 
 const pages = await import(`./page-components.mjs`)
 
@@ -14,16 +14,39 @@ router.route('/home').get(isNotSeekingSeating, pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
 //Pages only accessible for logged in users
-router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
+//first form handle, pick flight
+router.post('/home', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
     console.log(req.body.f_id);
-    ticketSearch(req.body, (err, res) => {
+    ticketSearch(req.body, (err, cb) => {
         if (err) {
             console.log(err);
         }
-        //replace with redirect/render
-        console.log(res); 
+        
+    console.log(cb);
+    // res.status(200).send({
+    //     f_cost: cb.f_cost,
+    //     b_cost: cb.b_cost,
+    //     e_cost: cb.e_cost
+    // })
     })
+    //204 stops the page from reloading after POST request but we can't pass any data to it
+    //need to use fetch on frontend to update the prices for the available classes
+    //preferably if _seats === 0, it won't be available to pick
+    res.status(204).send();
 });
+
+//second form handle, pick class, submit reservation request
+router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
+    console.log(req.body);
+    console.log(req.user);
+    ticketReserve(req.body, req.user, (err, res) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(res);
+    })
+    res.redirect('/home');
+})
 
 //Different landing pending on user type
 router.get('/profile', isAuthenticated, isSimpleUserSeekingProfile, pages.userProfile);

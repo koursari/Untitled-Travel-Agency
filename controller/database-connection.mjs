@@ -33,6 +33,8 @@ const insUsersString = 'INSERT INTO users (username, password, email, first_name
 const insAnnouncementsString = 'INSERT INTO announcements (title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5)';
 const insAnnouncementsStringWithID = 'INSERT INTO announcements (id, title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5, $6)';
 
+const insTicketsString = 'INSERT INTO ticket(t_id, seat_no, price, seat_class, username, f_id) VALUES (DEFAULT, DEFAULT, $1, $2, $3, $4)';
+
 const lsConnectionsString = 'SELECT departure, destination FROM flight';
 
 const lsSpecificAnnouncementString = 'SELECT * FROM announcements WHERE id=$1';
@@ -51,6 +53,7 @@ export {
    insUsersString,
    insAnnouncementsString,
    insAnnouncementsStringWithID,
+   insTicketsString,
    lsAllAnnouncementsString,
    lsActiveAnnouncementsString,
    lsConnectionsString,
