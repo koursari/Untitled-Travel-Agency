@@ -14,16 +14,28 @@ router.route('/home').get(pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
 //Pages only accessible for logged in users
+//first form handle, pick flight
 router.post('/home', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
     console.log(req.body.f_id);
-    ticketSearch(req.body, (err, res) => {
+    ticketSearch(req.body, (err, cb) => {
         if (err) {
             console.log(err);
         }
+        
+    console.log(cb);
+    // res.status(200).send({
+    //     f_cost: cb.f_cost,
+    //     b_cost: cb.b_cost,
+    //     e_cost: cb.e_cost
+    // })
     })
-    res.status(204).send()
+    //204 stops the page from reloading after POST request but we can't pass any data to it
+    //need to use fetch on frontend to update the prices for the available classes
+    //preferably if _seats === 0, it won't be available to pick
+    res.status(204).send();
 });
 
+//second form handle, pick class, submit reservation request
 router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
     console.log(req.body);
     console.log(req.user);

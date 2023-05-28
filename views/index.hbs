@@ -32,11 +32,9 @@
                     <ul>
                         {{#each flights}}
                         <li>
-                            <div class="flight"data-f_id="{{f_id}}"
-                            data-from="{{departure}}" data-to="{{destination}}"
-                            data-t_f_seats="{{t_f_seats}}" data-f_cost="{{first}}"
-                            data-t_b_seats="{{t_b_seats}}" data-b_cost="{{business}}"
-                            data-t_e_seats="{{t_e_seats}}" data-e_cost="{{economy}}">
+                            <div class="flight" data-f_id="{{f_id}}" data-from="{{departure}}" data-to="{{destination}}"
+                                data-t_f_seats="{{t_f_seats}}" data-f_cost="{{first}}" data-t_b_seats="{{t_b_seats}}"
+                                data-b_cost="{{business}}" data-t_e_seats="{{t_e_seats}}" data-e_cost="{{economy}}">
                                 <input type="radio" name="f_id" value="{{f_id}}" id="flight-{{f_id}}-radio">
                                 <!-- To Do: fill this out via JS so that the date format is more readable -->
                                 <label for="flight-{{f_id}}-radio">Ξεκινάει στις {{d_date}} και φτάνει στις
@@ -48,29 +46,31 @@
                     <button id="class-picker-btn" type="submit">Επιλογή θέσης</button>
                 </fieldset>
                 <fieldset id="class-picker-fieldset">
-                    {{!-- Would be nice to check if seat left of that class are 0 and make it unpickable in that case --}}
+                    {{!-- Would be nice to check if seat left of that class are 0 and make it unpickable in that case
+                    --}}
                     <legend>Επιλογή θέσης</legend>
-                        <input type="radio" name="f_class" value="F" id="fseat">
-                        <label for="fseat">
-                            <span>Τιμή:</span>
-                            <span id="f_cost"></span>
-                            <span>{{f_cost}}</span>
-                        </label>
-                        <input type="radio" name="f_class" value="B" id="bseat">
-                        <label for="bseat">
-                            <span>Τιμή:</span>
-                            <span id="bseatcost"></span>
-                            <span>{{b_cost}}</span>
-                        </label>
-                        <input type="radio" name="f_class" value="E" id="eseat">
-                        <label for="eseat">
-                            <span>Τιμή:</span>
-                            <span id="e_cost"></span>
-                            <span>{{e_cost}}</span>
-                        </label>
-                        {{!-- We use formaction="" to overwrite the action of the parent form just for this button, allowing us
-                        flexibility in handling our POST request responses. --}}
-                        <button id="purchase" type="submit" formaction="/reserve">Αγορά</button>
+                    <input type="radio" name="f_class" value="F" id="fseat">
+                    <label for="fseat">
+                        <span>Τιμή:</span>
+                        <span id="f_cost"></span>
+                        <span>{{f_cost}}</span>
+                    </label>
+                    <input type="radio" name="f_class" value="B" id="bseat">
+                    <label for="bseat">
+                        <span>Τιμή:</span>
+                        <span id="bseatcost"></span>
+                        <span>{{b_cost}}</span>
+                    </label>
+                    <input type="radio" name="f_class" value="E" id="eseat">
+                    <label for="eseat">
+                        <span>Τιμή:</span>
+                        <span id="e_cost"></span>
+                        <span>{{e_cost}}</span>
+                    </label>
+                    {{!-- We use formaction="" to overwrite the action of the parent form just for this button, allowing
+                    us
+                    flexibility in handling our POST request responses. --}}
+                    <button id="purchase" type="submit" formaction="/reserve">Αγορά</button>
                 </fieldset>
             </form>
         </div>

@@ -117,25 +117,3 @@ try {
 } catch {
     console.log("Oops, wrong page")
 }
-
-function handlePost(req) { // Invoke this on form-submit
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", '/reserve', true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    var payload = { 
-        f_seats: req.f_seats,
-        b_seats: req.b_seats,
-        e_seats: req.e_seats
-     };
-    xhr.send(payload);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && !xhr.status) {
-            // Handle error
-            console.log("FAILED");
-        } else if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("SUCCESS");
-            //your logic to update the page. No reloading will happen
-            
-        }
-    }
-}
