@@ -1,5 +1,4 @@
 import { Flight as myFlight } from '../model/fields.js'
-import dotenv from 'dotenv';
 import { listAllTicketsOfUser } from './ticket-controller.mjs'
 import {
    pool,
@@ -9,13 +8,6 @@ import {
    rmFlightString,
    lsConnectionsString
 } from './database-connection.mjs'
-
-
-const userId = 'postgres';
-
-if (process.env.NODE_ENV !== 'production') {
-   dotenv.config();
-}
 
 export async function listAllFlights() {
    const flightList = await pool.query(lsFlightsString);
@@ -54,9 +46,6 @@ export async function addFlight(
    economy,
    admin_username
 ) {
-   //to do
-   //maybe add check for valid flight info
-   //possibly in the constructor of the object
    const newFlight = new myFlight(
       company,
       departure,

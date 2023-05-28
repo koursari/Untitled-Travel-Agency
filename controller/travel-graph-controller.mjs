@@ -1,9 +1,7 @@
 const controller = await import("./flight-controller.mjs");
 
-const userId = 'postgres';
-
 export async function listRefomattedLocations() {
-    const locationPairs = await controller.getFlightConnections(userId);
+    const locationPairs = await controller.getFlightConnections();
 
     const groupByKey = (list, key, { omitKey = false }) => list.reduce((hash, { [key]: value, ...rest }) => ({ ...hash, [value]: (hash[value] || []).concat(omitKey ? { ...rest } : { [key]: value, ...rest }) }), {})
 
@@ -12,7 +10,7 @@ export async function listRefomattedLocations() {
 }
 
 export async function listAllLocations() {
-    const locationPairs = await controller.getFlightConnections(userId);
+    const locationPairs = await controller.getFlightConnections();
     const customLocations = new Array();
 
     locationPairs.forEach(element => {
@@ -27,7 +25,7 @@ export async function listAllLocations() {
 }
 
 export async function listAllConnections() {
-    const locationPairs = await controller.getFlightConnections(userId);
+    const locationPairs = await controller.getFlightConnections();
     const uniquePairs = new Array();
     locationPairs.forEach(element => {
         if (!uniquePairs.includes(element)) {

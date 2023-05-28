@@ -8,6 +8,8 @@ import {
     lsReservations
 } from './database-connection.mjs'
 
+import { Ticket as myTicket } from '../model/fields.js'
+
 
 export async function listAllTicketsOfFlight(flightID) {
     const ticketList = await pool.query(lsTicketsOfFlightString, [flightID]);
@@ -27,7 +29,7 @@ export async function removeTicket(ticketID) {
 
 export async function ticketSearch(flightID) {
     //FIND and GROUP reserved seats, calculate the total of reserved seats for said f_id 
-    let reserved = await pool.query(lsReservations, [flightID]);
+    let reserved = await pool.query(lsReservationsString, [flightID]);
     let data = reserved.rows;
 
     //get total number of seats for each class of said flight
