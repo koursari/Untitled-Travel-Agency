@@ -156,6 +156,7 @@ function manageTicketRedirect(request, response, next) {
     let redirectUrl = null;
     try {
         wasOnFlight = request.query.flightId;
+        if (wasOnFlight == undefined) throw (error);
         redirectUrl = '/tickets?flightId=' + wasOnFlight;
     } catch {
         redirectUrl = '/flights'

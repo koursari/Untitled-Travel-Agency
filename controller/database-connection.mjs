@@ -43,6 +43,8 @@ const rmAnnouncementString = 'DELETE FROM announcements WHERE id=$1 RETURNING id
 const lsTicketsOfFlightString = 'SELECT * FROM ticket WHERE ticket.f_id=$1';
 const rmTicketString = 'DELETE FROM ticket WHERE ticket.t_id=$1';
 
+const findFlightFromTicketString = 'SELECT f_id FROM ticket WHERE t_id=$1';
+
 export {
    pool,
    insFlightString,
@@ -60,5 +62,6 @@ export {
    lsSpecificAnnouncementString,
    rmAnnouncementString,
    lsTicketsOfFlightString,
-   rmTicketString
+   rmTicketString,
+   findFlightFromTicketString
 }

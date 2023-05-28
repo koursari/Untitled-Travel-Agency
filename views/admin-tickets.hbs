@@ -14,17 +14,14 @@
         </div>
         <ul class="list-group">
             <a href="/flights">Επιστροφή</a><br>
-            {{#each ticket}}
+            {{#each tickets}}
             <li class="ticket-list-item">
                 {{t_id}}.
                 {{username}} -
                 {{price}} -
-                {{seat}} -
-                {{f_id}} -
-                {{departure}} -
-                {{destination}} -
-                {{d_date}}
-                <a href="/ticket/remove/{{t_id}}">X</a>
+                {{seat_no}} -
+                {{f_id}}
+                <a href="/tickets/remove/{{t_id}}">X</a>
             </li>
             {{/each}}
         </ul>

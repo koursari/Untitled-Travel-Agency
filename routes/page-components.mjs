@@ -255,8 +255,10 @@ export async function logout(request, response, next) {
 export async function manageTicketAdd(){}
 
 export async function manageTicketRemove(request, response, next) {
+    let flightOfTicket = null;
     try {
-        await ticketController.removeTicket(request.params.removeTicketId);
+        flightOfTicket = await ticketController.removeTicket(request.params.removeTicketId);
+        request.query.flightId = flightOfTicket;
     } catch (err) {
         console.error(err);
     } finally {
