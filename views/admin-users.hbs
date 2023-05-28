@@ -1,22 +1,31 @@
 <main>
-<form method="GET" action="/users">
-    <div class="row">
-        <div class="col mt-3 col-sm-9">
-               Username - Password - First Name - Last Name - Phone - Address - isAdmin
+    <!--
+    Δε νομίζω να χρειάζεται οι admin να προσθέτουν χρήστες
+    <form method="GET" action="/admin/users">
+        <fieldset>
+            <legend>Προσθήκη χρήστη</legend>
+            <button type="submit">New User</button>
+        </fieldset>
+    </form>
+    -->
+    <div id="existing-users-list">
+        <div class="user-template">
+            Username - Password - First Name - Last Name - Phone - Address - isAdmin
         </div>
+        <ul class="list-group">
+            <a href="/admin/users">Επιστροφή</a><br>
+            {{#each users}}
+            <li class="user-list-item">
+                {{username}} -
+                {{password}} -
+                {{email}} -
+                {{first_name}} -
+                {{last_name}} -
+                {{phone}} -
+                {{address}}
+                {{!-- <a href="/flights/remove/{{f_id}}">X</a> --}}
+            </li>
+            {{/each}}
+        </ul>
     </div>
-    <div class="row ">
-        <div class="col mt-3">
-            <ul class="list-group">
-                <a href="/profile">..</a><br>
-                {{#each users}}
-                    <li class="list-group-item">
-                        {{username}} - {{password}} - {{first_name}} - {{last_name}} - {{phone}} - {{address}} - {{isAdmin}}
-                        {{!-- <a href="/flights/remove/{{f_id}}">X</a> --}}
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-</form>
 </main>
