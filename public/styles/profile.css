@@ -9,3 +9,43 @@
     align-items: stretch;
     column-gap: 10px;
 }
+
+.dashboard-table {
+    box-shadow: 5px 5px 10px black;
+    overflow: hidden;
+    border-radius: 20px;
+    border-collapse: collapse;
+}
+
+.dashboard-table th {
+    background-color: purple;
+    color: aqua;
+    padding: 5px 10px 5px 10px;
+}
+.dashboard-table td {
+    padding: 5px 10px 5px 10px;
+}
+
+.dashboard-table tr:nth-child(even){
+    background-color: yellowgreen;
+}
+
+.dashboard-table tr:hover {
+    background-color: orange;
+}
+
+.dashboard-table th:first-of-type {
+    border-top-left-radius: 20px;
+}
+
+.dashboard-table th:last-of-type {
+    border-top-right-radius: 20px;
+}
+
+.dashboard-table tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: 20px;
+}
+
+.dashboard-table tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: 20px;
+}
