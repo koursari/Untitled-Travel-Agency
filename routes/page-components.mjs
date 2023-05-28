@@ -82,18 +82,26 @@ export async function loginpage(request, response) {
 
 export async function userProfile(request, response) {
     let announcementList = null;
+    let purchasedTickets = null;
+    let relevantFlights = null;
     try {
         announcementList = await announcementsController.listActiveAnnouncements();
+        purchasedTickets = await ticketController.listAllTicketsOfUser(request.user.username);
+        relevantFlights = await flightsController.listAllFlightsOfUser(request.user.username);
     } catch (err) {
         announcementList = [];
+        purchasedTickets = [];
+        relevantFlights = [];
         console.error(err);
     } finally {
         response.render('profile',
             {
                 layout: 'main.hbs',
-                announcementList: announcementList,
+                announcements: announcementList,
                 isLoggedIn: fillLogStatus(request),
                 username: request.user.username,
+                tickets: purchasedTickets,
+                flights: relevantFlights,
                 message: request.flash('message')
             }
         )

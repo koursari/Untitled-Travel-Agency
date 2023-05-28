@@ -1,6 +1,7 @@
 import {
     pool,
     lsTicketsOfFlightString,
+    lsTicketsOfUserString,
     rmTicketString,
     findFlightFromTicketString,
     lsFlightCapacityString,
@@ -10,6 +11,11 @@ import {
 
 export async function listAllTicketsOfFlight(flightID) {
     const ticketList = await pool.query(lsTicketsOfFlightString, [flightID]);
+    return ticketList.rows;
+}
+
+export async function listAllTicketsOfUser(username) {
+    const ticketList = await pool.query(lsTicketsOfUserString, [username]);
     return ticketList.rows;
 }
 

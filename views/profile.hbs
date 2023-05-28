@@ -1,17 +1,32 @@
 <main>
     <h1>Προφίλ {{username}}</h1>
     <div id="user-tickets-list">
-        
+        <ul class="list-group">
+            {{#each tickets}}
+            <li class="ticket-list-item">
+                {{t_id}}.
+                {{username}} -
+                {{price}} -
+                {{seat_no}} -
+                {{f_id}}
+            </li>
+            {{/each}}
+        </ul>
     </div>
-    {{!<form id="ticket-area">
-        <fieldset>
-            <label for="ticket-searchbox">Κωδικός εισιτηρίου</label>
-            <legend>Αναζήτηση ολοκληρωμένης αγοράς</legend>
-            <input type="text" id="ticket-searchbox">
-            <button>Αναζήτηση</button>
-        </fieldset>
-    </form>
-    }}
+    <div id="user-flights-list">
+        <ul class="list-group">
+            {{#each flights}}
+            <li class="flight-list-item">
+                {{f_id}}.
+                {{company}} -
+                {{departure}} -
+                {{d_date}} -
+                {{destination}} -
+                {{a_date}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
     {{!
     <form id="personal-area">
         <fieldset>

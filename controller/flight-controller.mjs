@@ -1,8 +1,10 @@
 import { Flight as myFlight } from '../model/fields.js'
 import dotenv from 'dotenv';
+import { listAllTicketsOfUser } from './ticket-controller.mjs'
 import {
    pool,
    lsFlightsString,
+   lsSpecificFlightString,
    insFlightString,
    rmFlightString,
    lsConnectionsString
@@ -18,6 +20,24 @@ if (process.env.NODE_ENV !== 'production') {
 export async function listAllFlights() {
    const flightList = await pool.query(lsFlightsString);
    return flightList.rows;
+}
+
+export async function listAllFlightsOfUser(username) {
+   let ticketList = await listAllTicketsOfUser(username);
+   let flightUniqueIdList = new Array();
+   ticketList.forEach(element => {
+      if (!flightUniqueIdList.includes(element.f_id)) flightUniqueIdList.push(element.f_id);
+   });
+   let flights = new Array();
+   for (const fid of flightUniqueIdList) {
+      try {
+         let tmp = await pool.query(lsSpecificFlightString, [fid]);
+         flights.push(tmp.rows[0]);
+      } catch (err) {
+         console.error(err);
+      }
+   }
+   return flights;
 }
 
 export async function addFlight(

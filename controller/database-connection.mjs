@@ -41,12 +41,15 @@ const lsSpecificAnnouncementString = 'SELECT * FROM announcements WHERE id=$1';
 const rmAnnouncementString = 'DELETE FROM announcements WHERE id=$1 RETURNING id';
 
 const lsTicketsOfFlightString = 'SELECT * FROM ticket WHERE ticket.f_id=$1';
+const lsTicketsOfUserString = 'SELECT * FROM ticket WHERE ticket.username=$1';
 const rmTicketString = 'DELETE FROM ticket WHERE ticket.t_id=$1';
 
 const findFlightFromTicketString = 'SELECT f_id FROM ticket WHERE t_id=$1';
 
 const lsFlightCapacityString = 'SELECT t_f_seats, first, t_b_seats, business, t_e_seats, economy FROM flight WHERE flight.f_id=$1';
 const lsReservations = 'SELECT ticket.f_id, seat_class, COUNT(seat_no) FROM ticket WHERE ticket.f_id=$1 GROUP BY ticket.f_id, seat_class';
+
+const lsSpecificFlightString = 'SELECT * FROM flight WHERE f_id=$1';
 
 export {
    pool,
@@ -65,8 +68,10 @@ export {
    lsSpecificAnnouncementString,
    rmAnnouncementString,
    lsTicketsOfFlightString,
+   lsTicketsOfUserString,
    rmTicketString,
    findFlightFromTicketString,
    lsFlightCapacityString,
+   lsSpecificFlightString,
    lsReservations
 }
