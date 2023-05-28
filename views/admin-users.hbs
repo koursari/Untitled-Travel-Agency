@@ -1,7 +1,7 @@
 <main>
     <!--
     Δε νομίζω να χρειάζεται οι admin να προσθέτουν χρήστες
-    <form method="GET" action="/admin/users">
+    <form method="GET" action="/users/add">
         <fieldset>
             <legend>Προσθήκη χρήστη</legend>
             <button type="submit">New User</button>
@@ -13,7 +13,7 @@
             Username - Password - First Name - Last Name - Phone - Address - isAdmin
         </div>
         <ul class="list-group">
-            <a href="/admin/users">Επιστροφή</a><br>
+            <a href="/admin">Επιστροφή</a><br>
             {{#each users}}
             <li class="user-list-item">
                 {{username}} -
@@ -23,7 +23,7 @@
                 {{last_name}} -
                 {{phone}} -
                 {{address}}
-                {{!-- <a href="/flights/remove/{{f_id}}">X</a> --}}
+                {{!-- <a href="/user/remove/{{username}}">X</a> --}}
             </li>
             {{/each}}
         </ul>

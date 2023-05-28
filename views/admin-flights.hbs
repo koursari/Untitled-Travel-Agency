@@ -1,5 +1,5 @@
 <main>
-    <form method="GET" action="/admin/flights/add">
+    <form method="GET" action="/flights/add">
         <fieldset>
             <legend>Προσθήκη πτήσης</legend>
             <div id="flight-info-input">
@@ -28,7 +28,7 @@
             <a href="/admin">Επιστροφή</a><br>
             {{#each flights}}
             <li class="flight-list-item">
-                <a href="/admin/tickets?flightId={{f_id}}">{{f_id}}.</a>
+                <a href="/tickets?flightId={{f_id}}">{{f_id}}.</a>
                 {{f_id}}.
                 {{company}} -
                 {{departure}} -
@@ -41,7 +41,7 @@
                 {{business}} -
                 {{t_e_seats}} -
                 {{economy}}
-                <a href="/admin/flights/remove/{{f_id}}">X</a>
+                <a href="/flights/remove/{{f_id}}">X</a>
             </li>
             {{/each}}
         </ul>

@@ -1,19 +1,19 @@
 <main>
-    <!--
+    {{!--
     Μας νοιάζει οι admin να μπορούν να αγοράσουν εισητήριο εκ μέρους κάποιου;
-    <form method="GET" action="/admin/τιcket/add">
+    <form method="GET" action="/ticket/add">
         <fieldset>
             <legend>Προσθήκη εισητηρίου</legend>
             <button type="submit">New Ticket</button>
         </fieldset>
     </form>
-    -->
+    --}}
     <div id="existing-tickets-list">
         <div id="ticket-template">
             username - t_id - price - seat - f_id - departure - destination - d_date
         </div>
         <ul class="list-group">
-            <a href="/admin/flights">Επιστροφή</a><br>
+            <a href="/flights">Επιστροφή</a><br>
             {{#each ticket}}
             <li class="ticket-list-item">
                 {{t_id}}.

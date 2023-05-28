@@ -30,21 +30,21 @@ router.get('/profile', isAuthenticated, isSimpleUserSeekingProfile, pages.userPr
 router.get('/admin', isAuthenticated, isAdminSeekingAdminDashboard, pages.adminDashboard);
 
 //Forbidden for non-admin
-router.route('/admin/flights').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.flightsView);
-router.route('/admin/users').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.usersView);
-router.route('/admin/tickets').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.ticketsView);
-router.route('/admin/announcements').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.announcementsView);
+router.route('/flights').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.flightsView);
+router.route('/users').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.usersView);
+router.route('/tickets').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.ticketsView);
+router.route('/announcements').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.announcementsView);
 
 //Forbidden for non-admin, plus requiring redirection
 //Flights
-router.get('/admin/flights/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightAdd, manageFlightRedirect);
-router.get('/admin/flights/remove/:removeFlightId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightRemove, manageFlightRedirect);
+router.get('/flights/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightAdd, manageFlightRedirect);
+router.get('/flights/remove/:removeFlightId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageFlightRemove, manageFlightRedirect);
 //Announcements
-router.get('/admin/announcements/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementAdd, manageAnnouncementRedirect);
-router.get('/admin/announcements/remove/:removeAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementRemove, manageAnnouncementRedirect);
-router.get('/admin/announcements/toggle/:toggleAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementToggle, manageAnnouncementRedirect);
+router.get('/announcements/add/', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementAdd, manageAnnouncementRedirect);
+router.get('/announcements/remove/:removeAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementRemove, manageAnnouncementRedirect);
+router.get('/announcements/toggle/:toggleAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementToggle, manageAnnouncementRedirect);
 //Tickets
-router.get('/admin/tickets/remove/:removeTicketId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageTicketRemove, manageTicketRedirect);
+router.get('/tickets/remove/:removeTicketId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageTicketRemove, manageTicketRedirect);
 //ADD FOR USERS/TICKETS/ANNOUNCEMENTS
 
 //Login/Logout/Register
@@ -103,11 +103,11 @@ function isSimpleUserSeekingProfile(request, response, next) {
 }
 
 function manageFlightRedirect(request, response) {
-    response.redirect('/admin/flights');
+    response.redirect('/flights');
 }
 
 function manageAnnouncementRedirect(request, response) {
-    response.redirect('/admin/announcements');
+    response.redirect('/announcements');
 }
 
 function logoutRedirect(request, response) {
@@ -133,9 +133,9 @@ function manageTicketRedirect(request, response, next) {
     let redirectUrl = null;
     try {
         wasOnFlight = request.query.flightId;
-        redirectUrl = '/admin/tickets?flightId=' + wasOnFlight;
+        redirectUrl = '/tickets?flightId=' + wasOnFlight;
     } catch {
-        redirectUrl = '/admin/flights'
+        redirectUrl = '/flights'
     }
     response.redirect(redirectUrl);
 }

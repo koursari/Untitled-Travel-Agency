@@ -1,5 +1,5 @@
 <main>
-    <form method="GET" action="/admin/announcements/add">
+    <form method="GET" action="/announcements/add">
         <fieldset>
             <legend>Προσθήκη ανακοίνωσης</legend>
             <div id="announcements-info-input">
@@ -21,7 +21,7 @@
             <a href="/admin">Επιστροφή</a><br>
             {{#each managedAnnouncements}}
             <li class="list-group-item">
-                <a href="/admin/announcements/toggle/{{id}}">
+                <a href="/announcements/toggle/{{id}}">
                 {{id}} -
                 {{status}} -
                 {{title}} -
@@ -29,7 +29,7 @@
                 {{date}} -
                 {{admin_username}}
                 </a>
-                <a href="/admin/announcements/remove/{{id}}">X</a>
+                <a href="/announcements/remove/{{id}}">X</a>
             </li>
             {{/each}}
         </ul>
