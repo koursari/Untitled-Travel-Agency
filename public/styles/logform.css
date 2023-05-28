@@ -1,0 +1,17 @@
+.areas{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2em;
+    text-align: right;
+}
+
+#not-registered {
+    background-color: black;
+    color: white;
+    overflow: hidden;
+}
+
+#register-button:hover, #login-button:hover{
+    background-color: purple;
+
+}

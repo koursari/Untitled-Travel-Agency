@@ -1,45 +1,41 @@
-{{!-- some temporary code to test login insered at the top --}}
-
 <main>
     <div id="message">
         {{#if message}}
         <li>{{message}}</li>
         {{/if}}
     </div>
-    <form id="user-login-area" method="POST" action="/login/try">
-    <!--
-            add server side js to validate user and start session
-            -->
-    <fieldset>
-        <legend>Στοιχεία σύνδεσης</legend>
-        <label for="username-box">Όνομα χρήστη</label>
-        <input name="username" type="text" id="username-box">
-        <label for="password-box">Κωδικός χρήστη</label>
-        <input name="password" type="password" id="password-box">
-    </fieldset>
-    <button>Σύνδεση</button>
-    </form>
-    <!--
-        to do:
-        add client-side js to 
-            hide signup form and show upon button click
-            validate email adress and form filling out
-        add server-side js to create the user 
-        -->
-    <button id="not-registered">Δεν έχω προφιλ</button>
-    <form id="user-signup-area" method="POST" action="/register/try">
+    <form id="user-login-area" method="POST" action="/login/try" class="log">
         <fieldset>
             <legend>Στοιχεία σύνδεσης</legend>
+            <div class="areas">
             <label for="username-box">Όνομα χρήστη</label>
-            <input name="reg_username" type="text" id="username-box" placeholder="Όνομα χρήστη" required>
+            <input name="username" type="text" id="username-box">
             <label for="password-box">Κωδικός χρήστη</label>
-            <input name="reg_password" type="password" id="password-box" placeholder="Κωδικός χρήστη" required>
-            <label for="validate-password-box">Επιβεβαίωση κωδικού χρήστη</label>
-            <input name="reg_validate_password" type="password" id="validate-password-box"
-                placeholder="Επιβεβαίωση κωδικού" required>
+            <input name="password" type="password" id="password-box">
+            </div>
+            <button id="login-button">Σύνδεση</button>
         </fieldset>
-        <fieldset>
+        
+    </form>
+
+    <button id="not-registered">Δεν έχω προφίλ</button>
+
+    <form id="user-signup-area" method="POST" action="/register/try" class="log">
+        <fieldset id="connection-info-register">
+            <legend>Στοιχεία σύνδεσης</legend>
+            <div class="areas">
+            <label for="username-reg-box">Όνομα χρήστη</label>
+            <input name="reg_username" type="text" id="username-reg-box" placeholder="Όνομα χρήστη" required>
+            <label for="password-reg-box">Κωδικός χρήστη</label>
+            <input name="reg_password" type="password" id="password-reg-box" placeholder="Κωδικός χρήστη" required>
+            <label for="validate-password-reg-box">Επιβεβαίωση κωδικού χρήστη</label>
+            <input name="reg_validate_password" type="password" id="validate-password-reg-box"
+                placeholder="Επιβεβαίωση κωδικού" required>
+            </div>
+        </fieldset>
+        <fieldset id="personal-info-register">
             <legend>Προσωπικά στοιχεία</legend>
+            <div class="areas">
             <label for="email-box">Διεύθυνση eMail</label>
             <input name="reg_email" type="email" id="email-box" placeholder="Διεύθυνση eMail" required>
             <label for="first-name-box">Όνομα</label>
@@ -50,7 +46,8 @@
             <input name="reg_phone" type="tel" id="phone-box" placeholder="Τηλέφωνο επικοινωνίας" required>
             <label for="address-box">Διεύθυνση</label>
             <input name="reg_address" type="text" id="address-box" placeholder="Διεύθυνση" required>
+            </div>
         </fieldset>
-        <button>Εγγραφή</button>
+        <button id="register-button">Εγγραφή</button>
     </form>
 </main>
