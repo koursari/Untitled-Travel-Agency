@@ -62,7 +62,7 @@
                     {{!-- Would be nice to check if seat left of that class are 0 and make it unpickable in that case
                     --}}
                     <legend>Επιλογή θέσης</legend>
-                    <input type="radio" name="f_class" value="F" id="fseat" required>
+                    <input type="radio" name="f_class" value="F" id="fseatpick" required>
                     <label for="fseat">
                         <ul>
                             <li>
@@ -70,13 +70,14 @@
                             <span id="f_seat_cost"></span>
                             </li>
                             <li>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span>Διαθεσιμότητα:</span>
+                            <span id="f_seat_available"></span>
+                            <span>/</span>
+                            <span id="f_seat_total"></span>
                             </li>
                         </ul>
                     </label>
-                    <input type="radio" name="f_class" value="B" id="bseat">
+                    <input type="radio" name="f_class" value="B" id="bseatpick">
                     <label for="bseat">
                         <ul>
                             <li>
@@ -84,13 +85,14 @@
                             <span id="b_seat_cost"></span>
                             </li>
                             <li>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span>Διαθεσιμότητα</span>
+                            <span id="b_seat_available"></span>
+                            <span>/</span>
+                            <span id="b_seat_total"></span>
                             </li>
                         </ul>
                     </label>
-                    <input type="radio" name="f_class" value="E" id="eseat">
+                    <input type="radio" name="f_class" value="E" id="eseatpick">
                     <label for="eseat">
                         <ul>
                             <li>
@@ -98,9 +100,10 @@
                             <span id="e_seat_cost"></span>
                             </li>
                             <li>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span>Διαθεσιμότητα</span>
+                            <span id="e_seat_available"></span>
+                            <span>/</span>
+                            <span id="e_seat_total"></span>
                             </li>
                         </ul>
                     </label>

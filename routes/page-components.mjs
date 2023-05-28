@@ -306,5 +306,12 @@ export async function manageAnnouncementRemove(request, response, next) {
 
 export async function returnSeatingInfo(request, response) {
     console.log(request.query.returnSeats)
-    response.json({"foo": "bar"});
+    response.json(
+        {
+            "f_available": "0",
+            "b_available": "0",
+            "e_available": "0",
+            
+        }
+    );
 }

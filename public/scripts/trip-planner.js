@@ -24,6 +24,7 @@ try {
     let departureFormFlights = departureForm.querySelectorAll("#flight-options input");
     departureFormFlights.forEach(element => {
         element.checked = false;
+        
         let itsLabelDTime = document.querySelector("#dtime-"+element.value);
         let itsLabelATime = document.querySelector("#atime-"+element.value);
         let d = new Date(element.dataset.d_date);
@@ -106,23 +107,52 @@ try {
 
     async function flightPick() {
         seatPickerButton.disabled = false;
+        ticketSubmit.disabled = false;
         //write costs and available seats
         let chosenFlight = document.querySelector('input[name="f_id"]:checked').value;
         let existingFlightinfo = document.querySelector("#flight-"+chosenFlight+"-radio");
-        console.log(existingFlightinfo);
 
-        let firstClassOption = document.querySelector("#f_seat_cost");
-        firstClassOption.innerText = existingFlightinfo.dataset.f_cost;
+        let firstClassCost = document.querySelector("#f_seat_cost");
+        firstClassCost.innerText = existingFlightinfo.dataset.f_cost;
 
-        let businessClassOption = document.querySelector("#b_seat_cost");
-        businessClassOption.innerText = existingFlightinfo.dataset.b_cost;
+        let businessClassCost = document.querySelector("#b_seat_cost");
+        businessClassCost.innerText = existingFlightinfo.dataset.b_cost;
 
-        let economyClassOption = document.querySelector("#e_seat_cost");
-        economyClassOption.innerText = existingFlightinfo.dataset.e_cost;
+        let economyClassCost = document.querySelector("#e_seat_cost");
+        economyClassCost.innerText = existingFlightinfo.dataset.e_cost;
 
-        let infoJSON = await fetch("?returnSeats=true");
+        let infoJSON = await fetch("?returnSeats="+chosenFlight);
         let infoData = await infoJSON.json();
-        console.log(infoData.foo)
+
+        let firstClassSeats = document.querySelector("#f_seat_available");
+        firstClassSeats.innerText = infoData.f_available;
+        if(infoData.f_available == 0) {
+            let fClassOption = document.querySelector("#fseatpick");
+            fClassOption.checked = false;
+            fClassOption.disabled = true;
+        }
+        let firstClassTotal = document.querySelector("#f_seat_total");
+        firstClassTotal.innerText = existingFlightinfo.dataset.t_f_seats;
+
+        let businessClassSeats = document.querySelector("#b_seat_available");
+        businessClassSeats.innerText = infoData.b_available;
+        if(infoData.b_available == 0) {
+            let bClassOption = document.querySelector("#bseatpick");
+            bClassOption.checked = false;
+            bClassOption.disabled = true;
+        }
+        let businessClassTotal = document.querySelector("#b_seat_total");
+        businessClassTotal.innerText = existingFlightinfo.dataset.t_b_seats;
+
+        let economyClassSeats = document.querySelector("#e_seat_available");
+        economyClassSeats.innerText = infoData.e_available;
+        if(infoData.e_available == 0) {
+            let eClassOption = document.querySelector("#eseatpick");
+            eClassOption.checked = false;
+            eClassOption.disabled = true;
+        }
+        let economyClassTotal = document.querySelector("#e_seat_total");
+        economyClassTotal.innerText = existingFlightinfo.dataset.t_e_seats;
     }
     
     let seatingOptions = seatPickerField.querySelectorAll("input");
