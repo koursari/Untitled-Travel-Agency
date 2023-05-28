@@ -308,9 +308,9 @@ export async function returnSeatingInfo(request, response) {
     console.log(request.query.returnSeats)
     response.json(
         {
-            "f_available": "0",
-            "b_available": "0",
-            "e_available": "0",
+            "f_available": "01",
+            "b_available": "01",
+            "e_available": "01",
             
         }
     );

@@ -16,7 +16,6 @@ router.route('/about').get(pages.aboutpage);
 //Pages only accessible for logged in users
 //first form handle, pick flight
 router.post('/home', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
-    console.log(req.body.f_id);
     ticketSearch(req.body, (err, cb) => {
         if (err) {
             console.log(err);
@@ -37,6 +36,7 @@ router.post('/home', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
 
 //second form handle, pick class, submit reservation request
 router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
+    console.log(req.body.f_class)
     console.log(req.body);
     console.log(req.user);
     ticketReserve(req.body, req.user, (err, res) => {
