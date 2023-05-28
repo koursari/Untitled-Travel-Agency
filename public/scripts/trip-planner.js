@@ -14,13 +14,17 @@ try {
     destinationSelector.value = "";
 
     let departureForm = document.getElementById("departures");
-    let ticketSubmit = departureForm.querySelector("button");
+    let seatPickerField = document.getElementById("class-picker-fieldset");
+    let seatPickerButton = document.getElementById("class-picker-btn");
+    seatPickerButton.disabled = true;
+    seatPickerButton.addEventListener("click", ()=>{seatPickerField.style.display="block"})
+    let ticketSubmit = document.getElementById("purchase");
     ticketSubmit.disabled = true;
     
     let departureFormFlights = departureForm.querySelectorAll("input");
     departureFormFlights.forEach(element => {
         element.removeAttribute("checked");
-        element.addEventListener("change", ()=>{ticketSubmit.disabled = false})
+        element.addEventListener("change", flightPick)
     });
 
 
@@ -32,9 +36,10 @@ try {
         return result;
     }
 
-    function resetFlightsList() {
-        
+    function resetFlightsList() {  
         departureForm.style.display = "none";
+        seatPickerField.style.display = "none"
+        seatPickerButton.disabled = true;
         ticketSubmit.disabled = true;
         let btn = document.getElementById("searchtrips");
         btn.disabled = true;
@@ -89,6 +94,21 @@ try {
             console.log();
         });
         departureForm.style.display = "block";
+    }
+
+    function flightPick() {
+        //ticketSubmit.disabled = false;
+        seatPickerButton.disabled = false;
+        //write costs
+    }
+    
+    let seatingOptions = seatPickerField.querySelectorAll("input");
+    seatingOptions.forEach(element => {
+        element.addEventListener("click", seatPicked)
+    })
+
+    function seatPicked() {
+        ticketSubmit.disabled = false;
     }
 
     let searchButton = document.getElementById("searchtrips");

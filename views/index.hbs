@@ -22,23 +22,50 @@
             <button id="searchtrips" disabled>Αναζήτηση</button>
         </div>
         <div class="departures" id="departures">
-            <form method="POST" action="/reserve">
+            <form method="GET" action="/reserve">
                 <fieldset>
-                <legend>Δρομολόγια</legend>
-                <ul>
-                    {{#each flights}}
-                    <li>
-                        <div class="flight" data-f_id="{{f_id}}" data-from="{{departure}}" data-to="{{destination}}">
-                            <input type="radio" name="f_id" value="{{f_id}}" id="flight-{{f_id}}-radio">
-                            <!-- To Do: fill this out via JS so that the date format is more readable -->
-                            <label for="flight-{{f_id}}-radio">Ξεκινάει στις {{d_date}} και φτάνει στις {{a_date}}</label>
-                        </div>
-                    </li>
-                    {{/each}}
-                </ul>
+                    <legend>Δρομολόγια</legend>
+                    <ul>
+                        {{#each flights}}
+                        <li>
+                            <div class="flight"data-f_id="{{f_id}}"
+                            data-from="{{departure}}" data-to="{{destination}}"
+                            data-t_f_seats="{{t_f_seats}}" data-f_cost="{{first}}"
+                            data-t_b_seats="{{t_b_seats}}" data-b_cost="{{business}}"
+                            data-t_e_seats="{{t_e_seats}}" data-e_cost="{{economy}}">
+                                <input type="radio" name="f_id" value="{{f_id}}" id="flight-{{f_id}}-radio">
+                                <!-- To Do: fill this out via JS so that the date format is more readable -->
+                                <label for="flight-{{f_id}}-radio">Ξεκινάει στις {{d_date}} και φτάνει στις {{a_date}}</label>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    <button id="class-picker-btn" type="button">Επιλογή θέσης</button>
                 </fieldset>
-                <button>Αγορά</button>
-                </form>
+                <fieldset id="class-picker-fieldset">
+                    <legend>Επιλογή θέσης</legend>
+                    <input type="radio" name="seat" value="first-class" id="fseat">
+                    <label for="fseat">
+                        <span>Τιμή</span>
+                        <span id="fseatcost"></span>
+                        <span>ευρώ</span>
+                    </label>
+                    <input type="radio" name="seat" value="business-class" id="bseat">
+                    <label for="bseat">
+                        <span>Τιμή</span>
+                        <span id="bseatcost"></span>
+                        <span>ευρώ</span>
+                    </label>
+                    <input type="radio" name="seat" value="economy-class" id="eseat">
+                    <label for="eseat">
+                        <span>Τιμή</span>
+                        <span id="eseatcost"></span>
+                        <span>ευρώ</span>
+                    </label>
+
+                </fieldset>
+                <button id="purchase" type="submit">Αγορά</button>
+            </form>
         </div>
     </div>
     <!-- Data taken from server and saved for client-side processing via js -->
