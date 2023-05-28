@@ -12,6 +12,7 @@ export async function listAllTicketsOfFlight(flightID) {
 }
 
 export async function removeTicket(ticketID) {
+    //TO DO: UNRESERVE SEAT?
     await pool.query(rmTicketString, [ticketID]);
 }
 
