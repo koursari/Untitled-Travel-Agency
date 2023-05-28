@@ -12,7 +12,6 @@ export async function listAllTicketsOfFlight(flightID) {
 }
 
 export async function removeTicket(ticketID) {
-    //TO DO: UNRESERVE SEAT?
     await pool.query(rmTicketString, [ticketID]);
 }
 
@@ -85,12 +84,5 @@ export async function ticketReserve(req, cb) {
     //Caution on how f_id is selected by the user, it shouldn't be an input because it's a foreign key. It MUST exist in the flight list already!
     await pool.query('INSERT INTO ticket(price, seat_class, seats_no, username, f_id VALUES ($1, $2, $3, $4, $5)', [price, req.seat_class, req.seat_no, req.user.username, req.f_id]);
 
-    //return cb or render
-}
-
-
-//remove ticket
-export async function ticketRemove(req, cb) {
-    await pool.query('DELETE FROM ticket WHERE t_id=1 RETURNING t_id', [req.t_id]);
     //return cb or render
 }
