@@ -6,7 +6,6 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "reinstall": "npm run clean && npm install",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "debug": "nodemon --inspect .",
     "watch": "nodemon .",
     "start": "node ."
