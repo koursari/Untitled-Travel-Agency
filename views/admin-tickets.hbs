@@ -9,21 +9,26 @@
     </form>
     --}}
     <div id="existing-tickets-list">
-        <div id="ticket-template">
-            t_id - username - price - seat number - flight id
-        </div>
-        <ul class="list-group">
-            <a href="/flights">Επιστροφή</a><br>
+        <a href="/flights">Επιστροφή</a><br>
+        <table class="dashboard-table">
+            <tr>
+                <th>t_id</th>
+                <th>username</th>
+                <th>price</th>
+                <th>seat number</th>
+                <th>flight id</th>
+                <th>REMOVE</th>
+            </tr>
             {{#each tickets}}
-            <li class="ticket-list-item">
-                {{t_id}}.
-                {{username}} -
-                {{price}} -
-                {{seat_no}} -
-                {{f_id}}
-                <a href="/tickets/remove/{{t_id}}">X</a>
-            </li>
+            <tr>
+                <td>{{t_id}}</td>
+                <td>{{username}}</td>
+                <td>{{price}}</td>
+                <td>{{seat_no}}</td>
+                <td>{{f_id}}</td>
+                <td><a href="/tickets/remove/{{t_id}}">X</a></td>
+            </tr>
             {{/each}}
-        </ul>
+        </table>
     </div>
 </main>
