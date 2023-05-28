@@ -3,9 +3,13 @@ import {
     lsTicketsOfFlightString,
     lsTicketsOfUserString,
     rmTicketString,
+    insTicketShortString,
     findFlightFromTicketString,
     lsFlightCapacityString,
-    lsReservationsString
+    lsReservationsString,
+    getFirstCostByFlightString,
+    getBusinessCostByFlightString,
+    getEconomyCostByFlightString
 } from './database-connection.mjs'
 
 import { Ticket as myTicket } from '../model/fields.js'
@@ -58,24 +62,20 @@ export async function ticketSearch(flightID) {
 }
 
 
-export async function ticketReserve(req, user, cb) {
+//export async function ticketReserve(req, user, cb) {
+export async function ticketReserve(chosenFlight, chosenClass, username, callback) {
     //Find values for class and price picked.
     //and make the reservation.
-    if (req.f_class = 'F') {
-        let seat_class = 'F';
-        let query = await pool.query('SELECT first FROM flight WHERE f_id=$1', [req.f_id]);
-        let price = query.rows[0].first;
-        await pool.query('INSERT INTO ticket(price, seat_class, username, f_id) VALUES ($1, $2, $3, $4) RETURNING t_id', [price, seat_class, user.username, req.f_id]);
-    } else if (req.f_class = 'B') {
-        let seat_class = 'B';
-        let query = await pool.query('SELECT business FROM flight WHERE f_id=$1', [req.f_id]);
-        let price = query.rows[0].business;
-        await pool.query('INSERT INTO ticket(price, seat_class, username, f_id) VALUES ($1, $2, $3, $4) RETURNING t_id', [price, seat_class, user.username, req.f_id]);
+    let price = null;
+    if (chosenClass = 'F') {
+        let query = await pool.query(getFirstCostByFlightString, [chosenFlight]);
+        price = query.rows[0].first;
+    } else if (chosenClass = 'B') {
+        let query = await pool.query(getBusinessCostByFlightString, [chosenFlight]);
+        price = query.rows[0].business;
     } else {
-        let seat_class = 'E';
-        let query = await pool.query('SELECT economy FROM flight WHERE f_id=$1', [req.f_id]);
-        let price = query.rows[0].economy;
-        await pool.query('INSERT INTO ticket(price, seat_class, username, f_id) VALUES ($1, $2, $3, $4) RETURNING t_id', [price, seat_class, user.username, req.f_id]);
+        let query = await pool.query(getEconomyCostByFlightString, [chosenFlight]);
+        price = query.rows[0].economy;
     }
-    return cb(null, { message: "Successfully reserved ticket." })
+    await pool.query(insTicketShortString, [price, chosenClass, username, chosenFlight]);
 }

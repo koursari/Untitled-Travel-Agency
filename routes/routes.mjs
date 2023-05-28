@@ -2,7 +2,6 @@ import express from 'express'
 import passport from 'passport';
 // import flash from 'express-flash';
 import { registerUser } from '../controller/user-passport.mjs';
-import { ticketReserve, ticketSearch } from '../controller/ticket-controller.mjs';
 
 const pages = await import(`./page-components.mjs`)
 
@@ -14,39 +13,7 @@ router.route('/home').get(isNotSeekingSeating, pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
 //Pages only accessible for logged in users
-//first form handle, pick flight
-router.post('/home', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
-    ticketSearch(req.body, (err, cb) => {
-        if (err) {
-            console.log(err);
-        }
-        
-    console.log(cb);
-    // res.status(200).send({
-    //     f_cost: cb.f_cost,
-    //     b_cost: cb.b_cost,
-    //     e_cost: cb.e_cost
-    // })
-    })
-    //204 stops the page from reloading after POST request but we can't pass any data to it
-    //need to use fetch on frontend to update the prices for the available classes
-    //preferably if _seats === 0, it won't be available to pick
-    res.status(204).send();
-});
-
-//second form handle, pick class, submit reservation request
-router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, (req, res) => {
-    console.log(req.body.f_class)
-    console.log(req.body);
-    console.log(req.user);
-    ticketReserve(req.body, req.user, (err, res) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log(res);
-    })
-    res.redirect('/home');
-})
+router.post('/reserve', isAuthenticated, isSimpleUserPurchasing, pages.manageTicketAdd, isSuccessfulRedirect);
 
 //Different landing pending on user type
 router.get('/profile', isAuthenticated, isSimpleUserSeekingProfile, pages.userProfile);
@@ -68,12 +35,10 @@ router.get('/announcements/remove/:removeAnnouncementId', isAuthenticated, isAdm
 router.get('/announcements/toggle/:toggleAnnouncementId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageAnnouncementToggle, manageAnnouncementRedirect);
 //Tickets
 router.get('/tickets/remove/:removeTicketId', isAuthenticated, isAdminSeekingAdminDashboard, pages.manageTicketRemove, manageTicketRedirect);
-//ADD FOR USERS/TICKETS/ANNOUNCEMENTS
 
 //Login/Logout/Register
 router.get('/login', isNotAuthenticated, pages.loginpage);
 router.get('/logout', isAuthenticatedLoggingOut, pages.logout, logoutRedirect);
-
 
 router.post('/login/try',
     passport.authenticate('local', {
@@ -169,6 +134,14 @@ function isNotSeekingSeating(request, response, next) {
         return next();
     }
     return pages.returnSeatingInfo(request, response);
+}
+
+function isSuccessfulRedirect(request, response) {
+    if (request.body.successfulReservation == true) {
+        response.redirect('/profile');
+    } else {
+        response.redirect('/home');
+    }
 }
 
 export { router };

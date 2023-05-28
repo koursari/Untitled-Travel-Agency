@@ -237,7 +237,7 @@ export async function manageFlightAdd(request, response, next) {
             request.query.business,
             request.query.t_e_seats,
             request.query.economy,
-            request.user.username  // req.user.username passes the session user that is logged in
+            request.user.username  // request.user.username passes the session user that is logged in
         );
     } catch (err) {
         console.error(err);
@@ -316,4 +316,29 @@ export async function returnSeatingInfo(request, response) {
             "e_available": availability[2]
         }
     );
+}
+
+export async function manageTicketAdd(request, response, next) {
+    let chosenFlight = request.body.f_id;
+    let availabilityConfirmation = await ticketController.ticketSearch(chosenFlight)
+    let chosenClass = request.body.f_class;
+    if(chosenClass == 'F') {
+        if(availabilityConfirmation[0] < 1) {
+            request.body.successfulReservation = false;
+            return next();
+        }
+    } else if (chosenClass == 'B') {
+        if(availabilityConfirmation[1] < 1) {
+            request.body.successfulReservation = false;
+            return next();
+        }
+    } else {
+        if(availabilityConfirmation[2] < 1) {
+            request.body.successfulReservation = false;
+            return next();
+        }
+    }
+    ticketController.ticketReserve(chosenFlight, chosenClass, request.user.username);
+    request.body.successfulReservation = true;
+    return next();
 }

@@ -34,6 +34,7 @@ const insAnnouncementsString = 'INSERT INTO announcements (title, content, statu
 const insAnnouncementsStringWithID = 'INSERT INTO announcements (id, title, content, status, date, admin_username) VALUES ($1, $2, $3, $4, $5, $6)';
 
 const insTicketsString = 'INSERT INTO ticket(t_id, seat_no, price, seat_class, username, f_id) VALUES (DEFAULT, DEFAULT, $1, $2, $3, $4)';
+const insTicketShortString = 'INSERT INTO ticket(price, seat_class, username, f_id) VALUES ($1, $2, $3, $4) RETURNING t_id';
 
 const lsConnectionsString = 'SELECT departure, destination FROM flight';
 
@@ -51,6 +52,10 @@ const lsReservationsString = 'SELECT ticket.f_id, seat_class, COUNT(seat_no) FRO
 
 const lsSpecificFlightString = 'SELECT * FROM flight WHERE f_id=$1';
 
+const getFirstCostByFlightString = 'SELECT first FROM flight WHERE f_id=$1'
+const getBusinessCostByFlightString ='SELECT business FROM flight WHERE f_id=$1'
+const getEconomyCostByFlightString ='SELECT economy FROM flight WHERE f_id=$1'
+
 export {
    pool,
    insFlightString,
@@ -62,6 +67,7 @@ export {
    insAnnouncementsString,
    insAnnouncementsStringWithID,
    insTicketsString,
+   insTicketShortString,
    lsAllAnnouncementsString,
    lsActiveAnnouncementsString,
    lsConnectionsString,
@@ -73,5 +79,8 @@ export {
    findFlightFromTicketString,
    lsFlightCapacityString,
    lsSpecificFlightString,
-   lsReservationsString
+   lsReservationsString,
+   getFirstCostByFlightString,
+   getBusinessCostByFlightString,
+   getEconomyCostByFlightString
 }
