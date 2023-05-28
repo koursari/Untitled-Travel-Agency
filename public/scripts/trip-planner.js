@@ -96,10 +96,12 @@ try {
         departureForm.style.display = "block";
     }
 
-    function flightPick() {
-        //ticketSubmit.disabled = false;
+    async function flightPick() {
         seatPickerButton.disabled = false;
-        //write costs
+        //write costs and available seats
+        let infoJSON = await fetch("?returnSeats=true");
+        let infoData = await infoJSON.json();
+        console.log(infoData.foo)
     }
     
     let seatingOptions = seatPickerField.querySelectorAll("input");

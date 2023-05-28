@@ -9,8 +9,8 @@ const pages = await import(`./page-components.mjs`)
 const router = express.Router();
 
 //Pages accessible by all
-router.route('/').get(pages.homepage);
-router.route('/home').get(pages.homepage);
+router.route('/').get(isNotSeekingSeating, pages.homepage);
+router.route('/home').get(isNotSeekingSeating, pages.homepage);
 router.route('/about').get(pages.aboutpage);
 
 //Pages only accessible for logged in users
@@ -32,7 +32,7 @@ router.get('/admin', isAuthenticated, isAdminSeekingAdminDashboard, pages.adminD
 //Forbidden for non-admin
 router.route('/flights').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.flightsView);
 router.route('/users').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.usersView);
-router.route('/tickets').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.ticketsView);
+router.route('/tickets').get(isNotSeekingSeating, isAuthenticated, isAdminSeekingAdminDashboard, pages.ticketsView);
 router.route('/announcements').get(isAuthenticated, isAdminSeekingAdminDashboard, pages.announcementsView);
 
 //Forbidden for non-admin, plus requiring redirection
@@ -138,6 +138,13 @@ function manageTicketRedirect(request, response, next) {
         redirectUrl = '/flights'
     }
     response.redirect(redirectUrl);
+}
+
+function isNotSeekingSeating(request, response, next) {
+    if (!request.query.returnSeats){
+        return next();
+    }
+    return pages.returnSeatingInfo(request, response);
 }
 
 export { router };

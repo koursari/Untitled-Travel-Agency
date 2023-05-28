@@ -303,3 +303,8 @@ export async function manageAnnouncementRemove(request, response, next) {
         return next();
     }
 }
+
+export async function returnSeatingInfo(request, response) {
+    console.log(request.query.returnSeats)
+    response.json({"foo": "bar"});
+}
