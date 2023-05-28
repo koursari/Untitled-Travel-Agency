@@ -1,13 +1,14 @@
 import bcrypt from 'bcrypt';
 let saltRounds = 10;
 
-import {insAdminUsersString, insUsersString, insFlightString, insAnnouncementsString, pool} from '../controller/database-connection.mjs'
+import {insAdminUsersString, insTicketsString, insUsersString, insFlightString, insAnnouncementsString, pool} from '../controller/database-connection.mjs'
 //to load the .env file correctly, the current script must be run while
 //the working directory is the project root folderconst userId = 'postgres';
 
 import { flights } from './populate-data/flights.mjs'
 import { announcements } from './populate-data/announcements.mjs'
 import { admin, users } from './populate-data/users.mjs'
+import { tickets } from './populate-data/tickets.mjs';
 
 try {
     // Populate admin table with 1 admin user
@@ -58,6 +59,17 @@ try {
                 announcements[i].status,
                 announcements[i].date,
                 announcements[i].admin_username
+            ]
+        );
+    }
+
+    for (let i = 0; i < tickets.length; i++) {
+        await pool.query(insTicketsString,
+            [
+                tickets[i].price,
+                tickets[i].seat_class,
+                tickets[i].username,
+                tickets[i].f_id
             ]
         );
     }
