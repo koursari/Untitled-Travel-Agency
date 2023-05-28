@@ -1,2 +1,0 @@
-We should add an erd file here
-plus the documentation/presentation files i guess
